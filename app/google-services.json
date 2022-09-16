@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "328923114337",
+    "firebase_url": "https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "trippersapp-cffca",
+    "storage_bucket": "trippersapp-cffca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328923114337:android:9c4d0a304b0a0473def320",
+        "android_client_info": {
+          "package_name": "com.example.trippersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328923114337-nu4mf0odrc4mnmq2g74avqbiqu4kas7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trippersapp",
+            "certificate_hash": "aed20f0f633dec473cef2499d0dbe3c998357870"
+          }
+        },
+        {
+          "client_id": "328923114337-6nnn5iaug55q0jp6i5igqvc0ncoagu8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD8YJXi3Wog3EiLe0tauwBWElrsUkTAxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328923114337-6nnn5iaug55q0jp6i5igqvc0ncoagu8q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

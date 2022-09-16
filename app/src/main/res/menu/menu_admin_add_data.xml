@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!---homeicon.xml, mapicon2.xml, calendaricon.xml, usericon.xml-->
+    <item
+        android:id="@+id/addDestination"
+        android:icon="@drawable/destination_plane"
+        android:title="Add Destination"
+      />
+
+    <item
+        android:id="@+id/addAttractions"
+        android:icon="@drawable/attractions"
+        android:title="Add Attractions"
+        />
+
+    <item
+        android:id="@+id/adminOut"
+        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:title="Logout Admin"
+        />
+
+
+</menu>
