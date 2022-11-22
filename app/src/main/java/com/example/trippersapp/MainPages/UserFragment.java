@@ -1,4 +1,4 @@
-package com.example.trippersapp.fragmentssample;
+package com.example.trippersapp.MainPages;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 

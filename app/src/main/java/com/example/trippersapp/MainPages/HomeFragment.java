@@ -1,4 +1,4 @@
-package com.example.trippersapp.fragmentssample;
+package com.example.trippersapp.MainPages;
 
 import android.os.Build;
 import android.os.Bundle;

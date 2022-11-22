@@ -16,7 +16,7 @@ android:scrollbars="none">
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintTop_toTopOf="parent"
-    tools:context=".fragmentssample.UserFragment">
+    tools:context=".MainPages.UserFragment">
 
     <TextView
         android:id="@+id/user_title"
