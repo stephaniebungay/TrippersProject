@@ -16,18 +16,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.trippersapp.MainPages.MainActivity;
 import com.example.trippersapp.databinding.ActivityLoginBinding;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -47,9 +48,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.squareup.picasso.Picasso;
 
 
 public class login extends AppCompatActivity{
@@ -99,10 +97,8 @@ public class login extends AppCompatActivity{
 
         email = (EditText) findViewById(R.id.emailbox);
         pass = (EditText) findViewById(R.id.passbox);
-        checkbx = (CheckBox) findViewById(R.id.checkBox);
         loginButton = (Button) findViewById(R.id.loginbtn);
         registerlink = (Button) findViewById(R.id.reglink);
-        userImage = (ImageView) findViewById(R.id.userimage);
         facebookView = (MaterialButton) findViewById(R.id.facebookview);
 
         mAuth = FirebaseAuth.getInstance();

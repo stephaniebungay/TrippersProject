@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.trippersapp">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="32" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="androiid.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="androiid.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -20,47 +23,50 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Admin.AdminAttractions"
+            android:name="com.example.trippersapp.DetailPage.DestinationDetail"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+            android:exported="false"
+            tools:replace="android:exported" />
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+            android:exported="false"
+            tools:replace="android:exported" />
+        <activity
+            android:name="com.example.trippersapp.Admin.AdminAttractions"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Admin.AdminAddData"
+            android:name="com.example.trippersapp.Admin.AdminAddData"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ForgotPass2"
+            android:name="com.example.trippersapp.ForgotPass2"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ForgotPassword"
+            android:name="com.example.trippersapp.ForgotPassword"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".verifypage"
+            android:name="com.example.trippersapp.verifypage"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserPage"
+            android:name="com.example.trippersapp.MainPages.UserPage"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BookingPage"
+            android:name="com.example.trippersapp.registration"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MapPage"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".NotifPage"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".registration"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".login"
+            android:name="com.example.trippersapp.login"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -70,7 +76,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.trippersapp.MainPages.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

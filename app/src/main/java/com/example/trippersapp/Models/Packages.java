@@ -1,35 +1,36 @@
-package com.example.trippersapp;
+package com.example.trippersapp.Models;
 
 import java.util.HashMap;
 
-public class Recommendation {
+public class Packages {
 
     public String package_attractions;
     public String package_availability;
     public String package_country;
     public String package_description;
     public String package_name;
-    public String package_photos;
+    public HashMap<String, Object> package_photos;
+    public String package_poster;
     public String package_price;
     public Double package_rating;
     public String package_region;
-    public HashMap<String, Object> package_video;
+    public String package_video;
 
-    public Recommendation(){}
+    public Packages(){}
 
-    public Recommendation(String package_attractions, String package_availability, String package_country, String package_description, String package_name, String package_photos, String package_price, Double package_rating, String package_region, HashMap<String, Object> package_video) {
+    public Packages(String package_attractions, String package_availability, String package_country, String package_description, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, Double package_rating, String package_region, String package_video) {
         this.package_attractions = package_attractions;
         this.package_availability = package_availability;
         this.package_country = package_country;
         this.package_description = package_description;
         this.package_name = package_name;
         this.package_photos = package_photos;
+        this.package_poster = package_poster;
         this.package_price = package_price;
         this.package_rating = package_rating;
         this.package_region = package_region;
         this.package_video = package_video;
     }
-
 
     public String getPackage_attractions() {
         return package_attractions;
@@ -71,12 +72,20 @@ public class Recommendation {
         this.package_name = package_name;
     }
 
-    public String getPackage_photos() {
+    public HashMap<String, Object> getPackage_photos() {
         return package_photos;
     }
 
-    public void setPackage_photos(String package_photos) {
+    public void setPackage_photos(HashMap<String, Object> package_photos) {
         this.package_photos = package_photos;
+    }
+
+    public String getPackage_poster() {
+        return package_poster;
+    }
+
+    public void setPackage_poster(String package_poster) {
+        this.package_poster = package_poster;
     }
 
     public String getPackage_price() {
@@ -103,11 +112,11 @@ public class Recommendation {
         this.package_region = package_region;
     }
 
-    public HashMap<String, Object> getPackage_video() {
+    public String getPackage_video() {
         return package_video;
     }
 
-    public void setPackage_video(HashMap<String, Object> package_video) {
+    public void setPackage_video(String package_video) {
         this.package_video = package_video;
     }
 }

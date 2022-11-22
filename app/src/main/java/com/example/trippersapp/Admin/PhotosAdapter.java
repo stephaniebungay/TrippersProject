@@ -16,13 +16,13 @@ import com.example.trippersapp.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ImagesAdapter extends PagerAdapter {
+public class PhotosAdapter extends PagerAdapter {
 
     Context context;
     ArrayList<Uri> imageUris;
     LayoutInflater layoutInflater;
 
-    public ImagesAdapter(Context context, ArrayList<Uri> imageUris){
+    public PhotosAdapter(Context context, ArrayList<Uri> imageUris){
         this.context = context;
         this.imageUris = imageUris;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

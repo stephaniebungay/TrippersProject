@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".UserPage">
+        tools:context=".MainPages.UserPage">
 
         <TextView
             android:id="@+id/user_title"

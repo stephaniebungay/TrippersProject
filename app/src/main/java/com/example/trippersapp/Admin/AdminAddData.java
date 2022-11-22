@@ -3,7 +3,6 @@ package com.example.trippersapp.Admin;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -20,11 +19,9 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.trippersapp.MainActivity;
+import com.example.trippersapp.MainPages.MainActivity;
 import com.example.trippersapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,15 +52,16 @@ import java.util.HashMap;
 public class AdminAddData extends AppCompatActivity {
 
     private final int REQUEST_PERMISSION_CODE = 35;
-    private final int PICK_IMAGE_CODE = 39;
+    private final int PICK_POSTER_CODE = 38;
+    private final int PICK_PHOTOS_CODE = 39;
     private final int PICK_VIDEO = 40;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
     private FirebaseDatabase firebaseDatabase;
     private BottomNavigationView bottomNavigationView;
-    private ViewPager viewPage;
+    private ViewPager viewPagePoster, viewPagePhotos;
     private VideoView videoView;
-    private MaterialButton imageButton, videoButton, addPackagebtn;
-    private ArrayList<Uri> imagesUri;
+    private MaterialButton posterButton, photosButton, videoButton, addPackagebtn;
+    private ArrayList<Uri> imagesUri1, imagesUri2;
     private Uri selectVideo;
     private EditText packageid, packagename, desc, price, attractions,  availability;
     private Spinner country, region;
@@ -121,16 +119,74 @@ public class AdminAddData extends AppCompatActivity {
             }
         });
 
-        viewPage = findViewById(R.id.viewPage2);
-        imageButton = findViewById(R.id.imageBtn2);
+        viewPagePoster = findViewById(R.id.viewPage2);
+        viewPagePhotos = findViewById(R.id.viewPage3);
+        posterButton = findViewById(R.id.imageBtn2);
+        photosButton = findViewById(R.id.imageBtn3);
 
-        imagesUri = new ArrayList<>();
+        imagesUri1 = new ArrayList<>();
+        imagesUri2 = new ArrayList<>();
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        posterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkUserPermission(Manifest.permission.READ_EXTERNAL_STORAGE, REQUEST_PERMISSION_CODE);
+                Dexter.withContext(AdminAddData.this).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
 
+                                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                    intent.setType("image/*");
+                                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                                    startActivityForResult(intent, PICK_POSTER_CODE);
+
+                                    if(imagesUri2 != null){
+                                        imagesUri2.clear();
+
+                                }
+
+                            }
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
+
+                            }
+                        }).check();
+            }
+        });
+
+        photosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dexter.withContext(AdminAddData.this).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                intent.setType("image/*");
+                                intent.setAction(Intent.ACTION_GET_CONTENT);
+                                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                                startActivityForResult(intent, PICK_PHOTOS_CODE);
+
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
+
+
+                            }
+                        }).check();
 
             }
         });
@@ -216,8 +272,8 @@ public class AdminAddData extends AppCompatActivity {
                         databaseReference.child("Packages").child(packageidtxt).child("package_region").setValue(regiontxt);
                         databaseReference.child("Packages").child(packageidtxt).child("package_availability").setValue(availabletxt);
                         uploadVideo();
-                        compressImages();
-
+                        compressPoster();
+                        compressPhotos();
 
 
                         Toast.makeText(AdminAddData.this, "Saved successfully to database!", Toast.LENGTH_LONG).show();
@@ -266,7 +322,7 @@ public class AdminAddData extends AppCompatActivity {
     }
 
 
-    private void checkUserPermission(String permission, int requestCode) {
+    /**private void checkUserPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(AdminAddData.this, permission)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(AdminAddData.this, new String[]{permission},
@@ -281,9 +337,9 @@ public class AdminAddData extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(intent, PICK_IMAGE_CODE);
-    }
-
+        startActivityForResult(intent, PICK_PHOTOS_CODE);
+    }*/
+/**
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -295,25 +351,49 @@ public class AdminAddData extends AppCompatActivity {
                 Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
             }
         }
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_CODE && resultCode == RESULT_OK) {
+        if (requestCode == PICK_PHOTOS_CODE && resultCode == RESULT_OK) {
             if (data != null) {
                 if (data.getClipData() != null) {
                     int count = data.getClipData().getItemCount();
 
                     for (int i = 0; i < count; i++) {
-                        imagesUri.add(data.getClipData().getItemAt(i).getUri());
+                        imagesUri1.add(data.getClipData().getItemAt(i).getUri());
                     }
                 } else {
-                    imagesUri.add(data.getData());
+                    imagesUri1.add(data.getData());
                 }
-                setAdapter();
+                PhotosAdapter photosAdapter1 = new PhotosAdapter(this, imagesUri1);
+                viewPagePhotos.setAdapter(photosAdapter1);
+                photosAdapter1.notifyDataSetChanged();
+
+                //setAdapter();
             }
         }
+
+        if (requestCode == PICK_POSTER_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+
+                    for (int i = 0; i < count; i++) {
+                        imagesUri2.add(data.getClipData().getItemAt(i).getUri());
+                    }
+                } else {
+                    imagesUri2.add(data.getData());
+                }
+                PosterAdapter photosAdapter = new PosterAdapter(this, imagesUri2);
+                viewPagePoster.setAdapter(photosAdapter);
+                photosAdapter.notifyDataSetChanged();
+
+                //setAdapter();
+            }
+        }
+
         if (requestCode == PICK_VIDEO && resultCode == RESULT_OK) {
             if (data != null) {
                 selectVideo = data.getData();
@@ -394,21 +474,17 @@ public class AdminAddData extends AppCompatActivity {
         });
     }
 
-    private void setAdapter() {
-        ImagesAdapter imagesAdapter = new ImagesAdapter(this, imagesUri);
-        viewPage.setAdapter(imagesAdapter);
-    }
 
-    private void compressImages() {
+    private void compressPoster() {
         progressDialog.setMessage("Uploading...");
         progressDialog.show();
-        for (int i = 0; i < imagesUri.size(); i++) {
+        for (int i = 0; i < imagesUri2.size(); i++) {
             try {
-                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagesUri.get(i));
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagesUri2.get(i));
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 imageBitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream);
                 byte[] imageByte = stream.toByteArray();
-                uploadImages(imageByte);
+                uploadPoster(imageByte);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -416,18 +492,18 @@ public class AdminAddData extends AppCompatActivity {
         }
     }
 
-    private void uploadImages(byte[] imageByte) {
+    private void uploadPoster(byte[] imageByte) {
         String packageidtxt = packageid.getText().toString().trim();
         StorageReference storageReference = FirebaseStorage.getInstance("gs://trippersapp-cffca.appspot.com").getReference()
                 .child("Packages")
-                .child(packageidtxt + "_" + System.nanoTime() + ".jpg");
+                .child(packageidtxt + "_" + "POSTER.jpg");
         storageReference.putBytes(imageByte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        uploadImagesUri(String.valueOf(uri));
+                        uploadPosterUri(String.valueOf(uri));
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -448,7 +524,80 @@ public class AdminAddData extends AppCompatActivity {
 
     }
 
-    private void uploadImagesUri(String uri) {
+    private void uploadPosterUri(String uri) {
+        String packageidtxt = packageid.getText().toString().trim();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Packages").child(packageidtxt);
+        String key = databaseReference.push().getKey();
+        databaseReference.child("package_poster").setValue(uri).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+            @Override
+            public void onSuccess(Void unused) {
+                    progressDialog.dismiss();
+                    Toast.makeText(AdminAddData.this, "Uploaded", Toast.LENGTH_LONG).show();
+                    finish();
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.cancel();
+                Toast.makeText(AdminAddData.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    private void compressPhotos() {
+        progressDialog.setMessage("Uploading...");
+        progressDialog.show();
+        for (int i = 0; i < imagesUri1.size(); i++) {
+            try {
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagesUri1.get(i));
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream);
+                byte[] imageByte = stream.toByteArray();
+                uploadPhotos(imageByte);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void uploadPhotos(byte[] imageByte) {
+        String packageidtxt = packageid.getText().toString().trim();
+        StorageReference storageReference = FirebaseStorage.getInstance("gs://trippersapp-cffca.appspot.com").getReference()
+                .child("Packages")
+                .child(packageidtxt + "_" + System.nanoTime() + ".jpg");
+        storageReference.putBytes(imageByte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        uploadPhotosUri(String.valueOf(uri));
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.cancel();
+                        Toast.makeText(AdminAddData.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.cancel();
+                Toast.makeText(AdminAddData.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void uploadPhotosUri(String uri) {
         String packageidtxt = packageid.getText().toString().trim();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Packages").child(packageidtxt).child("package_photos");
         String key = databaseReference.push().getKey();
@@ -457,7 +606,7 @@ public class AdminAddData extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 count += 1;
-                if (count == imagesUri.size()) {
+                if (count == imagesUri1.size()) {
                     progressDialog.dismiss();
                     Toast.makeText(AdminAddData.this, "Uploaded", Toast.LENGTH_LONG).show();
                     finish();

@@ -1,4 +1,4 @@
-package com.example.trippersapp;
+package com.example.trippersapp.Models;
 
 public class User {
 
@@ -15,4 +15,5 @@ public class User {
         this.emailadd = emailadd;
         this.password = password;
     }
+
 }

@@ -1,36 +1,27 @@
-package com.example.trippersapp;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.trippersapp.MainPages;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityUserPageBinding;
+import com.example.trippersapp.login;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 public class UserPage extends AppCompatActivity {
 
@@ -138,39 +129,7 @@ public class UserPage extends AppCompatActivity {
             }
         };
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
-                    case R.id.user:
-                        return true;
-
-                    case R.id.homepage:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.notification:
-                        startActivity(new Intent(getApplicationContext(),NotifPage.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.map:
-                        startActivity(new Intent(getApplicationContext(),MapPage.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.booking:
-                        startActivity(new Intent(getApplicationContext(),BookingPage.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-
-                }
-                return false;
-            }
-        });
 
     }//end of oncreate
 

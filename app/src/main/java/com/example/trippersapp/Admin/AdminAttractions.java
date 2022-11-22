@@ -24,7 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.trippersapp.MainActivity;
+import com.example.trippersapp.MainPages.MainActivity;
 import com.example.trippersapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -398,8 +398,8 @@ public class AdminAttractions extends AppCompatActivity {
     }
 
     private void setAdapter() {
-        ImagesAdapter imagesAdapter = new ImagesAdapter(this, imagesUri);
-        viewPage.setAdapter(imagesAdapter);
+        PhotosAdapter photosAdapter = new PhotosAdapter(this, imagesUri);
+        viewPage.setAdapter(photosAdapter);
     }
 
     private void compressImages(){
