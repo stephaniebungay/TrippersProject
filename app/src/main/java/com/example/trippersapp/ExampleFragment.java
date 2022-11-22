@@ -80,9 +80,9 @@ public class ExampleFragment extends Fragment {
 
         ViewPager2 sampleViewPager = view.findViewById(R.id.sampleViewPager);
         TabLayout sampleTabLayout = view.findViewById(R.id.sampleTabLayout);
-       /*detailPageAdapter = new DetailPageAdapter(new FragmentActivity());
-        sampleViewPager.setAdapter(detailPageAdapter);*/
-        /*sampleTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+       detailPageAdapter = new DetailPageAdapter(getActivity());
+        sampleViewPager.setAdapter(detailPageAdapter);
+        sampleTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 sampleViewPager.setCurrentItem(tab.getPosition());
@@ -101,7 +101,7 @@ public class ExampleFragment extends Fragment {
                 super.onPageSelected(position);
                 sampleTabLayout.getTabAt(position).select();
             }
-        });*/
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,7 +23,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name="com.example.trippersapp.DetailPage.DestinationDetail"
+            android:name="com.example.trippersapp.DetailPage.DestinationDetailAct"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

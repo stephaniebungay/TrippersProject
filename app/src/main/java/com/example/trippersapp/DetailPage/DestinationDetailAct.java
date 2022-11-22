@@ -18,7 +18,7 @@ import com.example.trippersapp.databinding.ActivityDestinationDetailBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-public class DestinationDetail extends FragmentActivity {
+public class DestinationDetailAct extends FragmentActivity {
 
     ActivityDestinationDetailBinding binding;
 
