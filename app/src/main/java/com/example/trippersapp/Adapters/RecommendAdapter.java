@@ -17,7 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.trippersapp.ExampleFragment;
+import com.example.trippersapp.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -69,7 +69,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity=(AppCompatActivity)view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,new ExampleFragment(packages.getPackage_attractions(), packages.getPackage_availability(), packages.getPackage_country(), packages.getPackage_description(), packages.getPackage_name(), packages.getPackage_photos(), packages.getPackage_poster(), packages.getPackage_price(), packages.getPackage_rating(), packages.getPackage_region(), packages.getPackage_video())).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,new DestinationDetail(packages.getPackage_attractions(), packages.getPackage_availability(), packages.getPackage_country(), packages.getPackage_description(), packages.getPackage_name(), packages.getPackage_photos(), packages.getPackage_poster(), packages.getPackage_price(), packages.getPackage_rating(), packages.getPackage_region(), packages.getPackage_video())).addToBackStack(null).commit();
 
            /* Intent i = new Intent(context, DestinationDetailAct.class);
                 i.putExtra("name", recommendList.get(position).getPackage_name());
