@@ -1,4 +1,4 @@
-package com.example.trippersapp;
+package com.example.trippersapp.DetailPage;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,18 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.trippersapp.Adapters.DetailPageAdapter;
+import com.example.trippersapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DestinationDetail#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DestinationDetail extends Fragment {
-
 
     public String package_attractions;
     public String package_availability;
@@ -58,24 +53,16 @@ public class DestinationDetail extends Fragment {
         this.package_video = package_video;
     }
 
-
-    // TODO: Rename and change types and number of parameters
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_example, container, false);
+        View view= inflater.inflate(R.layout.fragment_destination_detail, container, false);
         VideoView sampleVideo = view.findViewById(R.id.sampleVideo);
         TextView sampleName = view.findViewById(R.id.sampleName);
         TextView sampleRegion = view.findViewById(R.id.sampleRegion );
