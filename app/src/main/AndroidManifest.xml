@@ -22,13 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
-        <activity
+        <!--<activity
             android:name="com.example.trippersapp.TextInputActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
+        </activity>-->
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
             android:exported="false"
@@ -57,6 +57,19 @@
             android:name="com.example.trippersapp.verifypage"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.trippersapp.MainPages.NotifPage"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.trippersapp.MainPages.BookingPage"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.trippersapp.sampledeets"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.example.trippersapp.MainPages.UserPage"
             android:exported="false"

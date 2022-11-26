@@ -2,6 +2,7 @@ package com.example.trippersapp.MainPages;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,6 +56,37 @@ public class UserPage extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomnav);
         bottomNavigationView.setSelectedItemId(R.id.user);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.user:
+                        return true;
+
+                    case R.id.notification:
+                        startActivity(new Intent(getApplicationContext(), NotifPage.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    /*case R.id.map:
+                        startActivity(new Intent(getApplicationContext(), MapPage.class));
+                        overridePendingTransition(0, 0);
+                        return true;*/
+
+                    case R.id.booking:
+                        startActivity(new Intent(getApplicationContext(), BookingPage.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    case R.id.homepage:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         userImage = findViewById(R.id.userimage);
         userName = findViewById(R.id.username);

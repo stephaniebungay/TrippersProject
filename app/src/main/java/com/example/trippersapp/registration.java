@@ -30,17 +30,16 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
+import com.mobsandgeeks.saripaar.annotation.Pattern;
 
 import java.util.List;
 
 public class registration extends AppCompatActivity implements Validator.ValidationListener {
 
-    private String TAG = registration.class.getSimpleName();
     protected boolean validated;
     protected Validator validator;
-
-
     DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+    private String TAG = registration.class.getSimpleName();
     private Context context;
 
     @NotEmpty(message = "First name is required")
@@ -50,6 +49,7 @@ public class registration extends AppCompatActivity implements Validator.Validat
     private EditText lName;
 
     @NotEmpty(message = "Last name is required")
+    @Pattern(regex = RegexValue.MOBILENUMBER)
     private EditText contactNo;
 
     @NotEmpty
@@ -150,15 +150,15 @@ public class registration extends AppCompatActivity implements Validator.Validat
             }
         });
         regbtn = (MaterialButton) findViewById(R.id.registerbtn);
-           regbtn.setOnClickListener((view) ->{
-                   regbtn_onClick(view);
-           if(agreementBx.isChecked()){
-               registerUser();}
+        regbtn.setOnClickListener((view) -> {
+            regbtn_onClick(view);
+            if (agreementBx.isChecked()) {
+                registerUser();
+            }
         });
 
 
-
-        }
+    }
 
     private void regbtn_onClick(View view) {
         validator.validate();

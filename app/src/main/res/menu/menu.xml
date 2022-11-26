@@ -9,10 +9,10 @@
         android:id="@+id/notification"
         android:title="Notification"
         android:icon="@drawable/notificon"/>
-    <item
+    <!--<item
         android:id="@+id/map"
         android:title="Map"
-        android:icon="@drawable/mapicon2"/>
+        android:icon="@drawable/mapicon2"/>-->
     <item
         android:id="@+id/booking"
         android:title="Booking"

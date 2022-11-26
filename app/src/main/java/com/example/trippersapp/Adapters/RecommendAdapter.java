@@ -2,6 +2,7 @@ package com.example.trippersapp.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +11,15 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.trippersapp.DetailPage.AboutFragment;
-import com.example.trippersapp.DetailPage.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
+import com.example.trippersapp.sampledeets;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                /*AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,
                         new DestinationDetail(packages.getPackage_attractions(),
                                 packages.getPackage_availability(),
@@ -102,16 +101,16 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                                 packages.getPackage_region(),
                                 packages.getPackage_video()))
                         .addToBackStack(null).commit();
-
+*/
                /* Intent i = new Intent(context, AboutFragment.class);
                 i.putExtra("description", recommendList.get(position).getPackage_description());
                 context.startActivity(i);*/
-           /* Intent i = new Intent(context, DestinationDetailAct.class);
+            Intent i = new Intent(context, sampledeets.class);
                 i.putExtra("name", recommendList.get(position).getPackage_name());
                 i.putExtra("region", recommendList.get(position).getPackage_region());
                 i.putExtra("country", recommendList.get(position).getPackage_country());
                 i.putExtra("videourl", recommendList.get(position).getPackage_video());
-                context.startActivity(i);*/
+                context.startActivity(i);
             }
         });
 
