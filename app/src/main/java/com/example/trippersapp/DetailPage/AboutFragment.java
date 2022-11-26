@@ -1,16 +1,21 @@
 package com.example.trippersapp.DetailPage;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AboutFragment extends Fragment {
@@ -26,7 +31,11 @@ public class AboutFragment extends Fragment {
     public Double package_rating;
     public String package_region;
     public String package_video;
-    private Packages packages;
+    private ArrayList<Packages> packageList;
+    Packages packages;
+    private ViewPager2 viewpageAbout;
+    private TextView aboutDescription;
+
 
     public AboutFragment(){
 
@@ -47,20 +56,50 @@ public class AboutFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @SuppressLint("MissingInflatedId")
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
-        TextView aboutDescription = view.findViewById(R.id.aboutDesctiption);
+       /* aboutDescription = view.findViewById(R.id.aboutDescription);
+       *//* viewpageAbout = view.findViewById(R.id.viewpageabout);
 
-        //aboutDescription.setText(packages.getPackage_description());
+        aboutAdapter = new AboutAdapter(getContext(), packageList);
+        viewpageAbout.setAdapter(aboutAdapter);*//*
+
+
+
+        aboutDescription.setText(package_description);*/
+        aboutDescription = view.findViewById(R.id.aboutDescription);
+        Log.d("About","package_description :" + package_description);
+        aboutDescription.setText(this.package_description);
         return view;
     }
 
-    /*public void onBackPressed(){
+
+
+    public void onStart(){
+        super.onStart();
+
+       /* viewpageAbout = view.findViewById(R.id.viewpageabout);
+
+        aboutAdapter = new AboutAdapter(getContext(), packageList);
+        viewpageAbout.setAdapter(aboutAdapter);*/
+
+
+        //fetch of data from firebase
+
+    }
+
+    public void onBackPressed(){
         Fragment fragment = new Fragment();
         AppCompatActivity activity=(AppCompatActivity)getContext();
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.aboutFrame, fragment).addToBackStack(null).commit();
-    }*/
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameabout, fragment).addToBackStack(null).commit();
+    }
 }

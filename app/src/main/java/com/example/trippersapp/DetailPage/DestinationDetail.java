@@ -34,7 +34,7 @@ public class DestinationDetail extends Fragment {
     public String package_region;
     public String package_video;
     DetailPageAdapter detailPageAdapter;
-
+    AboutFragment aboutFragment;
     public DestinationDetail(){
 
     }
@@ -70,6 +70,7 @@ public class DestinationDetail extends Fragment {
         FloatingActionButton save = view.findViewById(R.id.sampleSave);
         FloatingActionButton unsave = view.findViewById(R.id.sampleUnSave);
 
+
         ViewPager2 sampleViewPager = view.findViewById(R.id.sampleViewPager);
         TabLayout sampleTabLayout = view.findViewById(R.id.sampleTabLayout);
         detailPageAdapter = new DetailPageAdapter(getActivity());
@@ -78,6 +79,8 @@ public class DestinationDetail extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 sampleViewPager.setCurrentItem(tab.getPosition());
+
+
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -122,8 +125,7 @@ public class DestinationDetail extends Fragment {
 
         return view;
     }
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         AppCompatActivity activity=(AppCompatActivity)getContext();
         activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,new Fragment()).addToBackStack(null).commit();
 

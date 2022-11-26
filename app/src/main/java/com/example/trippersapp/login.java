@@ -57,7 +57,8 @@ public class login extends AppCompatActivity{
     private EditText email, pass;
     private TextView forgotpasslink;
     private MaterialButton facebookView;
-    private Button loginButton, registerlink;
+    private Button registerlink;
+    private MaterialButton  loginButton;
     private CheckBox checkbx;
     private FirebaseAuth mAuth;
     private LoginButton facebookbtn;
@@ -97,7 +98,7 @@ public class login extends AppCompatActivity{
 
         email = (EditText) findViewById(R.id.emailbox);
         pass = (EditText) findViewById(R.id.passbox);
-        loginButton = (Button) findViewById(R.id.loginbtn);
+        loginButton = (MaterialButton) findViewById(R.id.loginbtn);
         registerlink = (Button) findViewById(R.id.reglink);
         facebookView = (MaterialButton) findViewById(R.id.facebookview);
 

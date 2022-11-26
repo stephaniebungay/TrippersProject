@@ -1,6 +1,10 @@
 package com.example.trippersapp.MainPages;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -17,6 +21,35 @@ public class MainActivity extends AppCompatActivity {
    /* private Toolbar topBar;
     private AppBarLayout appBarLayout;
     private ActionBar actionBar;*/
+
+    private long backPressTime;
+    Toast toast;
+    View toastView;
+            ;
+
+    @Override
+    public void onBackPressed() {
+
+        if (backPressTime + 2000 > System.currentTimeMillis()) {
+//            super.onBackPressed();
+
+            //Function: To exit the application
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            toast.cancel();
+            return;
+        } else {
+            toast = Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toastView = toast.getView();
+            toastView.setBackgroundColor(getResources().getColor(R.color.white));
+            toast.setView(toastView);
+            toast.show();
+        }
+        backPressTime = System.currentTimeMillis();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

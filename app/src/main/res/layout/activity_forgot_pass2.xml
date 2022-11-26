@@ -61,14 +61,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/back2login"
-        android:layout_width="157dp"
-        android:layout_height="48dp"
+        style="@style/PrimaryButton"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="31dp"
-        android:background="@drawable/sign_in_box"
         android:fontFamily="@font/poppins_medium"
         android:scaleType="center"
         android:text="back to login"
@@ -100,7 +101,7 @@
             tools:layout_editor_absoluteX="124dp"
             tools:layout_editor_absoluteY="529dp"></TextView>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/resendbtn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="72dp"
@@ -110,13 +111,14 @@
             android:gravity="start|top"
             android:padding="0dp"
             android:text="RESEND"
+            android:clickable="true"
             android:textAlignment="gravity"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/textcolor"
             android:textSize="14sp"
             tools:ignore="TouchTargetSizeCheck"
             tools:layout_editor_absoluteX="278dp"
-            tools:layout_editor_absoluteY="529dp"></Button>
+            tools:layout_editor_absoluteY="529dp"></com.google.android.material.button.MaterialButton>
 
 
 

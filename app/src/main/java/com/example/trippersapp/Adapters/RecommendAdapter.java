@@ -17,6 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.trippersapp.DetailPage.AboutFragment;
 import com.example.trippersapp.DetailPage.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
@@ -28,7 +29,13 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
     Context context;
     ArrayList<Packages> recommendList;
     private ViewPager2 recommendViewPager;
-
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            recommendList.addAll(recommendList);
+            notifyDataSetChanged();
+        }
+    };
 
 
     public RecommendAdapter(Context context, ArrayList<Packages> recommendList, ViewPager2 recommendViewPager) {
@@ -38,17 +45,16 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
 
     }
 
-
     @NonNull
     @Override
     public RecommendAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_container_recommend,parent,false);
-        return  new MyViewHolder(v);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_container_recommend, parent, false);
+        return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        if(position == recommendList.size() - 2){
+        if (position == recommendList.size() - 2) {
             recommendViewPager.post(runnable);
         }
 
@@ -68,9 +74,38 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity=(AppCompatActivity)view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,new DestinationDetail(packages.getPackage_attractions(), packages.getPackage_availability(), packages.getPackage_country(), packages.getPackage_description(), packages.getPackage_name(), packages.getPackage_photos(), packages.getPackage_poster(), packages.getPackage_price(), packages.getPackage_rating(), packages.getPackage_region(), packages.getPackage_video())).addToBackStack(null).commit();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,
+                        new DestinationDetail(packages.getPackage_attractions(),
+                                packages.getPackage_availability(),
+                                packages.getPackage_country(),
+                                packages.getPackage_description(),
+                                packages.getPackage_name(),
+                                packages.getPackage_photos(),
+                                packages.getPackage_poster(),
+                                packages.getPackage_price(),
+                                packages.getPackage_rating(),
+                                packages.getPackage_region(),
+                                packages.getPackage_video()))
+                        .addToBackStack(null).commit();
 
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameabout,
+                        new AboutFragment(packages.getPackage_attractions(),
+                                packages.getPackage_availability(),
+                                packages.getPackage_country(),
+                                packages.getPackage_description(),
+                                packages.getPackage_name(),
+                                packages.getPackage_photos(),
+                                packages.getPackage_poster(),
+                                packages.getPackage_price(),
+                                packages.getPackage_rating(),
+                                packages.getPackage_region(),
+                                packages.getPackage_video()))
+                        .addToBackStack(null).commit();
+
+               /* Intent i = new Intent(context, AboutFragment.class);
+                i.putExtra("description", recommendList.get(position).getPackage_description());
+                context.startActivity(i);*/
            /* Intent i = new Intent(context, DestinationDetailAct.class);
                 i.putExtra("name", recommendList.get(position).getPackage_name());
                 i.putExtra("region", recommendList.get(position).getPackage_region());
@@ -87,7 +122,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         return recommendList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         RoundedImageView imagePoster;
         TextView textName, textCountry, titletext, titletext2;
@@ -115,17 +150,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
 
         }
     }
-
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            recommendList.addAll(recommendList);
-            notifyDataSetChanged();
-        }
-    };
-
-
-
 
 
 }

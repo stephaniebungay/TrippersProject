@@ -91,7 +91,12 @@ tools:context=".DetailPage.DestinationDetail">
                 app:layout_constraintStart_toEndOf="@+id/pinIcon" />
 
         </LinearLayout>
-
+        <FrameLayout
+            android:id="@+id/frameabout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/hello"
+            app:layout_constraintTop_toBottomOf="@id/sampleTabLayout"></FrameLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/sampleTabLayout"
@@ -125,12 +130,14 @@ tools:context=".DetailPage.DestinationDetail">
 
         </com.google.android.material.tabs.TabLayout>
 
+
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/sampleViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/hello"
-            app:layout_constraintTop_toBottomOf="@id/sampleTabLayout" />
+                    android:id="@+id/sampleViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/hello"
+                    app:layout_constraintTop_toBottomOf="@id/sampleTabLayout"></androidx.viewpager2.widget.ViewPager2>
+
 
 
         <TextView
@@ -141,6 +148,8 @@ tools:context=".DetailPage.DestinationDetail">
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

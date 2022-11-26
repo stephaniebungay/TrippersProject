@@ -1,14 +1,12 @@
 package com.example.trippersapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,56 +15,75 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.trippersapp.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Checked;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Length;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 
-public class registration extends AppCompatActivity implements View.OnClickListener{
+import java.util.List;
+
+public class registration extends AppCompatActivity implements Validator.ValidationListener {
+
+    private String TAG = registration.class.getSimpleName();
+    protected boolean validated;
+    protected Validator validator;
+
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+    private Context context;
 
-    private EditText fName, lName, contactNo, emailAdd, passWord, reType;
+    @NotEmpty(message = "First name is required")
+    private EditText fName;
+
+    @NotEmpty(message = "Last name is required")
+    private EditText lName;
+
+    @NotEmpty(message = "Last name is required")
+    private EditText contactNo;
+
+    @NotEmpty
+    @Email
+    private EditText emailAdd;
+
+    @NotEmpty
+    @Length(min = 6, message = "Password should be atleast 6 character")
+    @Password
+    private EditText passWord;
+
+    @NotEmpty
+    @ConfirmPassword
+    private EditText reType;
+    @NotEmpty
+    @Checked
     private CheckBox agreementBx;
-    private ProgressBar progbar;
+
     private ImageButton backButton;
-    private Button regbtn;
+    private MaterialButton regbtn;
 
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        Logger.LogView(TAG, "onCreate", "");
 
         mAuth = FirebaseAuth.getInstance();
 
-        fName = (EditText) findViewById(R.id.fname);
-        lName = (EditText) findViewById(R.id.lname);
-        contactNo = (EditText) findViewById(R.id.contactno);
-        emailAdd = (EditText) findViewById(R.id.emailadd);
-        passWord = (EditText) findViewById(R.id.password);
-        reType = (EditText) findViewById(R.id.retype);
-        agreementBx = (CheckBox) findViewById(R.id.agreementbox);
-
-        backButton = (ImageButton) findViewById(R.id.backbtn);
-        backButton.setOnClickListener(this);
-        regbtn = (Button) findViewById(R.id.registerbtn);
-        regbtn.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.backbtn:
-                startActivity(new Intent(this, login.class));
-                break;
-            case R.id.registerbtn:
-                registerUser();
-                break;
-        }
+        init();
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
     }
 
@@ -76,67 +93,13 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         String contacttxt = contactNo.getText().toString().trim();
         String emailaddtxt = emailAdd.getText().toString().trim();
         String passtxt = passWord.getText().toString().trim();
-        String retypetxt = reType.getText().toString().trim();
-
-        if(fnametxt.isEmpty()){
-            fName.setError("First name is required!");
-            fName.requestFocus();
-            return;
-        }
-
-        if(lnametxt.isEmpty()){
-            lName.setError("Last name is required!");
-            lName.requestFocus();
-            return;
-        }
-
-        if(contacttxt.isEmpty()){
-            contactNo.setError("Phone number is required");
-            contactNo.requestFocus();
-            return;
-        }
-
-        if(emailaddtxt.isEmpty()){
-            emailAdd.setError("Email address is required");
-            emailAdd.requestFocus();
-            return;
-        }
-        if(!Patterns.EMAIL_ADDRESS.matcher(emailaddtxt).matches()){
-            emailAdd.setError("Please provide a valid email address!");
-            emailAdd.requestFocus();
-            return;
-        }
-        if(passtxt.isEmpty()){
-            passWord.setError("Password is required!");
-            passWord.requestFocus();
-            return;
-        }
-        if(retypetxt.isEmpty()){
-            reType.setError("Confirm password!");
-            reType.requestFocus();
-            return;
-        }
-        if(passtxt.length() < 6){
-            passWord.setError("Password should be atleast 6 characters!");
-            passWord.requestFocus();
-            return;
-        }
-        if(!passtxt.equals(retypetxt)){
-            Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(!agreementBx.isChecked()){
-            Toast.makeText(this, "You must accept our Terms and Services", Toast.LENGTH_LONG).show();
-            agreementBx.requestFocus();
-            return;
-        }
 
         mAuth.createUserWithEmailAndPassword(emailaddtxt, passtxt)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             User user = new User(fnametxt, lnametxt, contacttxt, emailaddtxt, passtxt);
 
                             FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
@@ -145,25 +108,85 @@ public class registration extends AppCompatActivity implements View.OnClickListe
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
-                                            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fnametxt +" " + lnametxt).build();
+                                            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fnametxt + " " + lnametxt).build();
                                             userr.updateProfile(profileChangeRequest);
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
                                                 userr.sendEmailVerification();
                                                 startActivity(new Intent(registration.this, verifypage.class));
                                                 finish();
-                                            }else{
+                                            } else {
                                                 Toast.makeText(registration.this, "Failed to register. Try again!", Toast.LENGTH_LONG).show();
                                                 return;
                                             }
                                         }
                                     });
-                                    }else{
-                                        Toast.makeText(registration.this, "Email address is already taken!", Toast.LENGTH_LONG).show();
-                                        return;
+                        } else {
+                            Toast.makeText(registration.this, "Email address is already taken!", Toast.LENGTH_LONG).show();
+                            return;
 
                         }
                     }
                 });
 
+
+    }
+
+    public void init() {
+        context = registration.this;
+        fName = (EditText) findViewById(R.id.fname);
+        lName = (EditText) findViewById(R.id.lname);
+        contactNo = (EditText) findViewById(R.id.contactno);
+        emailAdd = (EditText) findViewById(R.id.emailadd);
+        passWord = (EditText) findViewById(R.id.password);
+        reType = (EditText) findViewById(R.id.retype);
+        agreementBx = (CheckBox) findViewById(R.id.agreementbox);
+
+
+        backButton = (ImageButton) findViewById(R.id.backbtn);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(registration.this, login.class));
+            }
+        });
+        regbtn = (MaterialButton) findViewById(R.id.registerbtn);
+           regbtn.setOnClickListener((view) ->{
+                   regbtn_onClick(view);
+           if(agreementBx.isChecked()){
+               registerUser();}
+        });
+
+
+
+        }
+
+    private void regbtn_onClick(View view) {
+        validator.validate();
+
+    }
+
+    protected boolean validate() {
+        if (validator != null)
+            validator.validate();
+        return validated;           // would be set in one of the callbacks below
+    }
+
+
+    @Override
+    public void onValidationSucceeded() {
+        Toast.makeText(this, "YES", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        validated = false;
+
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            }
+        }
     }
 }

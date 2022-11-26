@@ -16,102 +16,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
         tools:context=".registration">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/lname"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Your last name here"
-            android:minHeight="48dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lnametxt" />
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/contactno"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="09XX-XXXX-XX"
-            android:inputType="number"
-            android:letterSpacing="0.2"
-            android:maxLength="11"
-            android:minHeight="48dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contactnotxt" />
-
-        <TextView
-            android:id="@+id/contactnotxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Phone Number"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/lname" />
-
-        <TextView
-            android:id="@+id/passtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="301dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Password"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/emailadd" />
-
-        <TextView
-            android:id="@+id/emailaddtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Email Address"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/contactno" />
-
-        <TextView
-            android:id="@+id/lnametxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Last Name"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/fname" />
+        <!-- HEADER -->
 
         <ImageButton
             android:id="@+id/backbtn"
@@ -119,37 +24,7 @@
             android:layout_height="32dp"
             app:layout_constraintStart_toStartOf="@id/g1"
             app:layout_constraintTop_toBottomOf="@id/g2"
-            app:srcCompat="@drawable/backicon1"
-
-            />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/g1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.06" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/g2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.02" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/g3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.08" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/g4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.92" />
+            app:srcCompat="@drawable/backicon1" />
 
         <TextView
             android:id="@+id/regtitle"
@@ -190,6 +65,8 @@
             app:layout_constraintVertical_bias="0.018"
             app:srcCompat="@drawable/logo" />
 
+        <!-- REGISTRATION FORM -->
+
         <TextView
             android:id="@+id/fnametxt"
             android:layout_width="wrap_content"
@@ -224,6 +101,87 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fnametxt" />
 
+        <TextView
+            android:id="@+id/lnametxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Last Name"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/g3"
+            app:layout_constraintTop_toBottomOf="@+id/fname" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/lname"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="31dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="Your last name here"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#8BA78E"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lnametxt" />
+
+        <TextView
+            android:id="@+id/contactnotxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Phone Number"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/g3"
+            app:layout_constraintTop_toBottomOf="@+id/lname" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contactno"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="31dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="09XX-XXXX-XX"
+            android:inputType="number"
+            android:letterSpacing="0.2"
+            android:maxLength="11"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#8BA78E"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contactnotxt" />
+
+        <TextView
+            android:id="@+id/emailaddtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Email Address"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/g3"
+            app:layout_constraintTop_toBottomOf="@+id/contactno" />
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailadd"
             android:layout_width="match_parent"
@@ -231,7 +189,6 @@
             android:layout_marginStart="31dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
             android:fontFamily="@font/poppins_medium"
             android:hint="example@gmail.com"
             android:inputType="textEmailAddress"
@@ -246,53 +203,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailaddtxt" />
 
-        <CheckBox
-            android:id="@+id/agreementbox"
+        <TextView
+            android:id="@+id/passtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="16dp"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toStartOf="@+id/agreementxt"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
-
-        <TextView
-            android:id="@+id/agreementxt"
-            android:layout_width="235dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="66dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="301dp"
             android:fontFamily="@font/poppins_regular"
-            android:labelFor="@id/agreementbox"
-            android:letterSpacing="0.04"
-            android:lineSpacingExtra="10sp"
-            android:text="Creating an account means you agree with  our Terms and Services, Privacy Policy,  and default Notification Settings."
+            android:text="Password"
             android:textColor="#333333"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/agreementbox"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
-
-        <Button
-            android:id="@+id/registerbtn"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/sign_in_box"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Register"
-            android:textColor="#FFFFFF"
-            android:letterSpacing="0.10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/agreementxt" />
+            app:layout_constraintStart_toStartOf="@+id/g3"
+            app:layout_constraintTop_toBottomOf="@+id/emailadd" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -307,23 +230,23 @@
             tools:layout_editor_absoluteX="-31dp">
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="31dp"
-                android:background="@drawable/border"
-                android:fontFamily="@font/poppins_medium"
-                android:hint="Must be at least 6 characters"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="#8BA78E"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@+id/passtxt" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="31dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="Must be at least 6 characters"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#8BA78E"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/passtxt" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -379,6 +302,95 @@
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/accent" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/agreementbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="16dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toStartOf="@+id/agreementxt"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+        <TextView
+            android:id="@+id/agreementxt"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="66dp"
+            android:fontFamily="@font/poppins_regular"
+            android:labelFor="@id/agreementbox"
+            android:letterSpacing="0.04"
+            android:lineSpacingExtra="10sp"
+            android:text="Creating an account means you agree with  our Terms and Services, Privacy Policy,  and default Notification Settings."
+            android:textColor="#333333"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/agreementbox"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/registerbtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            style="@style/PrimaryButton"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="31dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Register"
+            android:textColor="#FFFFFF"
+            android:letterSpacing="0.10"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/agreementxt" />
+
+        <!--GUIDELINES-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/g4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92" />
+
+
+
+
+
+
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

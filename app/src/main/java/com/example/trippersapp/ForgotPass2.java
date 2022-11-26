@@ -1,8 +1,5 @@
 package com.example.trippersapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +8,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPass2 extends AppCompatActivity implements View.OnClickListener {
 
-    private Button back2login, resendbtn;
+    private Button resendbtn;
+    private MaterialButton back2login;
     private TextView emailCopy;
     private EditText emailadd;
     FirebaseAuth auth;
@@ -28,12 +30,12 @@ public class ForgotPass2 extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_pass2);
 
-        back2login = (Button) findViewById(R.id.back2login);
+        back2login = (MaterialButton) findViewById(R.id.back2login);
         resendbtn = (Button) findViewById(R.id.resendbtn);
 
         auth = FirebaseAuth.getInstance();
         emailCopy = findViewById(R.id.emailcopy);
-        emailadd = findViewById(R.id.emailbx);
+        //emailadd = findViewById(R.id.emailbx);
 
         String email = getIntent().getStringExtra("emailaddress");
 

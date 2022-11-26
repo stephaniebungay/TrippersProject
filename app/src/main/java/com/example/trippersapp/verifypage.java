@@ -34,7 +34,6 @@ public class verifypage extends AppCompatActivity {
         checkUser();
 
         verifyemail = findViewById(R.id.verifyemail);
-        emailadd = findViewById(R.id.emailadd);
         proceedlogin = findViewById(R.id.proceedlogin);
 
         String email = getIntent().getStringExtra("emailaddress");

@@ -116,27 +116,6 @@
         app:layout_constraintTop_toBottomOf="@id/inputlayout"
         app:layout_constraintVertical_bias="0.183">
 
-       <!-- <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:fontFamily="@font/poppins_regular"
-            android:minHeight="48dp"
-            android:textAlignment="viewStart"
-            android:textColor="#333333"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@id/g11"
-            app:layout_constraintTop_toBottomOf="@id/passbox" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="127dp"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppins_regular"
-            android:labelFor="@id/checkBox"
-            android:text="Remember me"
-            android:textColor="@color/textcolor"
-            android:textSize="13sp" /-->
 
         <TextView
             android:id="@+id/forgotpass"
@@ -154,21 +133,23 @@
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/loginbtn"
+        style="@style/PrimaryButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="31dp"
         android:layout_marginBottom="290dp"
-        android:background="@drawable/sign_in_box"
+        android:clickable="true"
         android:fontFamily="@font/poppins_medium"
         android:hapticFeedbackEnabled="true"
         android:letterSpacing="0.10"
         android:scaleType="center"
         android:text="Sign In"
         android:textColor="#FFFFFF"
+        android:theme="@style/Theme.MaterialComponents.Light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -224,12 +205,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/facebookview"
-            style="@style/Widget.MaterialComponents.Button"
+            style="@style/FacebookButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:padding="10dp"
             android:layout_marginStart="31dp"
             android:layout_marginEnd="31dp"
-            android:background="@drawable/facebook"
             android:fontFamily="@font/poppins_medium"
             android:foregroundGravity="center"
             android:gravity="center"
@@ -240,7 +221,6 @@
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:backgroundTint="@color/facebook"
             app:icon="@drawable/fbb"
             app:iconGravity="textStart"
             app:iconTintMode="multiply"
@@ -256,23 +236,22 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/gglbtn"
+            style="@style/GoogleButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:padding="10dp"
             android:layout_marginStart="31dp"
             android:layout_marginEnd="31dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/googlee"
             android:fontFamily="@font/poppins_medium"
             android:foregroundGravity="center"
+            android:gravity="center"
             android:letterSpacing="0.05"
             android:text="Sign in with Google"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#333333"
+            android:textColor="@color/textcolor"
             android:textSize="14sp"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:backgroundTint="#E7E6E1"
-            app:backgroundTintMode="multiply"
             app:icon="@drawable/google"
             app:iconGravity="textStart"
             app:iconTintMode="multiply"
