@@ -3,6 +3,7 @@ package com.example.trippersapp.MainPages;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -11,7 +12,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -23,23 +23,23 @@ import com.example.trippersapp.Adapters.TopDestinationAdapter;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
 
-
-
-
+    String TAG = MainActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
     private ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
@@ -47,12 +47,15 @@ public class MainActivity extends AppCompatActivity {
     private AppBarLayout appBarLayout;
     private ActionBar actionBar;
 
-    private DatabaseReference database;
+    //private DatabaseReference database;
+    private FirebaseFirestore firebaseFirestore;
     private ViewPager2 recommendViewPager, topDesViewPager, topAttractionViewPager;
     private ArrayList<Packages> recommendList, topDestinationList, topAttractionList;
     private RecommendAdapter recommendAdapter;
     private TopDestinationAdapter topDestinationAdapter;
     private TopAttractionAdapter topAttractionAdapter;
+
+    Packages packages;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
 
         topBar = findViewById(R.id.topAppBar);
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(topDesViewPager);
         setupViewPager(topAttractionViewPager);
 
-        database = FirebaseDatabase.getInstance().getReference("Packages");
+        firebaseFirestore = firebaseFirestore.getInstance();
         recommendList = new ArrayList<>();
         topDestinationList = new ArrayList<>();
         topAttractionList = new ArrayList<>();
@@ -92,7 +94,47 @@ public class MainActivity extends AppCompatActivity {
         topAttractionAdapter = new TopAttractionAdapter(this, topAttractionList, topAttractionViewPager);
         topAttractionViewPager.setAdapter(topAttractionAdapter);
 
-        database.addValueEventListener(new ValueEventListener() {
+        CollectionReference collectionReference = firebaseFirestore.collection("Packages");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                        Packages packages = new Packages();
+                        packages.package_attractions = document.getString("package_attractions").toString();
+                        packages.package_availability = document.getString("package_availability").toString();
+                        packages.package_country = document.getString("package_country").toString();
+                        packages.package_description = document.getString("package_description").toString();
+                        packages.package_name = document.getString("package_name").toString();
+                        packages.package_poster = document.getString("package_poster").toString();
+                        packages.package_price = document.getString("package_price").toString();
+                        packages.package_region = document.getString("package_region").toString();
+                        packages.package_video = document.getString("package_video").toString();
+
+
+                        recommendList.add(packages);
+                        topDestinationList.add(packages);
+                        topAttractionList.add(packages);
+
+                        recommendAdapter.notifyDataSetChanged();
+                        topDestinationAdapter.notifyDataSetChanged();
+                        topAttractionAdapter.notifyDataSetChanged();
+                    }
+
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+
+                /*addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -111,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+*/
 
         bottomNavigationView = findViewById(R.id.bottomnav);
         bottomNavigationView.setSelectedItemId(R.id.homepage);

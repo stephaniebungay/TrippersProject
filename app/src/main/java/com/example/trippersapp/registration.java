@@ -14,14 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trippersapp.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
@@ -36,9 +38,10 @@ import java.util.List;
 
 public class registration extends AppCompatActivity implements Validator.ValidationListener {
 
+    FirebaseFirestore firebaseFirestore;
     protected boolean validated;
     protected Validator validator;
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+//    DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
     private String TAG = registration.class.getSimpleName();
     private Context context;
 
@@ -80,6 +83,7 @@ public class registration extends AppCompatActivity implements Validator.Validat
         Logger.LogView(TAG, "onCreate", "");
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         init();
         validator = new Validator(this);
@@ -88,21 +92,60 @@ public class registration extends AppCompatActivity implements Validator.Validat
     }
 
     private void registerUser() {
+        User user = new User();
+
         String fnametxt = fName.getText().toString().trim();
         String lnametxt = lName.getText().toString().trim();
         String contacttxt = contactNo.getText().toString().trim();
         String emailaddtxt = emailAdd.getText().toString().trim();
         String passtxt = passWord.getText().toString().trim();
 
+        user.setFname(fnametxt);
+        user.setLname(lnametxt);
+        user.setContactno(contacttxt);
+        user.setEmailadd(emailaddtxt);
+        user.setPassword(passtxt);
+
         mAuth.createUserWithEmailAndPassword(emailaddtxt, passtxt)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                           @Override
+                                           public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()) {
-                            User user = new User(fnametxt, lnametxt, contacttxt, emailaddtxt, passtxt);
+                                               if (task.isSuccessful()) {
+                                                   FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
+                                                   UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fnametxt + " " + lnametxt).build();
+                                                   userAuth.updateProfile(profileChangeRequest);
+                                                   firebaseFirestore.collection("User").document(emailaddtxt).set(user);
+                                                   DocumentReference documentReference = firebaseFirestore.collection("User").document();
+                                                   documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                       @Override
+                                                       public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                           if (documentSnapshot.exists()) {
+                                                               Toast.makeText(registration.this, "Account already registered!", Toast.LENGTH_LONG).show();
+                                                           } else {
+                                                               userAuth.sendEmailVerification();
+                                                               user.setFname(fnametxt);
+                                                               user.setLname(lnametxt);
+                                                               user.setContactno(contacttxt);
+                                                               user.setEmailadd(emailaddtxt);
+                                                               user.setPassword(passtxt);
+                                                               firebaseFirestore.collection("User").document(emailaddtxt).set(user);
 
-                            FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
+                                                               startActivity(new Intent(registration.this, verifypage.class));
+                                                               finish();
+                                                           }
+                                                       }
+                                                   });
+                                               }else{
+                                                   Toast.makeText(registration.this, "Email address is already taken!", Toast.LENGTH_LONG).show();
+                                                   return;
+                                               }
+                                           }
+                                       });
+    }
+
+
+                            /*FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -122,14 +165,9 @@ public class registration extends AppCompatActivity implements Validator.Validat
                                     });
                         } else {
                             Toast.makeText(registration.this, "Email address is already taken!", Toast.LENGTH_LONG).show();
-                            return;
-
-                        }
-                    }
-                });
+                            return;*/
 
 
-    }
 
     public void init() {
         context = registration.this;

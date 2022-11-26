@@ -12,7 +12,6 @@ public class Packages {
     public HashMap<String, Object> package_photos;
     public String package_poster;
     public String package_price;
-    public Double package_rating;
     public String package_region;
     public String package_video;
 
@@ -27,7 +26,6 @@ public class Packages {
         this.package_photos = package_photos;
         this.package_poster = package_poster;
         this.package_price = package_price;
-        this.package_rating = package_rating;
         this.package_region = package_region;
         this.package_video = package_video;
     }
@@ -94,14 +92,6 @@ public class Packages {
 
     public void setPackage_price(String package_price) {
         this.package_price = package_price;
-    }
-
-    public Double getPackage_rating() {
-        return package_rating;
-    }
-
-    public void setPackage_rating(Double package_rating) {
-        this.package_rating = package_rating;
     }
 
     public String getPackage_region() {

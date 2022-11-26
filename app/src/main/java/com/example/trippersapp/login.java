@@ -48,6 +48,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class login extends AppCompatActivity{
@@ -63,6 +64,7 @@ public class login extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private LoginButton facebookbtn;
     private ImageView userImage;
+    FirebaseFirestore firebaseFirestore;
 
     private ActivityLoginBinding binding;
     private static final  int RC_SIGN_IN = 100;

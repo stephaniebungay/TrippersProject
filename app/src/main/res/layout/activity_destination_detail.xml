@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".DetailPage.DestinationDetail">
+    tools:context=".DetailPage.DestinationDetailAct">
 
 
     <FrameLayout
@@ -142,6 +142,20 @@
                 android:text="hello"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+
+           <!-- <FrameLayout
+                android:id="@+id/frameabout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/hello"
+                app:layout_constraintTop_toBottomOf="@id/sampleTabLayout"></FrameLayout>-->
+
+           <!-- <fragment
+                android:id="@+id/frameabout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/hello"
+                app:layout_constraintTop_toBottomOf="@id/sampleTabLayout"></fragment>-->
 
 
 

@@ -69,6 +69,10 @@
             android:name="com.example.trippersapp.sampledeets"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.trippersapp.DetailPage.DestinationDetailAct"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.example.trippersapp.MainPages.UserPage"

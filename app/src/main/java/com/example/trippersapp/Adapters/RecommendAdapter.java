@@ -17,9 +17,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.trippersapp.DetailPage.DestinationDetailAct;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
-import com.example.trippersapp.sampledeets;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -105,12 +105,27 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                /* Intent i = new Intent(context, AboutFragment.class);
                 i.putExtra("description", recommendList.get(position).getPackage_description());
                 context.startActivity(i);*/
-            Intent i = new Intent(context, sampledeets.class);
-                i.putExtra("name", recommendList.get(position).getPackage_name());
-                i.putExtra("region", recommendList.get(position).getPackage_region());
-                i.putExtra("country", recommendList.get(position).getPackage_country());
-                i.putExtra("videourl", recommendList.get(position).getPackage_video());
-                context.startActivity(i);
+            Intent i = new Intent(context, DestinationDetailAct.class);
+            i.putExtra("name", recommendList.get(position).getPackage_name());
+            i.putExtra("region", recommendList.get(position).getPackage_region());
+            i.putExtra("country", recommendList.get(position).getPackage_country());
+            i.putExtra("videourl", recommendList.get(position).getPackage_video());
+            context.startActivity(i);
+
+               /* AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameabout,
+                                new AboutFragment(packages.getPackage_attractions(),
+                                        packages.getPackage_availability(),
+                                        packages.getPackage_country(),
+                                        packages.getPackage_description(),
+                                        packages.getPackage_name(),
+                                        packages.getPackage_photos(),
+                                        packages.getPackage_poster(),
+                                        packages.getPackage_price(),
+                                        packages.getPackage_rating(),
+                                        packages.getPackage_region(),
+                                        packages.getPackage_video()))
+                        .addToBackStack(null).commit();*/
             }
         });
 
