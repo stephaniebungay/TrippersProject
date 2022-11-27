@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="none"
     android:background="#F2F2F0"
     android:fillViewport="true"
+    android:scrollbars="none"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="1dp">
 
@@ -22,6 +22,7 @@
             android:id="@+id/backbtn"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:clickable="true"
             app:layout_constraintStart_toStartOf="@id/g1"
             app:layout_constraintTop_toBottomOf="@id/g2"
             app:srcCompat="@drawable/backicon1" />
@@ -51,257 +52,241 @@
             app:layout_constraintStart_toStartOf="@+id/g1"
             app:layout_constraintTop_toBottomOf="@+id/regtitle" />
 
-        <ImageView
-            android:id="@+id/reglogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="113dp"
-            android:layout_marginBottom="534dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.516"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.018"
-            app:srcCompat="@drawable/logo" />
 
         <!-- REGISTRATION FORM -->
 
-        <TextView
-            android:id="@+id/fnametxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="First Name"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/reglogo" />
 
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fname"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Your first name here"
-            android:minHeight="48dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fnametxt" />
-
-        <TextView
-            android:id="@+id/lnametxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Last Name"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/fname" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/lname"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Your last name here"
-            android:minHeight="48dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lnametxt" />
-
-        <TextView
-            android:id="@+id/contactnotxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Phone Number"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/lname" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/contactno"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="09XX-XXXX-XX"
-            android:inputType="number"
-            android:letterSpacing="0.2"
-            android:maxLength="11"
-            android:minHeight="48dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contactnotxt" />
-
-        <TextView
-            android:id="@+id/emailaddtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Email Address"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/contactno" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailadd"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="31dp"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="example@gmail.com"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailaddtxt" />
-
-        <TextView
-            android:id="@+id/passtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="301dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Password"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/g3"
-            app:layout_constraintTop_toBottomOf="@+id/emailadd" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+        <LinearLayout
+            android:id="@+id/reglinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:hintEnabled="false"
-            app:layout_constraintTop_toBottomOf="@+id/passtxt"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/accent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-31dp">
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/regsub">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:backgroundTint="@color/background"
+                app:cardCornerRadius="@dimen/_50sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/regsub">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Must be at least 6 characters"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/passtxt" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/pfp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:src="@drawable/profilepicture_upload" />
 
-        <TextView
-            android:id="@+id/retypetxt"
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="235dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Re-type Password"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/retypetxt"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/accent"
-            tools:ignore="MissingConstraints">
+            <TextView
+                android:id="@+id/fnametxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="First Name"
+                android:textColor="#333333"
+                android:textSize="16sp" />
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/retype"
+                android:id="@+id/fname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="688dp"
-                android:layout_marginEnd="31dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/border"
                 android:fontFamily="@font/poppins_medium"
-                android:hint="Confirm password"
-                android:inputType="textPassword"
+                android:hint="Your first name here"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:singleLine="true"
+
+                android:textColor="@color/black"
+                android:textColorHint="#8BA78E"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/lnametxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Last Name"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lname"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Your last name here"
                 android:minHeight="48dp"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#8BA78E"
-                android:textSize="14sp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/contactnotxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Phone Number"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contactno"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="09XX-XXXX-XX"
+                android:inputType="number"
+                android:letterSpacing="0.2"
+                android:maxLength="11"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="#8BA78E"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/emailaddtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Email Address"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailadd"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="example@gmail.com"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="#8BA78E"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/passtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Password"
+                android:textColor="#333333"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/g3"
+                app:layout_constraintTop_toBottomOf="@+id/emailadd" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:hintEnabled="false"
+                app:layout_constraintTop_toBottomOf="@+id/passtxt"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/accent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="-31dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Must be at least 6 characters"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#8BA78E"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@+id/passtxt" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/retypetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Re-type Password"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/retypetxt"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/accent" />
-        </com.google.android.material.textfield.TextInputLayout>
+                app:passwordToggleTint="@color/accent"
+                tools:ignore="MissingConstraints">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/retype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="688dp"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Confirm password"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#8BA78E"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/retypetxt"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/accent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/agreementbox"
@@ -314,7 +299,7 @@
             app:layout_constraintEnd_toStartOf="@+id/agreementxt"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/reglinear" />
 
         <TextView
             android:id="@+id/agreementxt"
@@ -332,20 +317,20 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/agreementbox"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/reglinear" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/registerbtn"
+            style="@style/PrimaryButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryButton"
             android:layout_marginStart="31dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="31dp"
             android:fontFamily="@font/poppins_medium"
+            android:letterSpacing="0.10"
             android:text="Register"
             android:textColor="#FFFFFF"
-            android:letterSpacing="0.10"
             android:theme="@style/Theme.MaterialComponents.Light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -381,14 +366,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.92" />
-
-
-
-
-
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

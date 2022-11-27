@@ -1,16 +1,25 @@
 package com.example.trippersapp;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.trippersapp.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +33,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
@@ -38,12 +49,19 @@ import java.util.List;
 
 public class registration extends AppCompatActivity implements Validator.ValidationListener {
 
-    FirebaseFirestore firebaseFirestore;
+    static int REQUESCODE = 1;
+    static int PReqCode = 1;
     protected boolean validated;
     protected Validator validator;
-//    DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+    FirebaseFirestore firebaseFirestore;
+    private StorageReference storageReference;
     private String TAG = registration.class.getSimpleName();
     private Context context;
+
+    private ImageView profilePic;
+    private Uri pfpUri;
+    private Bitmap compressor;
+
 
     @NotEmpty(message = "First name is required")
     private EditText fName;
@@ -84,10 +102,12 @@ public class registration extends AppCompatActivity implements Validator.Validat
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        StorageReference storageReference = FirebaseStorage.getInstance("gs://trippersapp-cffca.appspot.com").getReference();
 
         init();
         validator = new Validator(this);
         validator.setValidationListener(this);
+
 
     }
 
@@ -100,77 +120,56 @@ public class registration extends AppCompatActivity implements Validator.Validat
         String emailaddtxt = emailAdd.getText().toString().trim();
         String passtxt = passWord.getText().toString().trim();
 
-        user.setFname(fnametxt);
-        user.setLname(lnametxt);
         user.setContactno(contacttxt);
         user.setEmailadd(emailaddtxt);
+        user.setFname(fnametxt);
+        user.setLname(lnametxt);
         user.setPassword(passtxt);
+
 
         mAuth.createUserWithEmailAndPassword(emailaddtxt, passtxt)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                           @Override
-                                           public void onComplete(@NonNull Task<AuthResult> task) {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                               if (task.isSuccessful()) {
-                                                   FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
-                                                   UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fnametxt + " " + lnametxt).build();
-                                                   userAuth.updateProfile(profileChangeRequest);
-                                                   firebaseFirestore.collection("User").document(emailaddtxt).set(user);
-                                                   DocumentReference documentReference = firebaseFirestore.collection("User").document();
-                                                   documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                       @Override
-                                                       public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                           if (documentSnapshot.exists()) {
-                                                               Toast.makeText(registration.this, "Account already registered!", Toast.LENGTH_LONG).show();
-                                                           } else {
-                                                               userAuth.sendEmailVerification();
-                                                               user.setFname(fnametxt);
-                                                               user.setLname(lnametxt);
-                                                               user.setContactno(contacttxt);
-                                                               user.setEmailadd(emailaddtxt);
-                                                               user.setPassword(passtxt);
-                                                               firebaseFirestore.collection("User").document(emailaddtxt).set(user);
+                        if (task.isSuccessful()) {
+                            FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
+                            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fnametxt + " " + lnametxt).build();
+                            userAuth.updateProfile(profileChangeRequest);
+                            firebaseFirestore.collection("User").document(emailaddtxt).set(user);
+                            DocumentReference documentReference = firebaseFirestore.collection("User").document();
+                            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if (documentSnapshot.exists()) {
+                                        Toast.makeText(registration.this, "Account already registered!", Toast.LENGTH_LONG).show();
+                                    } else {
 
-                                                               startActivity(new Intent(registration.this, verifypage.class));
-                                                               finish();
-                                                           }
-                                                       }
-                                                   });
-                                               }else{
-                                                   Toast.makeText(registration.this, "Email address is already taken!", Toast.LENGTH_LONG).show();
-                                                   return;
-                                               }
-                                           }
-                                       });
-    }
+                                        userAuth.sendEmailVerification();
+                                        user.setFname(fnametxt);
+                                        user.setLname(lnametxt);
+                                        user.setContactno(contacttxt);
+                                        user.setEmailadd(emailaddtxt);
+                                        user.setPassword(passtxt);
+                                        firebaseFirestore.collection("User").document(emailaddtxt).set(user);
 
-
-                            /*FirebaseDatabase.getInstance("https://trippersapp-cffca-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
-                                            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fnametxt + " " + lnametxt).build();
-                                            userr.updateProfile(profileChangeRequest);
-                                            if (task.isSuccessful()) {
-                                                userr.sendEmailVerification();
-                                                startActivity(new Intent(registration.this, verifypage.class));
-                                                finish();
-                                            } else {
-                                                Toast.makeText(registration.this, "Failed to register. Try again!", Toast.LENGTH_LONG).show();
-                                                return;
-                                            }
-                                        }
-                                    });
+                                        startActivity(new Intent(registration.this, verifypage.class));
+                                        finish();
+                                    }
+                                }
+                            });
                         } else {
                             Toast.makeText(registration.this, "Email address is already taken!", Toast.LENGTH_LONG).show();
-                            return;*/
-
-
+                            return;
+                        }
+                    }
+                });
+    }
 
     public void init() {
         context = registration.this;
+
+        profilePic = (ImageView) findViewById(R.id.pfp);
         fName = (EditText) findViewById(R.id.fname);
         lName = (EditText) findViewById(R.id.lname);
         contactNo = (EditText) findViewById(R.id.contactno);
@@ -178,6 +177,18 @@ public class registration extends AppCompatActivity implements Validator.Validat
         passWord = (EditText) findViewById(R.id.password);
         reType = (EditText) findViewById(R.id.retype);
         agreementBx = (CheckBox) findViewById(R.id.agreementbox);
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Build.VERSION.SDK_INT >= 22) {
+                    checkAndRequestForPermission();
+                }
+                else{
+                    selectPicture();
+                }
+            }
+        });
 
 
         backButton = (ImageButton) findViewById(R.id.backbtn);
@@ -203,12 +214,6 @@ public class registration extends AppCompatActivity implements Validator.Validat
 
     }
 
-    protected boolean validate() {
-        if (validator != null)
-            validator.validate();
-        return validated;           // would be set in one of the callbacks below
-    }
-
 
     @Override
     public void onValidationSucceeded() {
@@ -225,6 +230,70 @@ public class registration extends AppCompatActivity implements Validator.Validat
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
             }
+        }
+    }
+
+    /*private void uploadPfpStorage(byte[] imageByte){
+        FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
+        String emailaddtxt = emailAdd.getText().toString().trim();
+        StorageReference storageReference = FirebaseStorage.getInstance("gs://trippersapp-cffca.appspot.com")
+                .getReference()
+                .child("Profile_Pictures")
+                .child(emailaddtxt + "_" +System.currentTimeMillis()+".jpg");
+        storageReference.putBytes(imageByte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                                .setPhotoUri(uri)
+                                .build();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+    }*/
+
+
+    private void checkAndRequestForPermission() {
+        if (ContextCompat.checkSelfPermission(registration.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(registration.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Toast.makeText(registration.this, "Please Accept for required permission", Toast.LENGTH_SHORT).show();
+            } else {
+                ActivityCompat.requestPermissions(registration.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PReqCode);
+            }
+        } else
+            selectPicture();
+    }
+
+    private void selectPicture() {
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, REQUESCODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null) {
+            pfpUri = data.getData();
+            profilePic.setImageURI(pfpUri);
         }
     }
 }

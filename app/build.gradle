@@ -72,6 +72,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
-
+    implementation 'id.zelory:compressor:3.0.1'
 }
 

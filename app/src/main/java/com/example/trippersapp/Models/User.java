@@ -2,26 +2,13 @@ package com.example.trippersapp.Models;
 
 public class User {
 
-    public String fname;
-    public String lname;
     public String contactno;
     public String emailadd;
+    public String fname;
+    public String lname;
+    public String password;
+    public String userPhoto;
 
-    public String getFname() {
-        return fname;
-    }
-
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
 
     public String getContactno() {
         return contactno;
@@ -39,6 +26,23 @@ public class User {
         this.emailadd = emailadd;
     }
 
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+
     public String getPassword() {
         return password;
     }
@@ -47,18 +51,16 @@ public class User {
         this.password = password;
     }
 
-    public String password;
-
-    public User(){
-
+    public String getUserPhoto() {
+        return userPhoto;
     }
 
-    public User(String fname, String lname, String contactno, String emailadd, String password){
-        this.fname = fname;
-        this.lname = lname;
-        this.contactno = contactno;
-        this.emailadd = emailadd;
-        this.password = password;
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
     }
+
+
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.trippersapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -304,11 +305,13 @@ public class login extends AppCompatActivity{
                         //get logged in user
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         //get user info
+                        Uri pfp = firebaseUser.getPhotoUrl();
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
 
                         Log.d(TAG, "onSuccess: Email: "+email);
                         Log.d(TAG, "onSuccess: UID: "+uid);
+                        Log.d(TAG, "onSuccess: Profile Picture: "+pfp);
 
                         //check if user is new or existing
                         if(authResult.getAdditionalUserInfo().isNewUser()){

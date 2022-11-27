@@ -1,6 +1,7 @@
 package com.example.trippersapp.MainPages;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -173,19 +174,23 @@ public class UserPage extends AppCompatActivity {
         if(firebaseUser != null){
             String email = firebaseUser.getEmail();
             String name = firebaseUser.getDisplayName();
+            Uri photoUrl = firebaseUser.getPhotoUrl();
 
             binding.useremail.setText(email);
             binding.username.setText(name);
 
-
-          /*  if(firebaseUser.getPhotoUrl() != null){
-                String photoUrl = firebaseUser.getPhotoUrl().toString();
-                photoUrl = "https://graph.facebook.com/" + photoUrl + "?type=large";
-                Picasso.get().load(photoUrl).into(userImage);
+          if(firebaseUser.getPhotoUrl() != null){
+              /*  //photoUrl = "https://graph.facebook.com/" + photoUrl + "?type=large";
+              Glide.with(this)
+                      .load(firebaseUser.getPhotoUrl())
+                      .thumbnail(0.05f)
+                      .transition(DrawableTransitionOptions.withCrossFade())
+                      .diskCacheStrategy(DiskCacheStrategy.DATA)
+                      .into(userImage);*/
             }
             else{
-                userImage.setImageResource(R.drawable.logo);
-            }*/
+              Toast.makeText(this, "No picture detected", Toast.LENGTH_SHORT).show();
+            }
         }
         else{
             //user not logged in
