@@ -1,4 +1,4 @@
-package com.example.trippersapp;
+package com.example.trippersapp.LoginRegistration;
 
 import android.Manifest;
 import android.content.Context;
@@ -21,7 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.trippersapp.Logger;
 import com.example.trippersapp.Models.User;
+import com.example.trippersapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

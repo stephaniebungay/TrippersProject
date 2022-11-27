@@ -18,7 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.trippersapp.Models.User;
 import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityUserPageBinding;
-import com.example.trippersapp.login;
+import com.example.trippersapp.LoginRegistration.login;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.FacebookSdk;

@@ -1,4 +1,4 @@
-package com.example.trippersapp;
+package com.example.trippersapp.LoginRegistration;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trippersapp.MainPages.MainActivity;
+import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityLoginBinding;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
