@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
@@ -136,6 +137,8 @@ public class registration extends AppCompatActivity implements Validator.Validat
                             FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
                             UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fnametxt + " " + lnametxt).build();
                             userAuth.updateProfile(profileChangeRequest);
+
+
                             firebaseFirestore.collection("User").document(emailaddtxt).set(user);
                             DocumentReference documentReference = firebaseFirestore.collection("User").document();
                             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -152,6 +155,7 @@ public class registration extends AppCompatActivity implements Validator.Validat
                                         user.setEmailadd(emailaddtxt);
                                         user.setPassword(passtxt);
                                         firebaseFirestore.collection("User").document(emailaddtxt).set(user);
+                                        pfpStorage(pfpUri, mAuth.getCurrentUser());
 
                                         startActivity(new Intent(registration.this, verifypage.class));
                                         finish();
@@ -200,17 +204,12 @@ public class registration extends AppCompatActivity implements Validator.Validat
         });
         regbtn = (MaterialButton) findViewById(R.id.registerbtn);
         regbtn.setOnClickListener((view) -> {
-            regbtn_onClick(view);
+            validator.validate();
             if (agreementBx.isChecked()) {
                 registerUser();
             }
         });
 
-
-    }
-
-    private void regbtn_onClick(View view) {
-        validator.validate();
 
     }
 
@@ -223,51 +222,17 @@ public class registration extends AppCompatActivity implements Validator.Validat
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
         validated = false;
-
         for (ValidationError error : errors) {
             View view = error.getView();
             String message = error.getCollatedErrorMessage(this);
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
+
+                return;
             }
+            return;
         }
     }
-
-    /*private void uploadPfpStorage(byte[] imageByte){
-        FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
-        String emailaddtxt = emailAdd.getText().toString().trim();
-        StorageReference storageReference = FirebaseStorage.getInstance("gs://trippersapp-cffca.appspot.com")
-                .getReference()
-                .child("Profile_Pictures")
-                .child(emailaddtxt + "_" +System.currentTimeMillis()+".jpg");
-        storageReference.putBytes(imageByte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                .setPhotoUri(uri)
-                                .build();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-
-    }*/
 
 
     private void checkAndRequestForPermission() {
@@ -286,6 +251,46 @@ public class registration extends AppCompatActivity implements Validator.Validat
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, REQUESCODE);
+    }
+
+    private void pfpStorage(Uri pfpUri, FirebaseUser firebaseUser){
+        User user = new User();
+        String emailaddtxt = emailAdd.getText().toString().trim();
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("User_Photos");
+        StorageReference filePath = storageReference.child(emailaddtxt + "_" + System.currentTimeMillis());
+        filePath.putFile(pfpUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                filePath.getDownloadUrl().addOnSuccessListener((new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String pfpLink = uri.toString();
+                        firebaseFirestore.collection("User").document(emailaddtxt).set(user);
+                        DocumentReference documentReference = firebaseFirestore.collection("User").document();
+                        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
+
+                                }else{
+                                    user.setUserPhoto(pfpLink);
+                                    firebaseFirestore.collection("User").document(emailaddtxt).set(user);
+                                    UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                            .setPhotoUri(uri)
+                                            .build();
+                                    firebaseUser.updateProfile(profileChangeRequest);
+                                }
+                            }
+                        });
+
+
+
+                    }
+                }));
+            }
+        });
+
     }
 
     @Override

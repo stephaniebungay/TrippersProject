@@ -1,8 +1,8 @@
 package com.example.trippersapp.MainPages;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.trippersapp.Models.User;
 import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityUserPageBinding;
 import com.example.trippersapp.login;
@@ -24,17 +27,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class UserPage extends AppCompatActivity {
 
+    private static final String TAG = "USER+PROFILE";
+
     private BottomNavigationView bottomNavigationView;
-    private ImageView userImage;
+    ImageView userImage;
     private TextView userName, userEmail;
     private MaterialButton userProfileBtn, userHelpBtn, userPrivacyBtn, logoutBtn;
 
     private FirebaseAuth firebaseAuth;
     //private DatabaseReference databaseReference;
     //private FirebaseDatabase firebaseDatabase;
+    private FirebaseStorage firebaseStorage;
     private ActivityUserPageBinding binding;
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
@@ -50,6 +57,8 @@ public class UserPage extends AppCompatActivity {
 
        // databaseReference = firebaseDatabase.getReference("fname");
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseStorage = firebaseStorage.getInstance();
+        userImage = findViewById(R.id.userimage);
         checkUser();
        // getFullname();
 
@@ -89,7 +98,6 @@ public class UserPage extends AppCompatActivity {
             }
         });
 
-        userImage = findViewById(R.id.userimage);
         userName = findViewById(R.id.username);
         userEmail = findViewById(R.id.useremail);
         userProfileBtn = findViewById(R.id.userprofilebtn);
@@ -169,28 +177,35 @@ public class UserPage extends AppCompatActivity {
 
 
     private void checkUser() {
-        //get current user
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        User user = new User();
+
         if(firebaseUser != null){
             String email = firebaseUser.getEmail();
             String name = firebaseUser.getDisplayName();
-            Uri photoUrl = firebaseUser.getPhotoUrl();
 
             binding.useremail.setText(email);
             binding.username.setText(name);
 
-          if(firebaseUser.getPhotoUrl() != null){
-              /*  //photoUrl = "https://graph.facebook.com/" + photoUrl + "?type=large";
-              Glide.with(this)
-                      .load(firebaseUser.getPhotoUrl())
-                      .thumbnail(0.05f)
-                      .transition(DrawableTransitionOptions.withCrossFade())
-                      .diskCacheStrategy(DiskCacheStrategy.DATA)
-                      .into(userImage);*/
+            Log.d(TAG, "PROFILE_PICTURE: " + firebaseUser.getPhotoUrl() );
+            Log.d(TAG, "PROFILE_PICTURE: " + user.getUserPhoto() );
+
+            //Picasso.get().load(firebaseUser.getPhotoUrl()).into(userImage);
+
+
+            //            binding.userimage.setImageURI(photoUrl);
+           Glide.with(UserPage.this)
+                    .load(firebaseUser.getPhotoUrl())
+                   .apply(new RequestOptions())
+                    .into(userImage);
+
+        /*if(firebaseUser.getPhotoUrl() != null){
+                //photoUrl = "https://graph.facebook.com/" + photoUrl + "?type=large";
+
             }
             else{
               Toast.makeText(this, "No picture detected", Toast.LENGTH_SHORT).show();
-            }
+            }*/
         }
         else{
             //user not logged in
