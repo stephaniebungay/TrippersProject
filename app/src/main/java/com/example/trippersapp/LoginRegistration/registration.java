@@ -267,27 +267,10 @@ public class registration extends AppCompatActivity implements Validator.Validat
                 filePath.getDownloadUrl().addOnSuccessListener((new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        String pfpLink = uri.toString();
-                        firebaseFirestore.collection("User").document(emailaddtxt).set(user);
-                        DocumentReference documentReference = firebaseFirestore.collection("User").document();
-                        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if (documentSnapshot.exists()) {
-
-                                }else{
-                                    user.setUserPhoto(pfpLink);
-                                    firebaseFirestore.collection("User").document(emailaddtxt).set(user);
-                                    UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                                            .setPhotoUri(uri)
-                                            .build();
-                                    firebaseUser.updateProfile(profileChangeRequest);
-                                }
-                            }
-                        });
-
-
-
+                        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                .setPhotoUri(uri)
+                                .build();
+                        firebaseUser.updateProfile(profileChangeRequest);
                     }
                 }));
             }

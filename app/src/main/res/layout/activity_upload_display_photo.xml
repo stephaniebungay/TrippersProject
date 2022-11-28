@@ -4,26 +4,121 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/g2"
     tools:context=".LoginRegistration.UploadDisplayPhoto">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/background"
+        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:layout_constraintBottom_toBottomOf="parent"></RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/uploadLinear1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="31dp"
-        android:fontFamily="@font/poppins_bold_italic"
-        android:text="Welcome to Trippers!"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20ssp"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="80dp" />
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_bold_italic"
+            android:shadowColor="@color/textcolor"
+            android:shadowDx="-8"
+            android:shadowDy="-8"
+            android:shadowRadius="1"
+            android:text="Welcome to Trippers!"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_66sdp"
+            android:backgroundTint="@color/background"
+            android:elevation="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/_65sdp">
+
+            <ImageView
+                android:id="@+id/uploadimageview"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/profilepicture" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/uploadbtn"
+            style="@style/UploadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:icon="@drawable/ic_sharp_upload_24"
+            app:iconTint="@color/accent"
+            android:textColor="@color/accent"
+            android:text="Upload photo"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/uploadLinear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_200sdp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/uploadLinear1">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/skipupload"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/accent"
+            style="@style/CancelButton"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_gravity="center"
+            android:text="SKIP"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveupload"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:textColor="@color/white"
+            style="@style/SaveButton"
+            android:layout_gravity="center"
+            android:textSize="@dimen/_10ssp"
+            android:text="SAVE"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+
+    </LinearLayout>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.43" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,10 +38,6 @@ public class NotifPage extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
 
-                   /* case R.id.map:
-                        startActivity(new Intent(getApplicationContext(),MapPage.class));
-                        overridePendingTransition(0,0);
-                        return true;*/
 
                     case R.id.booking:
                         startActivity(new Intent(getApplicationContext(), BookingPage.class));

@@ -14,11 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.trippersapp.LoginRegistration.login;
 import com.example.trippersapp.Models.User;
+import com.example.trippersapp.ProfilePage;
 import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityUserPageBinding;
-import com.example.trippersapp.LoginRegistration.login;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.FacebookSdk;
@@ -108,6 +110,7 @@ public class UserPage extends AppCompatActivity {
         userProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(UserPage.this, ProfilePage.class));
 
             }
         });
@@ -194,18 +197,27 @@ public class UserPage extends AppCompatActivity {
 
 
             //            binding.userimage.setImageURI(photoUrl);
-           Glide.with(UserPage.this)
+           /*Glide.with(UserPage.this)
                     .load(firebaseUser.getPhotoUrl())
-                   .apply(new RequestOptions())
-                    .into(userImage);
+                    .thumbnail(0.05f)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                     .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .into(userImage);*/
 
-        /*if(firebaseUser.getPhotoUrl() != null){
-                //photoUrl = "https://graph.facebook.com/" + photoUrl + "?type=large";
+        if(firebaseUser.getPhotoUrl() != null){
+            String photoUrl = firebaseUser.getPhotoUrl().toString();
+            photoUrl = photoUrl + "?type=large";
+            Glide.with(UserPage.this)
+                    .load(photoUrl)
+                    .thumbnail(0.05f)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .into(userImage);
 
             }
             else{
               Toast.makeText(this, "No picture detected", Toast.LENGTH_SHORT).show();
-            }*/
+            }
         }
         else{
             //user not logged in

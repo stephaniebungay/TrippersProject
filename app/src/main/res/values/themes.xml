@@ -55,6 +55,29 @@
         <item name="cornerRadius">5dp</item>
     </style>
 
+    <style name="UploadButton">
+        <item name="backgroundTint">@color/offwhite</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="strokeColor">@color/accent</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+    
+    <style name="CancelButton">
+        <item name="android:height">@dimen/_33sdp</item>
+        <item name="backgroundTint">@color/transparent</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="elevation">@dimen/_8sdp</item>
+    </style>
+
+    <style name="SaveButton">
+        <item name="android:height">@dimen/_33sdp</item>
+        <item name="backgroundTint">@color/com_facebook_blue</item>
+        <item name="elevation">@dimen/_8sdp</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
+
 </resources>
 
     <!--   android:id="@+id/fname"

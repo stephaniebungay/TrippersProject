@@ -22,6 +22,9 @@ public class BookingPage extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomnav);
         bottomNavigationView.setSelectedItemId(R.id.booking);
 
+
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -40,10 +43,6 @@ public class BookingPage extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
 
-                   /* case R.id.map:
-                        startActivity(new Intent(getApplicationContext(), MapPage.class));
-                        overridePendingTransition(0,0);
-                        return true;*/
 
                     case R.id.user:
                         startActivity(new Intent(getApplicationContext(), UserPage.class));
