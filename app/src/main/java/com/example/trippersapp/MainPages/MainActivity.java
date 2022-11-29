@@ -193,8 +193,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager2 viewPager2) {
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
+        viewPager2.setFocusable(true);
+        viewPager2.getDescendantFocusability();
         viewPager2.setOffscreenPageLimit(3);
-        //viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.);
+        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(1));
         viewPager2.setPageTransformer(compositePageTransformer);

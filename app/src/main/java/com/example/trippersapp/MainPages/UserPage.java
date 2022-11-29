@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.trippersapp.AccountSettings;
 import com.example.trippersapp.LoginRegistration.login;
 import com.example.trippersapp.Models.User;
 import com.example.trippersapp.ProfilePage;
@@ -123,6 +124,7 @@ public class UserPage extends AppCompatActivity {
         userPrivacyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(UserPage.this, AccountSettings.class));
 
             }
         });

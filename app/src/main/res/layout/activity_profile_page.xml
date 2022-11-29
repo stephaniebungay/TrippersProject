@@ -142,12 +142,12 @@
             android:id="@+id/cancelbtn"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:textColor="@color/accent"
+            android:textColor="@color/textcolor"
             style="@style/CancelButton"
             android:textSize="@dimen/_10ssp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_gravity="center"
-            android:text="Cancel"
+            android:text="RESET"
             android:theme="@style/Theme.MaterialComponents.Light" />
 
         <com.google.android.material.button.MaterialButton
