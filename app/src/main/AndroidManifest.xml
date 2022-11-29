@@ -23,9 +23,16 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name="com.example.trippersapp.AccountSettings"
-            android:parentActivityName=".MainPages.UserPage"
+            android:name="com.example.trippersapp.TopDestinations"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.example.trippersapp.AccountSettings"
+            android:exported="false"
+            android:parentActivityName="com.example.trippersapp.MainPages.UserPage">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -53,14 +60,16 @@
                 android:value="" />
         </activity>
         -->
-        <!--<activity
+        <!--
+<activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
             android:exported="false"
             tools:replace="android:exported" />
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
             android:exported="false"
-            tools:replace="android:exported" />-->
+            tools:replace="android:exported" />
+        -->
         <activity
             android:name="com.example.trippersapp.Admin.AdminAttractions"
             android:exported="false"

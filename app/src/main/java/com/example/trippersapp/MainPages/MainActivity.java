@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -22,6 +24,7 @@ import com.example.trippersapp.Adapters.TopAttractionAdapter;
 import com.example.trippersapp.Adapters.TopDestinationAdapter;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
+import com.example.trippersapp.TopDestinations;
 import com.example.trippersapp.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar topBar;
     private AppBarLayout appBarLayout;
     private ActionBar actionBar;
+    private TextView seeALL;
 
     //private DatabaseReference database;
     private FirebaseFirestore firebaseFirestore;
@@ -64,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        seeALL = findViewById(R.id.recommendSeeAll);
 
 
         topBar = findViewById(R.id.topAppBar);
@@ -188,6 +194,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });//end of bottom nav
+
+        seeALL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TopDestinations.class));
+
+            }
+        });
     }//end of oncreate
 
     private void setupViewPager(ViewPager2 viewPager2) {

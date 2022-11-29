@@ -8,6 +8,12 @@
     android:background="@color/background"
     android:scrollbars="none">
 
+    <RelativeLayout
+        android:id="@+id/relativemoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/g2"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,6 +36,7 @@
             tools:context=".MainPages.BookingPage">
 
             <TextView
+                android:id="@+id/titlemoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -43,6 +50,17 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttonmoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLICK MO TO"
+                android:layout_marginTop="@dimen/_50sdp"
+                app:layout_constraintTop_toBottomOf="@id/titlemoto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
