@@ -22,6 +22,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.trippersapp.Adapters.RecommendAdapter;
 import com.example.trippersapp.Adapters.TopAttractionAdapter;
 import com.example.trippersapp.Adapters.TopDestinationAdapter;
+import com.example.trippersapp.DetailPage.AboutFragment;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.example.trippersapp.TopDestinations;
@@ -70,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         seeALL = findViewById(R.id.recommendSeeAll);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("about", "hello");
+        AboutFragment obj = new AboutFragment();
+        obj.setArguments(bundle);
 
 
         topBar = findViewById(R.id.topAppBar);

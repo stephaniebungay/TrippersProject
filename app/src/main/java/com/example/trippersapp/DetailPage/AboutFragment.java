@@ -24,45 +24,24 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AboutFragment extends Fragment {
 
-    public String package_attractions;
-    public String package_availability;
-    public String package_country;
-    public String package_description;
-    public String package_name;
-    public HashMap<String, Object> package_photos;
-    public String package_poster;
-    public String package_price;
-    public Double package_rating;
-    public String package_region;
-    public String package_video;
-    private ArrayList<Packages> packageList;
+    ArrayList<Packages>packageList;
+
+
+    private Packages packages;
     String TAG = AboutFragment.class.getSimpleName();
     private FirebaseFirestore firebaseFirestore;
     private ViewPager2 viewpageAbout;
     private TextView aboutDescription;
 
 
+
     public AboutFragment(){
 
     }
 
-    public AboutFragment(String package_attractions, String package_availability, String package_country, String package_description, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, Double package_rating, String package_region, String package_video) {
-        this.package_attractions = package_attractions;
-        this.package_availability = package_availability;
-        this.package_country = package_country;
-        this.package_description = package_description;
-        this.package_name = package_name;
-        this.package_photos = package_photos;
-        this.package_poster = package_poster;
-        this.package_price = package_price;
-        this.package_rating = package_rating;
-        this.package_region = package_region;
-        this.package_video = package_video;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,20 +58,17 @@ public class AboutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
         firebaseFirestore = firebaseFirestore.getInstance();
 
+        packageList = new ArrayList<Packages>();
 
-
-       /* aboutDescription = view.findViewById(R.id.aboutDescription);
-       *//* viewpageAbout = view.findViewById(R.id.viewpageabout);
-
-        aboutAdapter = new AboutAdapter(getContext(), packageList);
-        viewpageAbout.setAdapter(aboutAdapter);*//*
-
-
-
-        aboutDescription.setText(package_description);*/
         aboutDescription = view.findViewById(R.id.aboutDescription);
-        Log.d("About","package_description :" + package_description);
-        aboutDescription.setText(this.package_description);
+      /*  Log.d("About","package_description :" + package_description);
+        aboutDescription.setText(this.package_description);*/
+
+
+
+
+
+
         return view;
     }
 
@@ -105,6 +81,8 @@ public class AboutFragment extends Fragment {
 
         aboutAdapter = new AboutAdapter(getContext(), packageList);
         viewpageAbout.setAdapter(aboutAdapter);*/
+
+
 
 
         //fetch of data from firebase

@@ -20,6 +20,7 @@
     <color name="save">#FE605F</color>
     <color name="PrimaryButtonColor">#7FAD81</color>
     <color name="offwhite">#F1F1F1</color>
+    <color name="money">#118C4F</color>
 
     //bottom navigation colors
     <color name="bottom_bar_indicator_color">#D4F5FA</color>

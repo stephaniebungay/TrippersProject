@@ -110,7 +110,21 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
             i.putExtra("region", recommendList.get(position).getPackage_region());
             i.putExtra("country", recommendList.get(position).getPackage_country());
             i.putExtra("videourl", recommendList.get(position).getPackage_video());
-            context.startActivity(i);
+            i.putExtra("price", recommendList.get(position).getPackage_price());
+            i.putExtra("description", recommendList.get(position).getPackage_description());
+            i.putExtra("attractions", recommendList.get(position).getPackage_attractions());
+
+                context.startActivity(i);
+
+              /*  Intent i2 = new Intent(context, AboutFragment.class);
+
+                Bundle bundle = new Bundle();
+                String about = recommendList.get(position).getPackage_description();
+                bundle.putString("key", about);
+                i2.putExtras(bundle);
+                context.startActivity(i2);
+
+*/
 
                /* AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameabout,

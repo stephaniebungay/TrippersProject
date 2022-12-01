@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="end"
-                android:text="6889"
+                android:text="63219"
                 android:textColor="#118C4F"
                 android:textSize="@dimen/_12ssp" />
 

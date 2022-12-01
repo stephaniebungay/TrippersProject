@@ -49,11 +49,13 @@
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:layout_gravity="center"
+                android:scaleType="centerCrop"
                 android:clickable="true"
                 android:src="@drawable/profilepicture" />
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/changebtn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,13 +70,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_31sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="First Name"
+            android:text="Display Name"
             android:fontFamily="@font/poppins_medium"
             android:textSize="@dimen/_11ssp"
             android:textColor="@color/textcolor" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/firstName"
+            android:id="@+id/fullname"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_5sdp"
@@ -90,32 +92,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_31sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Last Name"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/textcolor" />
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/lastName"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_31sdp"
-            android:layout_marginEnd="@dimen/_31sdp"
-            android:background="@drawable/regbox"
-            android:text="Linetti"
-            android:textSize="@dimen/_12ssp"
-            android:paddingStart="@dimen/_10sdp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_31sdp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:text="Contact Number"
             android:fontFamily="@font/poppins_medium"
             android:textSize="@dimen/_11ssp"
             android:textColor="@color/textcolor" />
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/givencontact"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_5sdp"
@@ -139,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@id/pfplinear1">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/cancelbtn"
+            android:id="@+id/resetbtn"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:textColor="@color/textcolor"

@@ -52,13 +52,13 @@ import java.util.List;
 
 public class registration extends AppCompatActivity implements Validator.ValidationListener {
 
-    static int REQUESCODE = 1;
-    static int PReqCode = 1;
+    private String TAG = registration.class.getSimpleName();
+    private static int PICK_PHOTOS_CODE = 1; //REQUESCODE
+    private static int REQUEST_PERMISSION_CODE = 1; //PReqCode
     protected boolean validated;
     protected Validator validator;
     FirebaseFirestore firebaseFirestore;
     private StorageReference storageReference;
-    private String TAG = registration.class.getSimpleName();
     private Context context;
 
     private ImageView profilePic;
@@ -96,6 +96,9 @@ public class registration extends AppCompatActivity implements Validator.Validat
     private MaterialButton regbtn;
 
     private FirebaseAuth mAuth;
+
+    public registration() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,7 +246,7 @@ public class registration extends AppCompatActivity implements Validator.Validat
             if (ActivityCompat.shouldShowRequestPermissionRationale(registration.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 Toast.makeText(registration.this, "Please Accept for required permission", Toast.LENGTH_SHORT).show();
             } else {
-                ActivityCompat.requestPermissions(registration.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PReqCode);
+                ActivityCompat.requestPermissions(registration.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
             }
         } else
             selectPicture();
@@ -252,7 +255,7 @@ public class registration extends AppCompatActivity implements Validator.Validat
     private void selectPicture() {
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, REQUESCODE);
+        startActivityForResult(galleryIntent, PICK_PHOTOS_CODE);
     }
 
     private void pfpStorage(Uri pfpUri, FirebaseUser firebaseUser){
@@ -281,7 +284,7 @@ public class registration extends AppCompatActivity implements Validator.Validat
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null) {
+        if (resultCode == RESULT_OK && requestCode == PICK_PHOTOS_CODE && data != null) {
             pfpUri = data.getData();
             profilePic.setImageURI(pfpUri);
         }

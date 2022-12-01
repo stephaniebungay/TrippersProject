@@ -1,6 +1,8 @@
 package com.example.trippersapp.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.trippersapp.DetailPage.DestinationDetailAct;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -40,7 +43,7 @@ public class TopDestinationAdapter extends RecyclerView.Adapter<TopDestinationAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopDestinationAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TopDestinationAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if(position == topDestinationList.size() - 2){
             topDesViewPager.post(runnable);
         }
@@ -54,6 +57,20 @@ public class TopDestinationAdapter extends RecyclerView.Adapter<TopDestinationAd
         holder.textName.setText(packages.getPackage_name());
         holder.textCountry.setText(packages.getPackage_country());
         holder.ratingBar.setRating(3.2f);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, DestinationDetailAct.class);
+                i.putExtra("name", topDestinationList.get(position).getPackage_name());
+                i.putExtra("region", topDestinationList.get(position).getPackage_region());
+                i.putExtra("country", topDestinationList.get(position).getPackage_country());
+                i.putExtra("videourl", topDestinationList.get(position).getPackage_video());
+                i.putExtra("description", topDestinationList.get(position).getPackage_description());
+                i.putExtra("attractions", topDestinationList.get(position).getPackage_attractions());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

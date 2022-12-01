@@ -1,6 +1,8 @@
 package com.example.trippersapp.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.trippersapp.DetailPage.DestinationDetailAct;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -38,7 +41,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PackageAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PackageAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Packages packages = packageList.get(position);
         Glide.with(context)
                 .load(packageList.get(position).getPackage_poster())
@@ -51,6 +54,19 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
         holder.country.setText(packages.getPackage_country());
         holder.ratingBar.setRating(3.2f);
         holder.price.setText(packages.getPackage_price());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, DestinationDetailAct.class);
+                i.putExtra("name", packageList.get(position).getPackage_name());
+                i.putExtra("region", packageList.get(position).getPackage_region());
+                i.putExtra("country", packageList.get(position).getPackage_country());
+                i.putExtra("videourl", packageList.get(position).getPackage_video());
+                i.putExtra("description", packageList.get(position).getPackage_description());
+                i.putExtra("attractions", packageList.get(position).getPackage_attractions());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

@@ -112,7 +112,7 @@ public class UserPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserPage.this, ProfilePage.class));
-
+                Toast.makeText(UserPage.this, "JOYCE BANO HAHAHA", Toast.LENGTH_SHORT).show();
             }
         });
         userHelpBtn.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +125,7 @@ public class UserPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserPage.this, AccountSettings.class));
+                finish();
 
             }
         });
@@ -134,7 +135,7 @@ public class UserPage extends AppCompatActivity {
             public void onClick(View view) {
                 firebaseAuth.getInstance().signOut();
                 fbLogout();
-                finish();;
+                finish();
             }
 
             private void fbLogout() {
@@ -193,18 +194,6 @@ public class UserPage extends AppCompatActivity {
             binding.username.setText(name);
 
             Log.d(TAG, "PROFILE_PICTURE: " + firebaseUser.getPhotoUrl() );
-            Log.d(TAG, "PROFILE_PICTURE: " + user.getUserPhoto() );
-
-            //Picasso.get().load(firebaseUser.getPhotoUrl()).into(userImage);
-
-
-            //            binding.userimage.setImageURI(photoUrl);
-           /*Glide.with(UserPage.this)
-                    .load(firebaseUser.getPhotoUrl())
-                    .thumbnail(0.05f)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                     .diskCacheStrategy(DiskCacheStrategy.DATA)
-                    .into(userImage);*/
 
         if(firebaseUser.getPhotoUrl() != null){
             String photoUrl = firebaseUser.getPhotoUrl().toString();
@@ -216,9 +205,11 @@ public class UserPage extends AppCompatActivity {
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .into(userImage);
 
+
             }
             else{
               Toast.makeText(this, "No picture detected", Toast.LENGTH_SHORT).show();
+
             }
         }
         else{
