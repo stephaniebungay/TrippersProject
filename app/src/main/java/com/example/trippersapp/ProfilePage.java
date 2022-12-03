@@ -190,7 +190,7 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
             firebaseUser.updateProfile(profileChangeRequest);
         }
         Toast.makeText(this, "Profile Updated!", Toast.LENGTH_SHORT).show();
-        //startActivity(new Intent(ProfilePage.this, UserPage.class));
+        startActivity(new Intent(ProfilePage.this, UserPage.class));
     }
 
     private void pageUI(){

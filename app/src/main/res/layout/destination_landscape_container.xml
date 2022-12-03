@@ -129,7 +129,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:textSize="@dimen/_12ssp"
                 android:fontFamily="@font/poppins_bold"
-                android:textColor="#118C4F"
+                android:textColor="@color/money"
                 android:gravity="end"/>
 
             <TextView
@@ -139,7 +139,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="end"
                 android:text="63219"
-                android:textColor="#118C4F"
+                android:textColor="@color/money"
                 android:textSize="@dimen/_12ssp" />
 
             <TextView

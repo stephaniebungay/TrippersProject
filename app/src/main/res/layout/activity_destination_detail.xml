@@ -108,7 +108,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:text="₱"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="#118C4F"
                     android:gravity="end"/>
@@ -120,15 +120,15 @@
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="end"
                     android:text="63219"
-                    android:textColor="#118C4F"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/money"
+                    android:textSize="@dimen/_14ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:text="/pax"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/darkgray"
                     android:gravity="end"/>
