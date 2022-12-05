@@ -1,133 +1,86 @@
 package com.example.trippersapp.DetailPage;
 
-import android.net.Uri;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.trippersapp.Adapters.DetailPageAdapter;
 import com.example.trippersapp.R;
+import com.example.trippersapp.databinding.ActivityDestinationDetailBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 
-import java.util.HashMap;
+public class DestinationDetail extends AppCompatActivity {
 
-public class DestinationDetail extends Fragment {
+    ActivityDestinationDetailBinding binding;
 
-    public String package_attractions;
-    public String package_availability;
-    public String package_country;
-    public String package_description;
-    public String package_name;
-    public HashMap<String, Object> package_photos;
-    public String package_poster;
-    public String package_price;
-    public Double package_rating;
-    public String package_region;
-    public String package_video;
-    DetailPageAdapter detailPageAdapter;
-    AboutFragment aboutFragment;
-    public DestinationDetail(){
+    TextView destinationName, destinationRegion, destinationCountry, destinationDescription, destinationAttractions, destinationPrice;
+    FloatingActionButton destinationSave, destinationUNSave;
+    VideoView destinationVideo;
+    String desName, desRegion, desCountry, desVideo, desAttractions, desAbout, desPrice;
 
-    }
 
-    public DestinationDetail(String package_attractions, String package_availability, String package_country, String package_description, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, Double package_rating, String package_region, String package_video) {
-        this.package_attractions = package_attractions;
-        this.package_availability = package_availability;
-        this.package_country = package_country;
-        this.package_description = package_description;
-        this.package_name = package_name;
-        this.package_photos = package_photos;
-        this.package_poster = package_poster;
-        this.package_price = package_price;
-        this.package_rating = package_rating;
-        this.package_region = package_region;
-        this.package_video = package_video;
-    }
-
+    @SuppressLint("MissingInflatedId")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_destination_detail);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_destination_detail, container, false);
-        VideoView sampleVideo = view.findViewById(R.id.sampleVideo);
-        TextView sampleName = view.findViewById(R.id.sampleName);
-        TextView sampleRegion = view.findViewById(R.id.sampleRegion );
-        TextView sampleCountry = view.findViewById(R.id.sampleCountry);
-        FloatingActionButton save = view.findViewById(R.id.sampleSave);
-        FloatingActionButton unsave = view.findViewById(R.id.sampleUnSave);
+        Intent intent = getIntent();
+        desName = intent.getStringExtra("name");
+        desRegion = intent.getStringExtra("region");
+        desCountry = intent.getStringExtra("country");
+        desVideo = intent.getStringExtra("videourl");
+        desPrice = intent.getStringExtra("price");
 
+        desAbout = intent.getStringExtra("description");
+        desAttractions = intent.getStringExtra("attractions");
 
-        ViewPager2 sampleViewPager = view.findViewById(R.id.sampleViewPager);
-        TabLayout sampleTabLayout = view.findViewById(R.id.sampleTabLayout);
-        detailPageAdapter = new DetailPageAdapter(getActivity());
-        sampleViewPager.setAdapter(detailPageAdapter);
-        sampleTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                sampleViewPager.setCurrentItem(tab.getPosition());
+        destinationName = findViewById(R.id.DestinationName);
+        destinationRegion = findViewById(R.id.DestinationRegion);
+        destinationCountry = findViewById(R.id.DestinationCountry);
+        destinationVideo = findViewById(R.id.DestinationVideo);
+        destinationPrice = findViewById(R.id.DestinationPrice);
+        destinationDescription = findViewById(R.id.description);
+        destinationAttractions = findViewById(R.id.description2);
 
 
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
+        destinationName.setText(desName);
+        destinationRegion.setText(desRegion);
+        destinationCountry.setText(desCountry);
+        destinationPrice.setText(desPrice);
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-        sampleViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                sampleTabLayout.getTabAt(position).select();
-            }
-        });
+        destinationDescription.setText(desAbout);
 
-        save.setOnClickListener(new View.OnClickListener() {
+       /* destinationVideo.setVideoURI(Uri.parse(String.valueOf(desVideo)));
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(destinationVideo);
+        mediaController.setMediaPlayer(destinationVideo);
+        destinationVideo.setMediaController(mediaController);
+        destinationVideo.start();*/
+        destinationAttractions.setText(desAttractions.replace("</br>",System.lineSeparator()));
+
+
+        destinationUNSave = findViewById(R.id.DestinationUNSave);
+        destinationUNSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save.setVisibility(View.GONE);
-                unsave.setVisibility(View.VISIBLE);
+                destinationUNSave.setVisibility(View.GONE);
+                destinationSave.setVisibility(View.VISIBLE);
             }
         });
-        unsave.setOnClickListener(new View.OnClickListener() {
+
+        destinationSave = findViewById(R.id.DestinationSave);
+        destinationSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                unsave.setVisibility(View.GONE);
-                save.setVisibility(View.VISIBLE);
+                destinationSave.setVisibility(View.GONE);
+                destinationUNSave.setVisibility(View.VISIBLE);
             }
         });
-        sampleVideo.setVideoURI(Uri.parse(String.valueOf(package_video)));
-
-        MediaController mediaController = new MediaController(getContext());
-        mediaController.setAnchorView(sampleVideo);
-        mediaController.setMediaPlayer(sampleVideo);
-        sampleVideo.setMediaController(mediaController);
-
-        sampleName.setText(package_name);
-        sampleRegion.setText(package_region);
-        sampleCountry.setText(package_country);
-
-        return view;
-    }
-    public void onBackPressed() {
-        AppCompatActivity activity=(AppCompatActivity)getContext();
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,new Fragment()).addToBackStack(null).commit();
 
     }
 }

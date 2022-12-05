@@ -12,10 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.trippersapp.DetailPage.DestinationDetailAct;
+import com.example.trippersapp.DetailPage.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -43,12 +40,12 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull PackageAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Packages packages = packageList.get(position);
-        Glide.with(context)
+        /*Glide.with(context)
                 .load(packageList.get(position).getPackage_poster())
                 .thumbnail(0.05f)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .into(holder.poster);
+                .into(holder.poster);*/
         holder.title.setText(packages.getPackage_name());
         holder.region.setText(packages.getPackage_region());
         holder.country.setText(packages.getPackage_country());
@@ -57,7 +54,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, DestinationDetailAct.class);
+                Intent i = new Intent(context, DestinationDetail.class);
                 i.putExtra("name", packageList.get(position).getPackage_name());
                 i.putExtra("region", packageList.get(position).getPackage_region());
                 i.putExtra("country", packageList.get(position).getPackage_country());

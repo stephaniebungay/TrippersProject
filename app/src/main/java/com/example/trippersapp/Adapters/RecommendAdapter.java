@@ -14,10 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.trippersapp.DetailPage.DestinationDetailAct;
+import com.example.trippersapp.DetailPage.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -58,12 +55,12 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         }
 
         Packages packages = recommendList.get(position);
-        Glide.with(context)
+      /*  Glide.with(context)
                 .load(recommendList.get(position).getPackage_poster())
                 .thumbnail(0.05f)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .into(holder.imagePoster);
+                .into(holder.imagePoster);*/
 
         //Picasso.get().load(String.valueOf(recommendList.get(position).getPackage_poster())).into(holder.imagePoster);
         holder.textName.setText(packages.getPackage_name());
@@ -73,73 +70,16 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,
-                        new DestinationDetail(packages.getPackage_attractions(),
-                                packages.getPackage_availability(),
-                                packages.getPackage_country(),
-                                packages.getPackage_description(),
-                                packages.getPackage_name(),
-                                packages.getPackage_photos(),
-                                packages.getPackage_poster(),
-                                packages.getPackage_price(),
-                                packages.getPackage_rating(),
-                                packages.getPackage_region(),
-                                packages.getPackage_video()))
-                        .addToBackStack(null).commit();
-
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameabout,
-                        new AboutFragment(packages.getPackage_attractions(),
-                                packages.getPackage_availability(),
-                                packages.getPackage_country(),
-                                packages.getPackage_description(),
-                                packages.getPackage_name(),
-                                packages.getPackage_photos(),
-                                packages.getPackage_poster(),
-                                packages.getPackage_price(),
-                                packages.getPackage_rating(),
-                                packages.getPackage_region(),
-                                packages.getPackage_video()))
-                        .addToBackStack(null).commit();
-*/
-               /* Intent i = new Intent(context, AboutFragment.class);
-                i.putExtra("description", recommendList.get(position).getPackage_description());
-                context.startActivity(i);*/
-            Intent i = new Intent(context, DestinationDetailAct.class);
+            Intent i = new Intent(context, DestinationDetail.class);
             i.putExtra("name", recommendList.get(position).getPackage_name());
             i.putExtra("region", recommendList.get(position).getPackage_region());
             i.putExtra("country", recommendList.get(position).getPackage_country());
-            i.putExtra("videourl", recommendList.get(position).getPackage_video());
+           // i.putExtra("videourl", recommendList.get(position).getPackage_video());
             i.putExtra("price", recommendList.get(position).getPackage_price());
             i.putExtra("description", recommendList.get(position).getPackage_description());
             i.putExtra("attractions", recommendList.get(position).getPackage_attractions());
+            context.startActivity(i);
 
-                context.startActivity(i);
-
-              /*  Intent i2 = new Intent(context, AboutFragment.class);
-
-                Bundle bundle = new Bundle();
-                String about = recommendList.get(position).getPackage_description();
-                bundle.putString("key", about);
-                i2.putExtras(bundle);
-                context.startActivity(i2);
-
-*/
-
-               /* AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameabout,
-                                new AboutFragment(packages.getPackage_attractions(),
-                                        packages.getPackage_availability(),
-                                        packages.getPackage_country(),
-                                        packages.getPackage_description(),
-                                        packages.getPackage_name(),
-                                        packages.getPackage_photos(),
-                                        packages.getPackage_poster(),
-                                        packages.getPackage_price(),
-                                        packages.getPackage_rating(),
-                                        packages.getPackage_region(),
-                                        packages.getPackage_video()))
-                        .addToBackStack(null).commit();*/
             }
         });
 
@@ -175,6 +115,22 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
             /*firstName = itemView.findViewById(R.id.tvfirstName);
             lastName = itemView.findViewById(R.id.tvlastName);
             age = itemView.findViewById(R.id.tvage);*/
+
+                       /*AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.framemain,
+                        new DestinationDetail(packages.getPackage_attractions(),
+                                packages.getPackage_availability(),
+                                packages.getPackage_country(),
+                                packages.getPackage_description(),
+                                packages.getPackage_name(),
+                                packages.getPackage_photos(),
+                                packages.getPackage_poster(),
+                                packages.getPackage_price(),
+                                packages.getPackage_rating(),
+                                packages.getPackage_region(),
+                                packages.getPackage_video()))
+                        .addToBackStack(null).commit();
+*/
 
         }
     }

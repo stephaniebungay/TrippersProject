@@ -18,9 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.trippersapp.MainPages.BookingPage;
 import com.example.trippersapp.MainPages.MainActivity;
 import com.example.trippersapp.MainPages.NotifPage;
@@ -204,13 +201,13 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
 
         }
         name.setText(nametxt);
-        contact.setText(contacttxt);
+       /* contact.setText(contacttxt);
         Glide.with(this)
                 .load(pfp)
                 .thumbnail(0.05f)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .into(image);
+                .into(image);*/
 
        /* GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct != null){

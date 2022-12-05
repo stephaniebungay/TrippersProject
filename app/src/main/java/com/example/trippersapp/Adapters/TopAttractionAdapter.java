@@ -13,10 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.trippersapp.DetailPage.DestinationDetailAct;
+import com.example.trippersapp.DetailPage.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -47,12 +44,12 @@ public class TopAttractionAdapter extends RecyclerView.Adapter<TopAttractionAdap
             topAttractionViewPager.post(runnable);
         }
         Packages packages = topAttractionList.get(position);
-        Glide.with(context)
+       /* Glide.with(context)
                 .load(topAttractionList.get(position).getPackage_poster())
                 .thumbnail(0.05f)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(holder.imagePoster);
+                .into(holder.imagePoster);*/
         holder.textName.setText(packages.getPackage_name());
         holder.textCountry.setText(packages.getPackage_country());
         holder.ratingBar.setRating(2.5f);
@@ -60,11 +57,11 @@ public class TopAttractionAdapter extends RecyclerView.Adapter<TopAttractionAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, DestinationDetailAct.class);
+                Intent i = new Intent(context, DestinationDetail.class);
                 i.putExtra("name", topAttractionList.get(position).getPackage_name());
                 i.putExtra("region", topAttractionList.get(position).getPackage_region());
                 i.putExtra("country", topAttractionList.get(position).getPackage_country());
-                i.putExtra("videourl", topAttractionList.get(position).getPackage_video());
+               // i.putExtra("videourl", topAttractionList.get(position).getPackage_video());
                 i.putExtra("description", topAttractionList.get(position).getPackage_description());
                 i.putExtra("attractions", topAttractionList.get(position).getPackage_attractions());
                 context.startActivity(i);

@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                         packages.package_country = document.getString("package_country").toString();
                         packages.package_description = document.getString("package_description").toString();
                         packages.package_name = document.getString("package_name").toString();
+//                        packages.package_photos = document.getDocumentReference("package_photos").
                         packages.package_poster = document.getString("package_poster").toString();
                         packages.package_price = document.getString("package_price").toString();
                         packages.package_region = document.getString("package_region").toString();
