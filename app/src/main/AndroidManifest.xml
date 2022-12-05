@@ -98,7 +98,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.trippersapp.DetailPage.DestinationDetailAct"
+            android:name="com.example.trippersapp.DetailPage.DestinationDetail"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

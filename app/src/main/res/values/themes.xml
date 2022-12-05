@@ -78,11 +78,16 @@
         <item name="cornerRadius">5dp</item>
     </style>
 
-    <style name="TabButton">
-        <item name="backgroundTint">@color/white</item>
+    <style name="TabButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/textcolor</item>
+        <item name="rippleColor">@color/white</item>
+    </style>
+
+    <style name="TabInactiveButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@color/textcolor</item>
         <item name="rippleColor">@color/accent</item>
     </style>
+
 
 </resources>
 
