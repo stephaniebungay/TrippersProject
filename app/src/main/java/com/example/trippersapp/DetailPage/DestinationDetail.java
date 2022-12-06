@@ -10,6 +10,7 @@ import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.trippersapp.Extra.TextViewEx;
 import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityDestinationDetailBinding;
 import com.google.android.material.button.MaterialButton;
@@ -19,7 +20,8 @@ public class DestinationDetail extends AppCompatActivity {
 
     ActivityDestinationDetailBinding binding;
 
-    private TextView destinationName, destinationRegion, destinationCountry, destinationDescription, destinationAttractions, destinationPrice;
+    private TextView destinationName, destinationRegion, destinationCountry, destinationAttractions, destinationPrice;
+    private TextViewEx destinationDescription;
     private FloatingActionButton destinationSave, destinationUNSave;
     private VideoView destinationVideo;
     private String desName, desRegion, desCountry, desVideo, desAttractions, desAbout, desPrice;
@@ -54,7 +56,7 @@ public class DestinationDetail extends AppCompatActivity {
         destinationRegion.setText(desRegion);
         destinationCountry.setText(desCountry);
         destinationPrice.setText(desPrice);
-        destinationDescription.setText(desAbout);
+        destinationDescription.setText(desAbout, true);
         destinationAttractions.setText(desAttractions.replace("</br>",System.lineSeparator()));
 
         /**

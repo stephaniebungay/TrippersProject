@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
     implementation 'id.zelory:compressor:3.0.1'
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+    implementation 'me.biubiubiu.justifytext:library:1.1'
 
 }
 

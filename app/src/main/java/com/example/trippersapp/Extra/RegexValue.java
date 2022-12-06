@@ -1,4 +1,4 @@
-package com.example.trippersapp.LoginRegistration;
+package com.example.trippersapp.Extra;
 
 import android.content.Context;
 

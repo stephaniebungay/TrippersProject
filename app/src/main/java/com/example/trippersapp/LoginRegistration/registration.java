@@ -21,7 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.trippersapp.Logger;
+import com.example.trippersapp.Extra.Logger;
+import com.example.trippersapp.Extra.RegexValue;
 import com.example.trippersapp.Models.User;
 import com.example.trippersapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;

@@ -173,9 +173,9 @@
                     android:id="@+id/attractionsbtn"
                     style="@style/TabButton"
                     android:layout_width="@dimen/_76sdp"
-                    android:padding="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
+                    android:padding="0dp"
                     android:text="Attractions"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textSize="@dimen/_10ssp"
@@ -221,6 +221,7 @@
                 android:id="@+id/detailslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/DestinationLinear3">
 
@@ -244,19 +245,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
+                    <com.example.trippersapp.Extra.TextViewEx
                         android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:fontFamily="@font/poppins_regular"
-                        android:justificationMode="inter_word"
-                        android:letterSpacing="0.06"
+                        android:gravity="right"
                         android:text="@string/large_text"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titlww" />
-
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -291,8 +290,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:fontFamily="@font/poppins_regular"
-                        android:justificationMode="inter_word"
-                        android:letterSpacing="0.06"
                         android:text="@string/lorem_ipsum"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -318,18 +315,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
+                        android:justificationMode="inter_word"
                         android:text="MAP"
                         android:textColor="@color/textcolor"
                         android:textSize="@dimen/_20ssp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
 
-                    <TextView
+                    <me.biubiubiu.justifytext.library.JustifyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:fontFamily="@font/poppins_regular"
-                        android:justificationMode="inter_word"
                         android:letterSpacing="0.06"
                         android:text="@string/lorem_ipsum"
                         android:textSize="@dimen/_11ssp"
@@ -372,8 +369,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/background"
                 android:elevation="@dimen/_8sdp"
-                android:orientation="horizontal"
                 android:gravity="end"
+                android:orientation="horizontal"
                 android:paddingStart="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -390,9 +387,9 @@
                     android:text="₱"
                     android:textColor="#118C4F"
                     android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/DestinationPrice2"
@@ -403,9 +400,9 @@
                     android:text="63219"
                     android:textColor="@color/money"
                     android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/peso"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/pax"
@@ -417,49 +414,48 @@
                     android:text="/pax"
                     android:textColor="@color/darkgray"
                     android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/DestinationPrice2"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
+                    style="@style/PrimaryButton"
                     android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"
-                    android:theme="@style/Theme.MaterialComponents.Light"
-                    style="@style/PrimaryButton"
-                    android:fontFamily="@font/poppins_medium"
                     android:backgroundTint="@color/accent"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="BOOK NOW"
+                    android:theme="@style/Theme.MaterialComponents.Light"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                   />
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-       <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/DestinationSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/_10sdp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/saved_outline"
-            android:tint="@color/save"
-            app:backgroundTint="@color/white" />
+        <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+             android:id="@+id/DestinationSave"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom|end"
+             android:layout_margin="@dimen/_10sdp"
+             android:backgroundTint="@color/white"
+             android:src="@drawable/saved_outline"
+             android:tint="@color/save"
+             app:backgroundTint="@color/white" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/DestinationUNSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/_10sdp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_baseline_favorite_24"
-            android:tint="@color/save"
-            android:visibility="gone"
-            app:backgroundTint="@color/white" />
--->
+         <com.google.android.material.floatingactionbutton.FloatingActionButton
+             android:id="@+id/DestinationUNSave"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom|end"
+             android:layout_margin="@dimen/_10sdp"
+             android:backgroundTint="@color/white"
+             android:src="@drawable/ic_baseline_favorite_24"
+             android:tint="@color/save"
+             android:visibility="gone"
+             app:backgroundTint="@color/white" />
+ -->
 
     </FrameLayout>
 
