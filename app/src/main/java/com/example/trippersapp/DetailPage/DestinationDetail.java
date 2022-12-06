@@ -20,8 +20,8 @@ public class DestinationDetail extends AppCompatActivity {
 
     ActivityDestinationDetailBinding binding;
 
-    private TextView destinationName, destinationRegion, destinationCountry, destinationAttractions, destinationPrice;
-    private TextViewEx destinationDescription;
+    private TextView destinationName, destinationRegion, destinationCountry, destinationPrice;
+    private TextViewEx destinationDescription, destinationAttractions;
     private FloatingActionButton destinationSave, destinationUNSave;
     private VideoView destinationVideo;
     private String desName, desRegion, desCountry, desVideo, desAttractions, desAbout, desPrice;
@@ -57,7 +57,7 @@ public class DestinationDetail extends AppCompatActivity {
         destinationCountry.setText(desCountry);
         destinationPrice.setText(desPrice);
         destinationDescription.setText(desAbout, true);
-        destinationAttractions.setText(desAttractions.replace("</br>",System.lineSeparator()));
+        destinationAttractions.setText(desAttractions.replace("</br>",System.lineSeparator()), true);
 
         /**
          * -----VIDEO PLAYER -----

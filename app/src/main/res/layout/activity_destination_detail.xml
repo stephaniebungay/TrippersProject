@@ -107,29 +107,16 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="end"
-                    android:text="₱"
-                    android:textColor="#118C4F"
+                    android:text="4.2"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/DestinationPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="end"
-                    android:text="63219"
-                    android:textColor="@color/money"
-                    android:textSize="@dimen/_14ssp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:gravity="end"
-                    android:text="/pax"
-                    android:textColor="@color/darkgray"
-                    android:textSize="@dimen/_14ssp" />
+               <RatingBar
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   style="@style/Widget.AppCompat.RatingBar.Small"
+                   android:rating="4.2"
+                   />
 
             </LinearLayout>
 
@@ -251,8 +238,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:fontFamily="@font/poppins_regular"
-                        android:gravity="right"
                         android:text="@string/large_text"
+                        android:letterSpacing="0.06"
+                        android:lineSpacingMultiplier="1.1"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titlww" />
@@ -284,7 +272,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
 
-                    <TextView
+                    <com.example.trippersapp.Extra.TextViewEx
                         android:id="@+id/description2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -322,7 +310,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
 
-                    <me.biubiubiu.justifytext.library.JustifyTextView
+                    <com.example.trippersapp.Extra.TextViewEx
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"

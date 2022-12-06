@@ -22,7 +22,7 @@ import android.widget.TextView;
  * https://github.com/bluejamesbond/TextJustify-Android
  */
 
-public class TextViewEx extends TextView {
+public class TextViewEx extends androidx.appcompat.widget.AppCompatTextView {
     private Paint paint = new Paint();
 
     private String[] blocks;
