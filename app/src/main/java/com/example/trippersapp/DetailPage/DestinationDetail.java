@@ -1,9 +1,11 @@
 package com.example.trippersapp.DetailPage;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -11,6 +13,7 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trippersapp.Extra.TextViewEx;
+import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityDestinationDetailBinding;
 import com.google.android.material.button.MaterialButton;
@@ -24,10 +27,13 @@ public class DestinationDetail extends AppCompatActivity {
     private TextViewEx destinationDescription, destinationAttractions;
     private FloatingActionButton destinationSave, destinationUNSave;
     private VideoView destinationVideo;
-    private String desName, desRegion, desCountry, desVideo, desAttractions, desAbout, desPrice;
+    private String desName, desRegion, desCountry, desVideo, desAttractions, desAbout, desPrice, sampleLang;
     private MaterialButton detailsBtn, attractionsBtn, mapBtn, reviewsBtn;
     private ScrollView detailsLayout, attractionsLayout, mapLayout, reviewsLayout;
 
+    Button touchy;
+    Packages packages;
+    Context context;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,6 +49,8 @@ public class DestinationDetail extends AppCompatActivity {
         desPrice = intent.getStringExtra("price");
         desAbout = intent.getStringExtra("description");
         desAttractions = intent.getStringExtra("attractions");
+
+
 
         destinationName = findViewById(R.id.DestinationName);
         destinationRegion = findViewById(R.id.DestinationRegion);
@@ -191,6 +199,7 @@ public class DestinationDetail extends AppCompatActivity {
                 mapBtn.setTextColor(getResources().getColor(R.color.textcolor));
             }
         });
+
 
     }//END OF ONCREATE
 }

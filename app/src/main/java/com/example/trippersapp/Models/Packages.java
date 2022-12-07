@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Packages {
 
+    public String package_id;
     public String package_attractions;
     public String package_availability;
     public String package_country;
@@ -17,7 +18,8 @@ public class Packages {
 
     public Packages(){}
 
-    public Packages(String package_attractions, String package_availability, String package_country, String package_description, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, Double package_rating, String package_region, String package_video) {
+    public Packages(String package_id, String package_attractions, String package_availability, String package_country, String package_description, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, Double package_rating, String package_region, String package_video) {
+        this.package_id = package_id;
         this.package_attractions = package_attractions;
         this.package_availability = package_availability;
         this.package_country = package_country;
@@ -28,6 +30,14 @@ public class Packages {
         this.package_price = package_price;
         this.package_region = package_region;
         this.package_video = package_video;
+    }
+
+    public String getPackage_id() {
+        return package_id;
+    }
+
+    public void setPackage_id(String package_id) {
+        this.package_id = package_id;
     }
 
     public String getPackage_attractions() {

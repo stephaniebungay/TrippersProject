@@ -43,7 +43,7 @@
                 android:fontFamily="@font/poppins_black"
                 android:text="El Nido, Palawan"
                 android:textColor="@color/textcolor"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_18ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/DestinationVidFrame" />
 
@@ -109,14 +109,18 @@
                     android:gravity="end"
                     android:text="4.2"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
-               <RatingBar
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   style="@style/Widget.AppCompat.RatingBar.Small"
-                   android:rating="4.2"
-                   />
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:progressTint="@color/stars"
+                    android:secondaryProgressTint="@color/stars"
+                    android:rating="4.2" />
 
             </LinearLayout>
 
@@ -124,8 +128,6 @@
                 android:id="@+id/dividerr"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/DestinationLinear1" />
@@ -204,13 +206,21 @@
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/dividerr2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
+
             <ScrollView
                 android:id="@+id/detailslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
-                app:layout_constraintTop_toBottomOf="@id/DestinationLinear3">
+                app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -237,10 +247,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/large_text"
+                        android:fontFamily="@font/poppins_medium"
                         android:letterSpacing="0.06"
                         android:lineSpacingMultiplier="1.1"
+                        android:text="@string/large_text"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titlww" />
@@ -255,7 +265,7 @@
                 android:layout_height="0dp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
-                app:layout_constraintTop_toBottomOf="@id/DestinationLinear3">
+                app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -293,7 +303,7 @@
                 android:layout_height="0dp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
-                app:layout_constraintTop_toBottomOf="@id/DestinationLinear3">
+                app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -331,24 +341,92 @@
                 android:layout_height="0dp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
-                app:layout_constraintTop_toBottomOf="@id/DestinationLinear3">
+                app:layout_constraintTop_toBottomOf="@id/dividerr2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/addreviewslayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/bottommenu"
+                app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="REVIEWS"
-                        android:textColor="@color/textcolor"
-                        android:textSize="@dimen/_20ssp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/revtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Rate this Destination!"
+                            android:textColor="@color/textcolor"
+                            android:textSize="@dimen/_15ssp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <RatingBar
+                            android:id="@+id/revrating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_14sdp"
+                            android:clickable="true"
+                            android:progressTint="@color/stars"
+                            android:secondaryProgressTint="@color/stars"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/revtitle" />
 
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/revcomment"
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/commentbox"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="start"
+                            android:hint="Write a comment..."
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/_8sdp"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/revsubmit"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Add Rating"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/accent"
+                            android:theme="@style/Theme.MaterialComponents.Light" />
+
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </ScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -370,23 +448,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="start"
                     android:text="₱"
-                    android:textColor="#118C4F"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/DestinationPrice2"
+                    android:id="@+id/DestinationPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="start"
                     android:text="63219"
-                    android:textColor="@color/money"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/peso"
@@ -403,7 +481,7 @@
                     android:textColor="@color/darkgray"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/DestinationPrice2"
+                    app:layout_constraintStart_toEndOf="@id/DestinationPrice"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton

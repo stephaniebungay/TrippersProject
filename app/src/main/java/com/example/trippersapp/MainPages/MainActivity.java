@@ -22,7 +22,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.trippersapp.Adapters.RecommendAdapter;
 import com.example.trippersapp.Adapters.TopAttractionAdapter;
 import com.example.trippersapp.Adapters.TopDestinationAdapter;
-import com.example.trippersapp.DetailPage.AboutFragment;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.example.trippersapp.TopDestinations;
@@ -72,12 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         seeALL = findViewById(R.id.recommendSeeAll);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("about", "hello");
-        AboutFragment obj = new AboutFragment();
-        obj.setArguments(bundle);
-
-
         topBar = findViewById(R.id.topAppBar);
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(topBar);
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -114,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
                         Packages packages = new Packages();
+                        packages.package_id = document.getId().toString();
                         packages.package_attractions = document.getString("package_attractions").toString();
                         packages.package_availability = document.getString("package_availability").toString();
                         packages.package_country = document.getString("package_country").toString();

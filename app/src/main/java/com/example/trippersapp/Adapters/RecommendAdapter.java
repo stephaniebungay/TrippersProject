@@ -80,6 +80,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
             i.putExtra("attractions", recommendList.get(position).getPackage_attractions());
             context.startActivity(i);
 
+
+
+
             }
         });
 
