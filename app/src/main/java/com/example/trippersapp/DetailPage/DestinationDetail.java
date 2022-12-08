@@ -13,6 +13,7 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.trippersapp.Extra.TextViewEx;
 import com.example.trippersapp.Models.Reviews;
@@ -29,16 +30,16 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DestinationDetail extends AppCompatActivity implements View.OnClickListener {
 
     ActivityDestinationDetailBinding binding;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    FirebaseDatabase firebaseDatabase;
     private TextView destinationName, destinationRegion, destinationCountry, destinationPrice;
     private TextViewEx destinationDescription, destinationAttractions;
     private VideoView destinationVideo;
     private String desID, desAttractions, desAvailability, desCountry, desAbout, desName, desPrice, desRating, desRegion, desVideo;
-    private MaterialButton detailsBtn, attractionsBtn, mapBtn, reviewsBtn, revSubmit;
-    private ScrollView detailsLayout, attractionsLayout, mapLayout, reviewsLayout;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-    FirebaseDatabase firebaseDatabase;
+    private MaterialButton detailsBtn, attractionsBtn, mapBtn, reviewsBtn, addrevBtn, revSubmit, revCancel;
+    private ScrollView detailsLayout, attractionsLayout, mapLayout, addreviewsLayout;
+    private ConstraintLayout reviewsLayout;
     private RatingBar revRating;
     private EditText revComment;
 
@@ -65,8 +66,6 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         desRegion = intent.getStringExtra("region");
         desVideo = intent.getStringExtra("videourl");
 
-
-
         destinationName = findViewById(R.id.DestinationName);
         destinationRegion = findViewById(R.id.DestinationRegion);
         destinationCountry = findViewById(R.id.DestinationCountry);
@@ -80,7 +79,7 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         destinationCountry.setText(desCountry);
         destinationPrice.setText(desPrice);
         destinationDescription.setText(desAbout, true);
-        destinationAttractions.setText(desAttractions.replace("</br>",System.lineSeparator()), true);
+        destinationAttractions.setText(desAttractions.replace("</br>", System.lineSeparator()), true);
 
         /**
          * -----VIDEO PLAYER -----
@@ -96,45 +95,72 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         attractionsLayout = findViewById(R.id.attractionslayout);
         mapLayout = findViewById(R.id.maplayout);
         reviewsLayout = findViewById(R.id.reviewslayout);
+        addreviewsLayout = findViewById(R.id.addreviewslayout);
 
         detailsBtn = findViewById(R.id.detailsbtn);
         attractionsBtn = findViewById(R.id.attractionsbtn);
         mapBtn = findViewById(R.id.mapbtn);
         reviewsBtn = findViewById(R.id.reviewsbtn);
+        addrevBtn = findViewById(R.id.addrevbtn);
 
         revRating = findViewById(R.id.revrating);
         revComment = findViewById(R.id.revcomment);
         revSubmit = findViewById(R.id.revsubmit);
+        revCancel = findViewById(R.id.revcancel);
 
         detailsBtn.setOnClickListener(this);
         attractionsBtn.setOnClickListener(this);
         mapBtn.setOnClickListener(this);
         reviewsBtn.setOnClickListener(this);
+        addrevBtn.setOnClickListener(this);
         revSubmit.setOnClickListener(this);
+        revCancel.setOnClickListener(this);
         activeTab(detailsBtn);
-
 
 
     }//END OF ONCREATE
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.detailsbtn:
                 showDetails();
                 break;
+
             case R.id.attractionsbtn:
                 showAttractions();
                 break;
+
             case R.id.mapbtn:
                 showMap();
                 break;
+
             case R.id.reviewsbtn:
+            case R.id.revcancel:
                 showReviews();
                 break;
+
+            case R.id.addrevbtn:
+                showAddReview();
+                break;
+
             case R.id.revsubmit:
                 submitReview();
+                break;
         }
+    }
+
+    private void showAddReview() {
+        addreviewsLayout.setVisibility(View.VISIBLE);
+        reviewsLayout.setVisibility(View.INVISIBLE);
+        detailsLayout.setVisibility(View.INVISIBLE);
+        attractionsLayout.setVisibility(View.INVISIBLE);
+        mapLayout.setVisibility(View.INVISIBLE);
+
+        activeTab(reviewsBtn);
+        inactiveTab(detailsBtn);
+        inactiveTab(attractionsBtn);
+        inactiveTab(mapBtn);
     }
 
     private void submitReview() {
@@ -146,19 +172,27 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         String rating = String.valueOf(revRating.getRating());
         Reviews reviews = new Reviews(review_comment, uid, uimg, uname, rating);
 
-        reviewRef.setValue(reviews).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(DestinationDetail.this, "Review Added!", Toast.LENGTH_SHORT).show();
-                revComment.setText("");
-                revRating.setRating(0);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(DestinationDetail.this, "Fail to add review: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (Float.parseFloat(rating)==0) {
+            Toast.makeText(this, "Please add rating!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            reviewRef.setValue(reviews).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(DestinationDetail.this, "Review Added!", Toast.LENGTH_SHORT).show();
+                    revComment.setText("");
+                    revRating.setRating(0);
+                    showReviews();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(DestinationDetail.this, "Fail to add review: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
 
     }
 
@@ -167,6 +201,8 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         attractionsLayout.setVisibility(View.INVISIBLE);
         mapLayout.setVisibility(View.INVISIBLE);
         reviewsLayout.setVisibility(View.INVISIBLE);
+        addreviewsLayout.setVisibility(View.INVISIBLE);
+
 
         activeTab(detailsBtn);
         inactiveTab(reviewsBtn);
@@ -179,6 +215,8 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         detailsLayout.setVisibility(View.INVISIBLE);
         mapLayout.setVisibility(View.INVISIBLE);
         reviewsLayout.setVisibility(View.INVISIBLE);
+        addreviewsLayout.setVisibility(View.INVISIBLE);
+
 
         activeTab(attractionsBtn);
         inactiveTab(detailsBtn);
@@ -191,6 +229,8 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         detailsLayout.setVisibility(View.INVISIBLE);
         attractionsLayout.setVisibility(View.INVISIBLE);
         reviewsLayout.setVisibility(View.INVISIBLE);
+        addreviewsLayout.setVisibility(View.INVISIBLE);
+
 
         activeTab(mapBtn);
         inactiveTab(detailsBtn);
@@ -203,21 +243,25 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         detailsLayout.setVisibility(View.INVISIBLE);
         attractionsLayout.setVisibility(View.INVISIBLE);
         mapLayout.setVisibility(View.INVISIBLE);
+        addreviewsLayout.setVisibility(View.INVISIBLE);
+
 
         activeTab(reviewsBtn);
         inactiveTab(detailsBtn);
         inactiveTab(attractionsBtn);
         inactiveTab(mapBtn);
+
+        revComment.setText("");
+        revRating.setRating(0);
     }
 
 
-
-    private void activeTab (MaterialButton materialButton){
+    private void activeTab(MaterialButton materialButton) {
         materialButton.setBackgroundColor(getResources().getColor(R.color.accent));
         materialButton.setTextColor(getResources().getColor(R.color.white));
     }
 
-    private void inactiveTab (MaterialButton materialButton){
+    private void inactiveTab(MaterialButton materialButton) {
         materialButton.setBackgroundColor(getResources().getColor(R.color.transparent));
         materialButton.setTextColor(getResources().getColor(R.color.textcolor));
 

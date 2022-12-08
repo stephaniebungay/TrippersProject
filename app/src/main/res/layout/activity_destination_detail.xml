@@ -324,49 +324,53 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
-            <RelativeLayout
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/reviewslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/addrevbtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:fontFamily="@font/poppins_medium"
                     android:foregroundGravity="center"
                     android:padding="0dp"
                     android:text="Add Review"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/accent"
-                    android:textSize="@dimen/_14ssp"
+                    android:textSize="@dimen/_12ssp"
                     android:theme="@style/Theme.MaterialComponents.Light"
                     app:icon="@drawable/add"
                     app:iconGravity="textStart"
                     app:iconTint="@color/accent"
-                    app:rippleColor="@color/accent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@id/bottommenu"
-                app:layout_constraintTop_toBottomOf="@id/addrevbtn">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
-            </RelativeLayout>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/accent" />
 
+                <View
+                    android:id="@+id/dividerr3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintTop_toBottomOf="@id/addrevbtn" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="409dp"
+                    android:layout_height="346dp"
+                    app:layout_constraintTop_toBottomOf="@id/dividerr3"
+                    app:layout_constraintBottom_toTopOf="@id/bottommenu"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ScrollView
                 android:id="@+id/addreviewslayout"
