@@ -1,0 +1,65 @@
+Index: app/src/main/java/com/example/trippersapp/Models/Reviews.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/trippersapp/Models/Reviews.java b/app/src/main/java/com/example/trippersapp/Models/Reviews.java
+--- a/app/src/main/java/com/example/trippersapp/Models/Reviews.java	
++++ b/app/src/main/java/com/example/trippersapp/Models/Reviews.java	(date 1670514547937)
+@@ -1,12 +1,8 @@
+ package com.example.trippersapp.Models;
+ 
+-import com.google.firebase.database.ServerValue;
+-
+ public class Reviews {
+ 
+     private String content;
+-    private String rating;
+-    private Object timestamp;
+     private String user_email;
+     private String user_pfp;
+     private String username;
+@@ -14,20 +10,9 @@
+     public Reviews() {
+     }
+ 
+-    public Reviews(String content, String rating, String user_email, String user_pfp, String username ) {
+-        this.content = content;
+-        this.rating = rating;
+-        this.timestamp = ServerValue.TIMESTAMP;
+-        this.user_email = user_email;
+-        this.user_pfp = user_pfp;
+-        this.username = username;
+ 
+-    }
+-
+-    public Reviews(String content, String rating, Object timestamp, String user_email, String user_pfp, String username) {
++    public Reviews(String content, String user_email, String user_pfp, String username) {
+         this.content = content;
+-        this.rating = rating;
+-        this.timestamp = timestamp;
+         this.user_email = user_email;
+         this.user_pfp = user_pfp;
+         this.username = username;
+@@ -41,21 +26,7 @@
+         this.content = content;
+     }
+ 
+-    public String getRating() {
+-        return rating;
+-    }
+-
+-    public void setRating(String rating) {
+-        this.rating = rating;
+-    }
+ 
+-    public Object getTimestamp() {
+-        return timestamp;
+-    }
+-
+-    public void setTimestamp(Object timestamp) {
+-        this.timestamp = timestamp;
+-    }
+ 
+     public String getUser_email() {
+         return user_email;

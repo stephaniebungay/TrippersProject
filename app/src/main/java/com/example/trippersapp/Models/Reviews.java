@@ -5,33 +5,33 @@ import com.google.firebase.database.ServerValue;
 public class Reviews {
 
     private String content;
-    private String user_email;
-    private String  user_pfp;
-    private String username;
-    private String rating;
+    private float rating;
     private Object timestamp;
+    private String user_email;
+    private String user_pfp;
+    private String username;
 
-    public Reviews(){
+    public Reviews() {
     }
 
-    public Reviews(String content, String user_email, String user_pfp, String username, String rating) {
+    public Reviews(String content, float rating, String user_email, String user_pfp, String username ) {
         this.content = content;
-        this.user_email = user_email;
-        this.user_pfp = user_pfp;
-        this.username = username;
         this.rating = rating;
         this.timestamp = ServerValue.TIMESTAMP;
-    }
-
-    public Reviews(String content, String user_email, String user_pfp, String username, String rating, Object timestamp) {
-        this.content = content;
         this.user_email = user_email;
         this.user_pfp = user_pfp;
         this.username = username;
-        this.rating = rating;
-        this.timestamp = timestamp;
+
     }
 
+    public Reviews(String content, float rating, Object timestamp, String user_email, String user_pfp, String username) {
+        this.content = content;
+        this.rating = rating;
+        this.timestamp = timestamp;
+        this.user_email = user_email;
+        this.user_pfp = user_pfp;
+        this.username = username;
+    }
 
     public String getContent() {
         return content;
@@ -39,6 +39,22 @@ public class Reviews {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public Object getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Object timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getUser_email() {
@@ -64,20 +80,7 @@ public class Reviews {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public Object getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Object timestamp) {
-        this.timestamp = timestamp;
-    }
 }
+
+
+

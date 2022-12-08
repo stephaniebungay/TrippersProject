@@ -14,7 +14,10 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trippersapp.Adapters.ReviewsAdapter;
 import com.example.trippersapp.Extra.TextViewEx;
 import com.example.trippersapp.Models.Reviews;
 import com.example.trippersapp.R;
@@ -24,15 +27,23 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class DestinationDetail extends AppCompatActivity implements View.OnClickListener {
+
+    String TAG = DestinationDetail.class.getSimpleName();
 
     ActivityDestinationDetailBinding binding;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     private TextView destinationName, destinationRegion, destinationCountry, destinationPrice;
     private TextViewEx destinationDescription, destinationAttractions;
     private VideoView destinationVideo;
@@ -42,6 +53,11 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
     private ConstraintLayout reviewsLayout;
     private RatingBar revRating;
     private EditText revComment;
+    private RecyclerView rvReviews;
+    ReviewsAdapter reviewsAdapter;
+    ArrayList<Reviews> reviewsList;
+    static String REVIEWS_KEY = "Reviews";
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -53,6 +69,15 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        rvReviews = findViewById(R.id.rvreviews);
+        rvReviews.setHasFixedSize(true);
+        rvReviews.setLayoutManager(new LinearLayoutManager(this));
+
+        /*reviewsList = new ArrayList<>();
+        reviewsAdapter = new ReviewsAdapter(this, reviewsList);
+        rvReviews.setAdapter(reviewsAdapter);
+*/
 
         Intent intent = getIntent();
         desID = intent.getStringExtra("id");
@@ -116,9 +141,50 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         revSubmit.setOnClickListener(this);
         revCancel.setOnClickListener(this);
         activeTab(detailsBtn);
+        userReviews();
 
 
     }//END OF ONCREATE
+
+    private void userReviews() {
+        rvReviews.setLayoutManager(new LinearLayoutManager(this));
+
+        DatabaseReference reference = firebaseDatabase.getReference(REVIEWS_KEY).child(desID);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                reviewsList = new ArrayList<>();
+
+
+                for (DataSnapshot snap: snapshot.getChildren()){
+                    Reviews reviews = snap.getValue(Reviews.class);
+                    reviewsList.add(reviews);
+
+                }
+                reviewsAdapter = new ReviewsAdapter(getApplicationContext(), reviewsList);
+                rvReviews.setAdapter(reviewsAdapter);
+                reviewsAdapter.notifyDataSetChanged();
+
+                LinearLayoutManager lin = new LinearLayoutManager(getApplicationContext());
+                lin.setStackFromEnd(true);
+                lin.setReverseLayout(true);
+
+                rvReviews.setLayoutManager(lin);
+                rvReviews.setHasFixedSize(true);
+
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                databaseReference = firebaseDatabase.getReference("Reviews");
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View view) {
@@ -169,10 +235,10 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         String uid = firebaseUser.getEmail();
         String uimg = firebaseUser.getPhotoUrl().toString();
         String uname = firebaseUser.getDisplayName();
-        String rating = String.valueOf(revRating.getRating());
-        Reviews reviews = new Reviews(review_comment, uid, uimg, uname, rating);
+        float rating = revRating.getRating();
+        Reviews reviews = new Reviews(review_comment, rating, uid, uimg, uname);
 
-        if (Float.parseFloat(rating)==0) {
+        if (rating==0) {
             Toast.makeText(this, "Please add rating!", Toast.LENGTH_SHORT).show();
             return;
         }
