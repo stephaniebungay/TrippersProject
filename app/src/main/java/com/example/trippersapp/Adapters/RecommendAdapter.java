@@ -70,17 +70,19 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent i = new Intent(context, DestinationDetail.class);
-            i.putExtra("name", recommendList.get(position).getPackage_name());
-            i.putExtra("region", recommendList.get(position).getPackage_region());
-            i.putExtra("country", recommendList.get(position).getPackage_country());
-           // i.putExtra("videourl", recommendList.get(position).getPackage_video());
-            i.putExtra("price", recommendList.get(position).getPackage_price());
-            i.putExtra("description", recommendList.get(position).getPackage_description());
-            i.putExtra("attractions", recommendList.get(position).getPackage_attractions());
-            context.startActivity(i);
-
-
+                Intent i = new Intent(context, DestinationDetail.class);
+                i.putExtra("id", recommendList.get(position).getPackage_id());
+                i.putExtra("attractions", recommendList.get(position).getPackage_attractions());
+                i.putExtra("availability", recommendList.get(position).getPackage_availability());
+                i.putExtra("country", recommendList.get(position).getPackage_country());
+                i.putExtra("description", recommendList.get(position).getPackage_description());
+                i.putExtra("name", recommendList.get(position).getPackage_name());
+                //photos
+                i.putExtra("price", recommendList.get(position).getPackage_price());
+                i.putExtra("rating", recommendList.get(position).getPackage_rating());
+                i.putExtra("region", recommendList.get(position).getPackage_region());
+                // i.putExtra("videourl", recommendList.get(position).getPackage_video());
+                context.startActivity(i);
 
 
             }

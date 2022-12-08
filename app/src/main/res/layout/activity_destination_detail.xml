@@ -218,7 +218,7 @@
                 android:id="@+id/detailslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -263,7 +263,7 @@
                 android:id="@+id/attractionslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -301,7 +301,7 @@
                 android:id="@+id/maplayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -320,41 +320,59 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
 
-                    <com.example.trippersapp.Extra.TextViewEx
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:letterSpacing="0.06"
-                        android:text="@string/lorem_ipsum"
-                        android:textSize="@dimen/_11ssp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/titlww2" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
-            <ScrollView
+            <RelativeLayout
                 android:id="@+id/reviewslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
-
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addrevbtn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:foregroundGravity="center"
+                    android:padding="0dp"
+                    android:text="Add Review"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_14ssp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:icon="@drawable/add"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/accent"
+                    app:rippleColor="@color/accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@id/bottommenu"
+                app:layout_constraintTop_toBottomOf="@id/addrevbtn">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-
-
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
+            </RelativeLayout>
+
 
             <ScrollView
                 android:id="@+id/addreviewslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -363,12 +381,12 @@
                     android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/addrevlinear"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_14sdp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -410,20 +428,41 @@
                             android:inputType="textMultiLine"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_10ssp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center"
+                        app:layout_constraintTop_toBottomOf="@+id/addrevlinear">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/revsubmit"
+                            android:id="@+id/revcancel"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Add Rating"
+                            android:text="Cancel"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/accent"
                             android:theme="@style/Theme.MaterialComponents.Light" />
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/revsubmit"
+                            style="@style/PrimaryButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:backgroundTint="@color/accent"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Add Rating"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/white"
+                            android:theme="@style/Theme.MaterialComponents.Light" />
                     </LinearLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

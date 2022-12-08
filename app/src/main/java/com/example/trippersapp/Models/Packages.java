@@ -13,13 +13,13 @@ public class Packages {
     public HashMap<String, Object> package_photos;
     public String package_poster;
     public String package_price;
-    public Float package_rating;
+    public String package_rating;
     public String package_region;
     public String package_video;
 
     public Packages(){}
 
-    public Packages(String package_id, String package_attractions, String package_availability, String package_country, String package_description, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, Float package_rating, String package_region, String package_video) {
+    public Packages(String package_id, String package_attractions, String package_availability, String package_country, String package_description, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, String package_rating, String package_region, String package_video) {
         this.package_id = package_id;
         this.package_attractions = package_attractions;
         this.package_availability = package_availability;
@@ -106,11 +106,11 @@ public class Packages {
         this.package_price = package_price;
     }
 
-    public float getPackage_rating(){
+    public String getPackage_rating(){
         return package_rating;
     }
 
-    public void setPackage_rating(float package_rating){
+    public void setPackage_rating(String package_rating){
         this.package_rating = package_rating;
     }
 

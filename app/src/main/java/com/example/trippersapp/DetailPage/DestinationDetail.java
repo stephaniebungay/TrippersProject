@@ -4,16 +4,27 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trippersapp.Extra.TextViewEx;
+import com.example.trippersapp.Models.Reviews;
 import com.example.trippersapp.R;
 import com.example.trippersapp.databinding.ActivityDestinationDetailBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class DestinationDetail extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,9 +33,14 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
     private TextView destinationName, destinationRegion, destinationCountry, destinationPrice;
     private TextViewEx destinationDescription, destinationAttractions;
     private VideoView destinationVideo;
-    private String desName, desRegion, desCountry, desVideo, desAttractions, desAbout, desPrice;
-    private MaterialButton detailsBtn, attractionsBtn, mapBtn, reviewsBtn;
+    private String desID, desAttractions, desAvailability, desCountry, desAbout, desName, desPrice, desRating, desRegion, desVideo;
+    private MaterialButton detailsBtn, attractionsBtn, mapBtn, reviewsBtn, revSubmit;
     private ScrollView detailsLayout, attractionsLayout, mapLayout, reviewsLayout;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    FirebaseDatabase firebaseDatabase;
+    private RatingBar revRating;
+    private EditText revComment;
 
 
     @SuppressLint("MissingInflatedId")
@@ -33,14 +49,23 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination_detail);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
         Intent intent = getIntent();
-        desName = intent.getStringExtra("name");
-        desRegion = intent.getStringExtra("region");
-        desCountry = intent.getStringExtra("country");
-        desVideo = intent.getStringExtra("videourl");
-        desPrice = intent.getStringExtra("price");
-        desAbout = intent.getStringExtra("description");
+        desID = intent.getStringExtra("id");
         desAttractions = intent.getStringExtra("attractions");
+        desAvailability = intent.getStringExtra("availability");
+        desCountry = intent.getStringExtra("country");
+        desAbout = intent.getStringExtra("description");
+        desName = intent.getStringExtra("name");
+        desPrice = intent.getStringExtra("price");
+        desRating = intent.getStringExtra("rating");
+        desRegion = intent.getStringExtra("region");
+        desVideo = intent.getStringExtra("videourl");
+
+
 
         destinationName = findViewById(R.id.DestinationName);
         destinationRegion = findViewById(R.id.DestinationRegion);
@@ -77,10 +102,15 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         mapBtn = findViewById(R.id.mapbtn);
         reviewsBtn = findViewById(R.id.reviewsbtn);
 
+        revRating = findViewById(R.id.revrating);
+        revComment = findViewById(R.id.revcomment);
+        revSubmit = findViewById(R.id.revsubmit);
+
         detailsBtn.setOnClickListener(this);
         attractionsBtn.setOnClickListener(this);
         mapBtn.setOnClickListener(this);
         reviewsBtn.setOnClickListener(this);
+        revSubmit.setOnClickListener(this);
         activeTab(detailsBtn);
 
 
@@ -102,7 +132,34 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
             case R.id.reviewsbtn:
                 showReviews();
                 break;
+            case R.id.revsubmit:
+                submitReview();
         }
+    }
+
+    private void submitReview() {
+        DatabaseReference reviewRef = firebaseDatabase.getReference("Reviews").child(desID).push();
+        String review_comment = revComment.getText().toString();
+        String uid = firebaseUser.getEmail();
+        String uimg = firebaseUser.getPhotoUrl().toString();
+        String uname = firebaseUser.getDisplayName();
+        String rating = String.valueOf(revRating.getRating());
+        Reviews reviews = new Reviews(review_comment, uid, uimg, uname, rating);
+
+        reviewRef.setValue(reviews).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(DestinationDetail.this, "Review Added!", Toast.LENGTH_SHORT).show();
+                revComment.setText("");
+                revRating.setRating(0);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(DestinationDetail.this, "Fail to add review: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void showDetails() {
