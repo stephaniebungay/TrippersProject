@@ -218,7 +218,7 @@
                 android:id="@+id/detailslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -339,11 +339,11 @@
                 android:id="@+id/reviewslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
@@ -354,7 +354,7 @@
                 android:id="@+id/addreviewslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -417,7 +417,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Add Rating"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/accent"
