@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.trippersapp.AccountSettings;
 import com.example.trippersapp.LoginRegistration.login;
 import com.example.trippersapp.Models.User;
@@ -79,11 +82,6 @@ public class UserPage extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         return true;
 
-                    /*case R.id.map:
-                        startActivity(new Intent(getApplicationContext(), MapPage.class));
-                        overridePendingTransition(0, 0);
-                        return true;*/
-
                     case R.id.booking:
                         startActivity(new Intent(getApplicationContext(), BookingPage.class));
                         overridePendingTransition(0, 0);
@@ -109,7 +107,6 @@ public class UserPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserPage.this, ProfilePage.class));
-                Toast.makeText(UserPage.this, "JOYCE BANO HAHAHA", Toast.LENGTH_SHORT).show();
             }
         });
         userHelpBtn.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +190,7 @@ public class UserPage extends AppCompatActivity {
             Log.d(TAG, "PROFILE_PICTURE: " + firebaseUser.getPhotoUrl() );
 
         if(firebaseUser.getPhotoUrl() != null){
-           /* String photoUrl = firebaseUser.getPhotoUrl().toString();
+            String photoUrl = firebaseUser.getPhotoUrl().toString();
             photoUrl = photoUrl + "?type=large";
             Glide.with(UserPage.this)
                     .load(photoUrl)
@@ -201,7 +198,6 @@ public class UserPage extends AppCompatActivity {
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .into(userImage);
-*/
 
             }
             else{

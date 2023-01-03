@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.trippersapp.DetailPage.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
@@ -23,33 +25,31 @@ import java.util.ArrayList;
 public class TopAttractionAdapter extends RecyclerView.Adapter<TopAttractionAdapter.MyViewHolder> {
     Context context;
     ArrayList<Packages> topAttractionList;
-    private ViewPager2 topAttractionViewPager;
 
-    public TopAttractionAdapter(Context context, ArrayList<Packages> topAttractionList, ViewPager2 topAttractionViewPager) {
+    public TopAttractionAdapter(Context context, ArrayList<Packages> topAttractionList) {
         this.context = context;
         this.topAttractionList = topAttractionList;
-        this.topAttractionViewPager = topAttractionViewPager;
     }
 
     @NonNull
     @Override
     public TopAttractionAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_container_recommend, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.destination_container, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if(position == topAttractionList.size() - 2){
+  /*      if(position == topAttractionList.size() - 2){
             topAttractionViewPager.post(runnable);
-        }
+        }*/
         Packages packages = topAttractionList.get(position);
-       /* Glide.with(context)
+       Glide.with(context)
                 .load(topAttractionList.get(position).getPackage_poster())
                 .thumbnail(0.05f)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(holder.imagePoster);*/
+                .into(holder.imagePoster);
         holder.textName.setText(packages.getPackage_name());
         holder.textCountry.setText(packages.getPackage_country());
         holder.ratingBar.setRating(2.5f);
@@ -58,12 +58,21 @@ public class TopAttractionAdapter extends RecyclerView.Adapter<TopAttractionAdap
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DestinationDetail.class);
-                i.putExtra("name", topAttractionList.get(position).getPackage_name());
-                i.putExtra("region", topAttractionList.get(position).getPackage_region());
-                i.putExtra("country", topAttractionList.get(position).getPackage_country());
-               // i.putExtra("videourl", topAttractionList.get(position).getPackage_video());
-                i.putExtra("description", topAttractionList.get(position).getPackage_description());
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("id", topAttractionList.get(position).getPackage_id());
                 i.putExtra("attractions", topAttractionList.get(position).getPackage_attractions());
+                i.putExtra("availability", topAttractionList.get(position).getPackage_availability());
+                i.putExtra("country", topAttractionList.get(position).getPackage_country());
+                i.putExtra("description", topAttractionList.get(position).getPackage_description());
+                i.putExtra("latitude", topAttractionList.get(position).getPackage_latitude());
+                i.putExtra("longitude", topAttractionList.get(position).getPackage_longitude());
+                i.putExtra("name", topAttractionList.get(position).getPackage_name());
+                //photos
+                i.putExtra("price", topAttractionList.get(position).getPackage_price());
+                i.putExtra("rating", topAttractionList.get(position).getPackage_rating());
+                i.putExtra("region", topAttractionList.get(position).getPackage_region());
+                i.putExtra("reviewer", topAttractionList.get(position).getPackage_reviewer());
+                i.putExtra("videourl", topAttractionList.get(position).getPackage_video());
                 context.startActivity(i);
 
             }
@@ -83,10 +92,10 @@ public class TopAttractionAdapter extends RecyclerView.Adapter<TopAttractionAdap
         public  MyViewHolder (@NonNull View itemView) {
             super(itemView);
 
-            imagePoster = itemView.findViewById(R.id.imagePoster);
-            textName = itemView.findViewById(R.id.textName);
-            textCountry = itemView.findViewById(R.id.textCountry);
-            ratingBar = itemView.findViewById(R.id.ratingBar);
+            imagePoster = itemView.findViewById(R.id.imagePoster1);
+            textName = itemView.findViewById(R.id.textName1);
+            textCountry = itemView.findViewById(R.id.textCountry1);
+            ratingBar = itemView.findViewById(R.id.ratingBar1);
 
         }
     }

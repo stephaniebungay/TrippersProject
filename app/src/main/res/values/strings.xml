@@ -380,6 +380,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="booking">(Reminder: The email address and contact number that you will provide must be working as it will be used by the agency to contact you)  </string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -12,7 +13,6 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -73,8 +73,13 @@ dependencies {
 
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
     implementation 'id.zelory:compressor:3.0.1'
-    implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
-    implementation 'me.biubiubiu.justifytext:library:1.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:8.0.2'
+
+    // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
 
 }
 

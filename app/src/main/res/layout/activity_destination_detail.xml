@@ -218,15 +218,15 @@
                 android:id="@+id/detailslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp"
                     android:background="@color/offwhite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/DestinationLinear3">
@@ -263,26 +263,39 @@
                 android:id="@+id/attractionslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/titlww2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="ABOUT 2"
+                        android:fontFamily="@font/poppins_medium_italic"
+                        android:text="Attractions"
                         android:textColor="@color/textcolor"
                         android:textSize="@dimen/_20ssp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
 
-                    <com.example.trippersapp.Extra.TextViewEx
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/galleryView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_100sdp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titlww2"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="1dp" />
+
+                    <TextView
                         android:id="@+id/description2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -291,13 +304,13 @@
                         android:text="@string/lorem_ipsum"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/titlww2" />
+                        app:layout_constraintTop_toBottomOf="@id/galleryView" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
-            <ScrollView
+            <FrameLayout
                 android:id="@+id/maplayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -307,31 +320,31 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:justificationMode="inter_word"
-                        android:text="MAP"
-                        android:textColor="@color/textcolor"
-                        android:textSize="@dimen/_20ssp"
+                <!--    <fragment
+                        android:id="@+id/gmaps"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
-
+                        app:layout_constraintTop_toTopOf="parent" />
+-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
+            </FrameLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/reviewslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
-                app:layout_constraintTop_toBottomOf="@id/dividerr2">
+                app:layout_constraintTop_toBottomOf="@id/dividerr2"
+                tools:layout_editor_absoluteX="18dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/addrevbtn"
@@ -359,12 +372,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="?android:attr/listDivider"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/addrevbtn" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvreviews"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:scrollbars="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -377,7 +392,7 @@
                 android:id="@+id/addreviewslayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -529,6 +544,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/booknowbtn"
                     style="@style/PrimaryButton"
                     android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"

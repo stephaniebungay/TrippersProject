@@ -256,7 +256,7 @@
             app:iconTintMode="multiply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" />
-        -->
+
 
     </LinearLayout>
 
@@ -282,6 +282,7 @@
         <Button
             android:id="@+id/reglink"
             style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:theme="@style/Theme.MaterialComponents.Light"
             android:layout_width="124dp"
             android:layout_height="27dp"
             android:fontFamily="@font/poppins_bold"

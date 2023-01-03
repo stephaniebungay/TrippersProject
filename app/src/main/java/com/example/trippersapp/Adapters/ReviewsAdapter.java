@@ -74,7 +74,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
     private String timestampToString(long time) {
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
         calendar.setTimeInMillis(time);
-        String date = DateFormat.format("hh-mm", calendar).toString();
+        String date = DateFormat.format("yyyy-MM-dd", calendar).toString();
         return date;
     }
 

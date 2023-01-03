@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,31 +9,58 @@
     android:orientation="vertical"
     tools:context=".MainPages.MainActivity"
     >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_margin="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:cardElevation="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Search your next trip!"
+
+            />
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/framesearch"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottomnav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+
     <FrameLayout
         android:id="@+id/framemain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize">
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="44dp">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:background="@color/background"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:menu="@menu/top_menu" />
-
-        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -48,7 +75,7 @@
                     android:id="@+id/linear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="?attr/actionBarSize"
+                    android:layout_marginTop="@dimen/_14sdp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -80,14 +107,14 @@
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 
-                <androidx.viewpager2.widget.ViewPager2
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommendViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_173sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_24sdp"
+                    android:orientation="horizontal"
                     android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_120sdp"
                     app:layout_constraintBottom_toTopOf="@id/linear2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -129,13 +156,13 @@
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 
-                <androidx.viewpager2.widget.ViewPager2
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/topDesViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_173sdp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"
                     android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_120sdp"
                     app:layout_constraintBottom_toTopOf="@id/linear3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -177,13 +204,13 @@
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 
-                <androidx.viewpager2.widget.ViewPager2
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/topAttractionViewPager"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_height="@dimen/_180sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"
                     android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_120sdp"
                     app:layout_constraintBottom_toTopOf="@id/lorem"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -204,11 +231,9 @@
                     app:layout_constraintTop_toBottomOf="@id/topAttractionViewPager" />
 
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnav"
         android:layout_width="match_parent"
@@ -219,8 +244,11 @@
         app:itemIconSize="@dimen/_18sdp"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu" />
-</RelativeLayout>
+        app:menu="@menu/menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--
     <?xml version="1.0" encoding="utf-8"?>
