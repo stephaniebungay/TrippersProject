@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbg"
+    tools:context=".DetailPage.BookingConfirmation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="@dimen/_40sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ttl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="0dp"
+
+            android:text="Confirm your Details"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintBottom_toTopOf="@id/tname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Client Name:"
+            android:textColor="@color/textcolor"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/mname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ttl" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingEnd="@dimen/_40sdp"
+            android:text="Stephanie"
+
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@id/tname"
+            app:layout_constraintTop_toBottomOf="@id/ttl" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Contact Number:"
+            android:textColor="@color/textcolor"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/mphone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tname" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingEnd="@dimen/_40sdp"
+
+            android:text="09354383435"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@id/tphone"
+            app:layout_constraintTop_toBottomOf="@id/mname" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Email Address:"
+            android:textColor="@color/textcolor"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/memail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tphone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/memail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingEnd="@dimen/_40sdp"
+            android:text="sy.bungay@gmail.com"
+
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@id/temail"
+            app:layout_constraintTop_toBottomOf="@id/mphone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Travel Date:"
+            android:textColor="@color/textcolor"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/mdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingEnd="@dimen/_40sdp"
+
+            android:text="January 10, 2022"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@id/tdate"
+            app:layout_constraintTop_toBottomOf="@id/memail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tpax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Pax:"
+            android:textColor="@color/textcolor"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/mpax"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tdate" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mpax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingEnd="@dimen/_40sdp"
+            android:text="5 Person"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@id/tpax"
+            app:layout_constraintTop_toBottomOf="@id/mdate" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tnote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Note:"
+            android:textColor="@color/textcolor"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/mnote"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tpax" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mnote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingEnd="@dimen/_40sdp"
+            android:text=""
+            android:textColor="@color/accent"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@id/tnote"
+            app:layout_constraintTop_toBottomOf="@id/mpax" />
+
+
+        <LinearLayout
+            android:id="@+id/lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_40sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mnote">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AMOUNT TO BE PAID:"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/textcolor"
+                android:textSize="@dimen/_13ssp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pricey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00000"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/money"
+                android:textSize="@dimen/_13ssp"/>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_40sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lin">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/backbooking"
+                style="@style/CancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BACK"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:textColor="@color/accent"
+                android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/confirmbooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+                style="@style/PrimaryButton"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="CONFIRM"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>
