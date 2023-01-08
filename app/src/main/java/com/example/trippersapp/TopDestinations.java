@@ -2,9 +2,11 @@ package com.example.trippersapp;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TopDestinations extends AppCompatActivity {
 
@@ -28,13 +31,28 @@ public class TopDestinations extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
 
     PackageAdapter adapter;
-    ArrayList<Packages> packageList;
+    List<Packages> packageList;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_destinations);
 
+        searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
         recyclerView = findViewById(R.id.packageView);
         firebaseFirestore = firebaseFirestore.getInstance();
         recyclerView.setHasFixedSize(true);
@@ -43,6 +61,7 @@ public class TopDestinations extends AppCompatActivity {
         packageList = new ArrayList<>();
         adapter = new PackageAdapter(this, packageList);
         recyclerView.setAdapter(adapter);
+
 
         CollectionReference collectionReference = firebaseFirestore.collection("Packages");
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -79,5 +98,22 @@ public class TopDestinations extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void filterList(String text) {
+        List<Packages> filteredList = new ArrayList<>();
+        for(Packages packages : packageList){
+            if(packages.getPackage_name().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(packages);
+            }
+
+        }
+        if(filteredList.isEmpty()){
+            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            adapter.setFilteredList(filteredList);
+
+        }
     }
 }

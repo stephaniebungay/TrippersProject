@@ -23,7 +23,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.trippersapp.MainPages.BookingPage;
 import com.example.trippersapp.MainPages.MainActivity;
-import com.example.trippersapp.MainPages.NotifPage;
 import com.example.trippersapp.MainPages.UserPage;
 import com.facebook.AccessTokenTracker;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -84,10 +83,10 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
                         overridePendingTransition(0, 0);
                         return true;
 
-                    case R.id.notification:
+                   /* case R.id.notification:
                         startActivity(new Intent(getApplicationContext(), NotifPage.class));
                         overridePendingTransition(0, 0);
-                        return true;
+                        return true;*/
 
                     case R.id.booking:
                         startActivity(new Intent(getApplicationContext(), BookingPage.class));

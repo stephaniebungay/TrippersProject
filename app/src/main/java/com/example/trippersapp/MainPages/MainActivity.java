@@ -4,15 +4,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,12 +26,10 @@ import com.example.trippersapp.Adapters.RecommendAdapter;
 import com.example.trippersapp.Adapters.SearchAdapter;
 import com.example.trippersapp.Adapters.TopAttractionAdapter;
 import com.example.trippersapp.Adapters.TopDestinationAdapter;
-import com.example.trippersapp.Adapters.ViewHolder;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.example.trippersapp.TopDestinations;
 import com.example.trippersapp.databinding.ActivityMainBinding;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,21 +40,26 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
 
+    private Toolbar topBar;
+    private AppBarLayout appBarLayout;
     String TAG = MainActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
     private ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
-    private Toolbar topBar;
-    private AppBarLayout appBarLayout;
     private ActionBar actionBar;
     private TextView seeALL;
 
@@ -93,34 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         /*dataFetch();*/
-        search();
 
-        SearchBar = findViewById(R.id.searchView);
-        results = findViewById(R.id.searchRv);
-        searchList = new ArrayList<>();
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        results.setLayoutManager(layoutManager);
-
-        searchAdapter = new SearchAdapter(getApplicationContext(), searchList);
-        results.setAdapter(searchAdapter);
+        /** APPBAR */
 
 
-        SearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                searchAdapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                searchAdapter.getFilter().filter(newText);
-
-                return false;
-            }
-        });
 
 
 
@@ -151,26 +128,12 @@ public class MainActivity extends AppCompatActivity {
         recommendAdapter = new RecommendAdapter(this, recommendList);
         recommendViewPager.setAdapter(recommendAdapter);
 
-        topDestinationAdapter = new TopDestinationAdapter(this, topDestinationList);
-        topDesViewPager.setAdapter(topDestinationAdapter);
+        /*topDestinationAdapter = new TopDestinationAdapter(this, topDestinationList);
+        topDesViewPager.setAdapter(topDestinationAdapter);*/
 
         topAttractionAdapter = new TopAttractionAdapter(this, topAttractionList);
         topAttractionViewPager.setAdapter(topAttractionAdapter);
 
-        CollectionReference collectionReferences = firebaseFirestore.collection("package_photos");
-        collectionReferences.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()){
-                        Log.d(TAG, document.getId() + " => " + document.getData());
-                    }
-                }else{
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-
-                }
-            }
-        });
 
         CollectionReference collectionReference = firebaseFirestore.collection("Packages");
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -194,16 +157,12 @@ public class MainActivity extends AppCompatActivity {
                         packages.package_region = document.getString("package_region").toString();
                         packages.package_video = document.getString("package_video").toString();
 
-
                         recommendList.add(packages);
-                        topDestinationList.add(packages);
+                        /*topDestinationList.add(packages);*/
                         topAttractionList.add(packages);
-
-                        searchList.add(packages);
-
-
-                        topDestinationAdapter = new TopDestinationAdapter(getApplicationContext(), topDestinationList);
+/*
                         topDesViewPager.setAdapter(topDestinationAdapter);
+*/
 
                         recommendAdapter = new RecommendAdapter(getApplicationContext(), recommendList);
                         recommendViewPager.setAdapter(recommendAdapter);
@@ -212,11 +171,10 @@ public class MainActivity extends AppCompatActivity {
                         topAttractionViewPager.setAdapter(topAttractionAdapter);
 
                         recommendAdapter.notifyDataSetChanged();
+/*
                         topDestinationAdapter.notifyDataSetChanged();
+*/
                         topAttractionAdapter.notifyDataSetChanged();
-
-                        searchAdapter.notifyDataSetChanged();
-
                     }
 
                 } else {
@@ -230,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         bottomNavigationView = findViewById(R.id.bottomnav);
         bottomNavigationView.setSelectedItemId(R.id.homepage);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -239,16 +199,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.homepage:
                         return true;
-
-                    case R.id.notification:
-                        startActivity(new Intent(getApplicationContext(), NotifPage.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-
-                    /*case R.id.map:
-                        startActivity(new Intent(getApplicationContext(), MapPage.class));
-                        overridePendingTransition(0, 0);
-                        return true;*/
 
                     case R.id.booking:
                         startActivity(new Intent(getApplicationContext(), BookingPage.class));
@@ -272,17 +222,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        search();
 
     }//end of oncreate
 
     private void search() {
+        topDestinationAdapter = new TopDestinationAdapter(getApplicationContext(), topDestinationList);
+        topDesViewPager.setAdapter(topDestinationAdapter);
+        firebaseFirestore.collection("Packages")
+                .whereEqualTo("package_country", "Philippines")
+                .orderBy("package_name", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        List listofDes = value.getDocumentChanges();
+                        if (listofDes.isEmpty()){
+                            Toast.makeText(MainActivity.this, "No recyclerview", Toast.LENGTH_SHORT).show();
+                        }else{
+                            for (DocumentChange documentChange : value.getDocumentChanges()){
+                                if (documentChange.getType() == DocumentChange.Type.ADDED){
+                                    topDestinationList.add(documentChange.getDocument().toObject(Packages.class));
+                                    topDestinationAdapter.notifyDataSetChanged();
 
+                                }
+                            }
+                        }
+
+                    }
+                });
 
 
     }
 
     private void init(){
-
+        topBar = findViewById(R.id.appBar);
+        appBarLayout = findViewById(R.id.appBarLayout);
+        setSupportActionBar(topBar);
+        getSupportActionBar().setTitle("Trippers: Homepage");
+        /** END OF APPBAR */
 
 
     }
@@ -349,14 +326,14 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setPageTransformer(compositePageTransformer);
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.top_menu, menu);
 
 
         return true;
-    }
+    }*/
 /*protected void onStart(){
         super.onStart();
 

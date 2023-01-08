@@ -383,5 +383,11 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="booking">(Reminder: The email address and contact number that you will provide must be working as it will be used by the agency to contact you)  </string>
 
+    <string-array name="sort">
+        <item>Name</item>
+        <item>Popularity</item>
+        <item>Price: Low to High</item>
+        <item>Price: High to Low</item>
+    </string-array>
 
 </resources>

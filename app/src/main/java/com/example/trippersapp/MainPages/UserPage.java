@@ -77,10 +77,10 @@ public class UserPage extends AppCompatActivity {
                     case R.id.user:
                         return true;
 
-                    case R.id.notification:
+                   /* case R.id.notification:
                         startActivity(new Intent(getApplicationContext(), NotifPage.class));
                         overridePendingTransition(0, 0);
-                        return true;
+                        return true;*/
 
                     case R.id.booking:
                         startActivity(new Intent(getApplicationContext(), BookingPage.class));

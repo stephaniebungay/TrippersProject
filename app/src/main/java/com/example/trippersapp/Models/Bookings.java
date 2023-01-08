@@ -2,24 +2,41 @@ package com.example.trippersapp.Models;
 
 public class Bookings {
 
+    private String country;
     private String customer;
     private String date;
     private String destination;
     private String email;
     private String note;
     private String pax;
-    private String phone;
     private String payment;
+    private String phone;
+    private String process;
+    private String region;
 
-    public Bookings(String customer, String date, String destination, String email, String note, String pax, String phone, String payment) {
+    public Bookings(String country, String customer, String date, String destination, String email, String note, String pax, String payment, String phone, String process, String region) {
+        this.country = country;
         this.customer = customer;
         this.date = date;
         this.destination = destination;
         this.email = email;
         this.note = note;
         this.pax = pax;
-        this.phone = phone;
         this.payment = payment;
+        this.phone = phone;
+        this.process = process;
+        this.region = region;
+    }
+    public Bookings(){
+
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getCustomer() {
@@ -38,16 +55,16 @@ public class Bookings {
         this.date = date;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDestination() {
+        return destination;
     }
 
     public void setDestination(String destination) {
         this.destination = destination;
     }
 
-    public String getDestination() {
-        return destination;
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
@@ -70,6 +87,14 @@ public class Bookings {
         this.pax = pax;
     }
 
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -78,13 +103,23 @@ public class Bookings {
         this.phone = phone;
     }
 
-    public String getPayment() {
-        return payment;
+    public String getProcess() {
+        return process;
     }
 
-    public void setPayment(String payment) {
-        this.payment = payment;
+    public void setProcess(String process) {
+        this.process = process;
     }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+
 
 
 

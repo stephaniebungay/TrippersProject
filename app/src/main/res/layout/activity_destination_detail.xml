@@ -324,14 +324,13 @@
                     android:layout_marginStart="@dimen/_14sdp"
                     android:layout_marginEnd="@dimen/_14sdp">
 
-                <!--    <fragment
+                    <fragment
                         android:id="@+id/gmaps"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
--->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>

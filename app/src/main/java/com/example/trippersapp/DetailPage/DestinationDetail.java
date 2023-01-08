@@ -1,7 +1,6 @@
 package com.example.trippersapp.DetailPage;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,8 +26,13 @@ import com.example.trippersapp.Extra.TextViewEx;
 import com.example.trippersapp.Models.Gallery;
 import com.example.trippersapp.Models.Reviews;
 import com.example.trippersapp.R;
-import com.example.trippersapp.TravelBooking;
 import com.example.trippersapp.databinding.ActivityDestinationDetailBinding;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,7 +77,7 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
     private RatingBar revRating;
     private EditText revComment;
     private RecyclerView rvReviews;
-    Context context;
+    DestinationDetail context;
     TravelBooking tb;
 
     @SuppressLint("MissingInflatedId")
@@ -163,7 +167,25 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         bookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(DestinationDetail.this, TravelBooking.class ));
+                Intent o = new Intent(DestinationDetail.this, TravelBooking.class);
+                o.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                o.putExtra("price", desPrice);
+                o.putExtra("id", desID);
+                o.putExtra("attractions", desAttractions);
+                o.putExtra("availability", desAvailability);
+                o.putExtra("country", desCountry);
+                o.putExtra("description", desAbout);
+                o.putExtra("latitude", deslatitude);
+                o.putExtra("longitude", deslongitude);
+                o.putExtra("name", desName);
+                //photos
+                o.putExtra("price", desPrice);
+                o.putExtra("rating", desRating);
+                o.putExtra("region", desRegion);
+                o.putExtra("reviewer", desReviewer);
+                o.putExtra("videourl", desVideo);
+
+                startActivity(o);
 
             }
         });
@@ -315,7 +337,7 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         inactiveTab(detailsBtn);
         inactiveTab(attractionsBtn);
         inactiveTab(reviewsBtn);
-      /*  SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.gmaps);
+       SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.gmaps);
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -327,7 +349,7 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
                 googleMap.addMarker(markerOptions);
             }
-        });*/
+        });
     }
 
     private void showReviews() {

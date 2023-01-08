@@ -46,7 +46,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
         holder.name.setText(mData.get(position).getUsername());
         holder.rating.setRating(mData.get(position).getRating());
         holder.content.setText(mData.get(position).getContent());
-        holder.rdate.setText(timestampToString((Long)mData.get(position).getTimestamp()));
+//        holder.rdate.setText(timestampToString((Long)mData.get(position).getTimestamp()));
     }
 
     @Override

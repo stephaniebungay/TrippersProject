@@ -15,6 +15,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+
     <style name="Widget.MaterialComponents.Button.TextButton.Icon"></style>
 
     <style name="NoActionBar">
@@ -63,11 +64,12 @@
         <item name="strokeWidth">2dp</item>
     </style>
     
-    <style name="CancelButton">
+    <style name="CancelButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:height">@dimen/_33sdp</item>
-        <item name="backgroundTint">@color/transparent</item>
         <item name="cornerRadius">5dp</item>
         <item name="rippleColor">@color/white</item>
+        <item name="strokeColor">@color/accent</item>
+        <item name="strokeWidth">1dp</item>
         <item name="elevation">@dimen/_8sdp</item>
     </style>
 

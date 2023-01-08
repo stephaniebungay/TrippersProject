@@ -40,43 +40,11 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/appBarLayout1">
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:text="Change email address"
-                android:textSize="@dimen/_11ssp"
-                android:fontFamily="@font/poppins_regular"
-                app:iconTint="@color/textcolor"
-                android:textColor="@color/textcolor"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:gravity="center_horizontal|left"
-                app:icon="@drawable/next_icon"
-                app:iconGravity="end"
-                />
-
             <View
                 android:id="@+id/divider1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider"
-                />
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:text="Change password"
-                android:textSize="@dimen/_11ssp"
-                android:fontFamily="@font/poppins_regular"
-                app:iconTint="@color/textcolor"
-                android:textColor="@color/textcolor"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:gravity="center_horizontal|left"
-                app:icon="@drawable/next_icon"
-                app:iconGravity="end"
                 />
 
             <View
@@ -87,6 +55,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteacct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.MaterialComponents.Light"

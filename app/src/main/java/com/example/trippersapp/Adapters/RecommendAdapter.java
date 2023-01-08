@@ -19,7 +19,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.trippersapp.DetailPage.DestinationDetail;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
-import com.example.trippersapp.TravelBooking;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -89,23 +88,23 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                 i.putExtra("videourl", recommendList.get(position).getPackage_video());
                 context.startActivity(i);
 
-                Intent o = new Intent(context, TravelBooking.class);
-                o.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                o.putExtra("id", recommendList.get(position).getPackage_id());
-                o.putExtra("attractions", recommendList.get(position).getPackage_attractions());
-                o.putExtra("availability", recommendList.get(position).getPackage_availability());
-                o.putExtra("country", recommendList.get(position).getPackage_country());
-                o.putExtra("description", recommendList.get(position).getPackage_description());
-                o.putExtra("latitude", recommendList.get(position).getPackage_latitude());
-                o.putExtra("longitude", recommendList.get(position).getPackage_longitude());
-                o.putExtra("name", recommendList.get(position).getPackage_name());
-                //photos
-                o.putExtra("price", recommendList.get(position).getPackage_price());
-                o.putExtra("rating", recommendList.get(position).getPackage_rating());
-                o.putExtra("region", recommendList.get(position).getPackage_region());
-                o.putExtra("reviewer", recommendList.get(position).getPackage_reviewer());
-                o.putExtra("videourl", recommendList.get(position).getPackage_video());
-                context.startActivities(new Intent[]{o, i});
+//                Intent o = new Intent(context, TravelBooking.class);
+//                o.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                o.putExtra("id", recommendList.get(position).getPackage_id());
+//                o.putExtra("attractions", recommendList.get(position).getPackage_attractions());
+//                o.putExtra("availability", recommendList.get(position).getPackage_availability());
+//                o.putExtra("country", recommendList.get(position).getPackage_country());
+//                o.putExtra("description", recommendList.get(position).getPackage_description());
+//                o.putExtra("latitude", recommendList.get(position).getPackage_latitude());
+//                o.putExtra("longitude", recommendList.get(position).getPackage_longitude());
+//                o.putExtra("name", recommendList.get(position).getPackage_name());
+//                //photos
+//                o.putExtra("price", recommendList.get(position).getPackage_price());
+//                o.putExtra("rating", recommendList.get(position).getPackage_rating());
+//                o.putExtra("region", recommendList.get(position).getPackage_region());
+//                o.putExtra("reviewer", recommendList.get(position).getPackage_reviewer());
+//                o.putExtra("videourl", recommendList.get(position).getPackage_video());
+//                context.startActivities(new Intent[]{o, i});
 
 
                 /*AppCompatActivity activity = (AppCompatActivity) view.getContext();

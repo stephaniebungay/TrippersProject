@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".TravelBooking">
+    tools:context=".DetailPage.TravelBooking">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -36,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="?actionBarSize"
+                android:layout_marginBottom="?actionBarSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/appBarBackLayout">
@@ -169,7 +170,7 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:background="@drawable/regbox"
-                        android:hint="email@gmai.com"
+                        android:hint="email@gmail.com"
                         android:padding="@dimen/_5sdp" />
 
 
@@ -185,38 +186,52 @@
 
                     <EditText
                         android:id="@+id/bookingdate"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
+                        android:editable="false"
                         android:background="@drawable/regbox"
                         android:hint="Select Date..."
                         android:padding="@dimen/_5sdp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_11ssp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Pax:"
-                        android:textColor="@color/textcolor"
-                        android:textSize="@dimen/_11ssp" />
-
-                    <EditText
-                        android:id="@+id/bookingpax"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/regbox"
-                        android:inputType="number"
-                        android:maxLength="2"
-                        android:padding="@dimen/_5sdp"
-                        android:text="1" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Pax:"
+                            android:gravity="center"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:textColor="@color/textcolor"
+                            android:textSize="@dimen/_11ssp" />
+
+                        <NumberPicker
+                            android:id="@+id/bookingpax"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/pricedesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="henlo"
+                            android:textSize="@dimen/_11ssp"
+                            android:textColor="@color/textcolor"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_medium"
+                            android:layout_marginStart="@dimen/_31sdp"
+                            />
+
+
+                    </LinearLayout>
+
 
 
                     <TextView
@@ -236,6 +251,7 @@
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_30sdp"
                         android:background="@drawable/regbox"
                         android:gravity="start|top"
                         android:hint="Optional"

@@ -1,29 +1,23 @@
-package com.example.trippersapp;
+package com.example.trippersapp.DetailPage;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.trippersapp.Models.Bookings;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.trippersapp.R;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -35,15 +29,17 @@ public class TravelBooking extends AppCompatActivity {
 
     private Toolbar topBar;
     private AppBarLayout appBarLayout;
-    private EditText customer, phone, email, date, pax, note;
-    private TextView total, destination;
+    private EditText customer, phone, email, date, note;
+    private TextView total, destination, description;
     private MaterialButton submit;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    private String desPrice, name;
+    private String desID, desAttractions, desAvailability, desCountry, desAbout, desName, desPrice, desRating, desRegion, desReviewer, desVideo;
     private DatePickerDialog datePickerDialog;
+    private ImageView add, minus;
+    private NumberPicker pax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,62 +51,6 @@ public class TravelBooking extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         init();
-        String s = "999";
-        /*total.setText(s);*/
-
-
-        Intent intent = getIntent();
-        desPrice = intent.getStringExtra("prices");
-        name = intent.getStringExtra("name");
-        destination.setText(name);
-        Toast.makeText(this, "hello "+name, Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "=>" + desPrice);
-        total.setText(desPrice);
-
-
-
-        pax.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String paxtxt = pax.getText().toString().trim();
-                int temp = 999;
-                int paxx = Integer.valueOf((pax.getText().toString()));
-                int totalprice = Integer.valueOf((temp * paxx));
-                if (pax != null && !paxtxt.equals("") && !paxtxt.equals(0)) {
-                    total.setText(Integer.toString(totalprice));
-                }
-                else{
-                    total.setText(temp);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String paxtxt = pax.getText().toString().trim();
-                int temp = 999;
-                int paxx = Integer.valueOf((pax.getText().toString()));
-                int totalprice = Integer.valueOf((temp * paxx));
-                if (pax != null && !paxtxt.equals("") && !paxtxt.equals(0)) {
-                    total.setText(Integer.toString(totalprice));
-                }
-            }
-        });
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submitData();
-            }
-        });
-
-
 
 
 
@@ -138,6 +78,44 @@ public class TravelBooking extends AppCompatActivity {
         total = findViewById(R.id.bookingtotal);
         submit = findViewById(R.id.bookingbtn);
         destination = findViewById(R.id.bookdestination);
+        description = findViewById(R.id.pricedesc);
+
+        pax.setMaxValue(99);
+        pax.setMinValue(1);
+
+
+        Intent intent = getIntent();
+        desPrice = intent.getStringExtra("price");
+        desName = intent.getStringExtra("name");
+        desRegion = intent.getStringExtra("region");
+        desCountry = intent.getStringExtra("country");
+        destination.setText(desName);
+        total.setText(desPrice);
+
+        description.setText("Price per pax: \nPHP " + desPrice);
+        pax.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                int num = pax.getValue();
+                int prices = Integer.parseInt(desPrice);
+                int totalprice = Integer.valueOf((num * prices));
+                total.setText(Integer.toString(totalprice));
+            }
+        });
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitData();
+            }
+        });
+
+
+
+
+
+
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,55 +146,54 @@ public class TravelBooking extends AppCompatActivity {
     }
 
     private void submitData() {
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        String uid = currentUser.getUid();
-        DatabaseReference reviewRef = firebaseDatabase.getReference("Bookings").child(uid).push();
-
-        String destination = "Palawan";
         String customertxt = customer.getText().toString().trim();
         String phonetxt = phone.getText().toString().trim();
         String emailtxt = email.getText().toString().trim();
         String datetxt = date.getText().toString().trim();
-        String paxtxt = pax.getText().toString().trim();
+        String paxtxt = String.valueOf(pax.getValue());
         String notetxt = note.getText().toString().trim();
         String totalpayment = total.getText().toString().trim();
-        Bookings bookings = new Bookings(customertxt,datetxt,destination, emailtxt,
-                notetxt,paxtxt,phonetxt, totalpayment);
+
 
 
         if (customertxt.isEmpty()) {
-            Toast.makeText(TravelBooking.this, "Must fill name", Toast.LENGTH_SHORT).show();
+            customer.setError("Must fill name");
             customer.requestFocus();
             return;
         }
         if (phonetxt.isEmpty()) {
-            Toast.makeText(TravelBooking.this, "Must fill contact number", Toast.LENGTH_SHORT).show();
+            phone.setError("Must fill contact number");
             phone.requestFocus();
             return;
         }
 
         if (emailtxt.isEmpty()) {
-            Toast.makeText(TravelBooking.this, "Must fill email ", Toast.LENGTH_SHORT).show();
+            email.setError("Must fill email");
             email.requestFocus();
             return;
         }
 
         if (datetxt.isEmpty()) {
-            Toast.makeText(TravelBooking.this, "Must fill date ", Toast.LENGTH_SHORT).show();
+            date.setError("Must fill date");
             date.requestFocus();
             return;
         }
-        if (paxtxt.equals("")) {
-            Toast.makeText(TravelBooking.this, "Must fill pax(number or person) ", Toast.LENGTH_SHORT).show();
-            pax.requestFocus();
-            return;
-        }
-        if (paxtxt.equals("0")) {
-            Toast.makeText(TravelBooking.this, "Must fill pax(number or person) ", Toast.LENGTH_SHORT).show();
-            pax.requestFocus();
-            return;
-        }else{
-            reviewRef.setValue(bookings).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        else{
+            Intent i = new Intent(TravelBooking.this, BookingConfirmation.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtra("name", customertxt);
+            i.putExtra("phone", phonetxt);
+            i.putExtra("email", emailtxt);
+            i.putExtra("date", datetxt);
+            i.putExtra("pax", paxtxt);
+            i.putExtra("note", notetxt);
+            i.putExtra("total", totalpayment);
+            i.putExtra("destination", desName);
+            i.putExtra("region", desRegion);
+            i.putExtra("country", desCountry);
+            startActivity(i);
+            /*reviewRef.setValue(bookings).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     Toast.makeText(TravelBooking.this, "Booking Added!", Toast.LENGTH_SHORT).show();
@@ -227,7 +204,7 @@ public class TravelBooking extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(TravelBooking.this, "Failed to add booking!", Toast.LENGTH_SHORT).show();
                 }
-            });
+            });*/
         }
 
 
