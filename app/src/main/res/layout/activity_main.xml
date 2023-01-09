@@ -121,7 +121,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:gravity="left"
                             android:padding="0dp"
-                            android:text="Top Destinations"
+                            android:text="Local Tours"
                             android:textColor="@color/textcolor"
                             android:textSize="@dimen/_13ssp"
                             tools:ignore="TouchTargetSizeCheck" />
@@ -169,7 +169,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:gravity="left"
                             android:padding="0dp"
-                            android:text="Top Attractions"
+                            android:text="International Tours"
                             android:textColor="@color/textcolor"
                             android:textSize="@dimen/_13ssp"
                             tools:ignore="TouchTargetSizeCheck" />

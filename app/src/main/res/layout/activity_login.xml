@@ -10,366 +10,294 @@
     android:overScrollMode="never"
     tools:context=".LoginRegistration.login">
 
-
-    <TextView
-        android:id="@+id/logintitle"
-        android:layout_width="99dp"
-        android:layout_height="40dp"
-        android:fontFamily="@font/poppins_bold"
-        android:padding="0dp"
-        android:text="@string/sign_in"
-        android:textColor="#333333"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="@id/g2"
-        app:layout_constraintTop_toBottomOf="@id/g1" />
-
-    <TextView
-        android:id="@+id/sub"
-        android:layout_width="wrap_content"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_light_italic"
-        android:text="@string/sign_in_to_your_account"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@id/g2"
-        app:layout_constraintTop_toBottomOf="@id/logintitle" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:scaleType="center"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"
-        tools:ignore="ContentDescription" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/emailbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="31dp"
-        android:background="@drawable/border"
-        android:fontFamily="@font/poppins_medium"
-        android:hint="Enter email address"
-        android:inputType="textNoSuggestions"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textColorHint="#8BA78E"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:hintEnabled="false"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailbox"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/accent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passbox"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="31dp"
-            android:background="@drawable/border"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="Enter your password"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="#8BA78E"
-            android:textSize="14sp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="31dp"
-        android:paddingRight="31dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginbtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputlayout"
-        app:layout_constraintVertical_bias="0.183">
-
-
-        <TextView
-            android:id="@+id/forgotpass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:fontFamily="@font/poppins_regular"
-            android:hapticFeedbackEnabled="true"
-            android:text="Forgot password?"
-            android:textColor="#4B684C"
-            android:textSize="13sp"
-            android:gravity="right"
-            app:layout_constraintTop_toBottomOf="@id/passbox" />
-
-
-    </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginbtn"
-        style="@style/PrimaryButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="290dp"
-        android:clickable="true"
-        android:fontFamily="@font/poppins_medium"
-        android:hapticFeedbackEnabled="true"
-        android:letterSpacing="0.10"
-        android:scaleType="center"
-        android:text="Sign In"
-        android:textColor="#FFFFFF"
-        android:theme="@style/Theme.MaterialComponents.Light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox"
-        app:layout_constraintVertical_bias="0.194"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/continuee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_light_italic"
-        android:letterSpacing="0.05"
-        android:padding="3dp"
-        android:text="or continue with"
-        android:textColor="#A8A89E"
-        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginbtn" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <View
-        android:id="@+id/divider1"
-        android:layout_width="155dp"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="33dp"
-        android:background="#A8A89E"
-        app:layout_constraintEnd_toStartOf="@+id/continuee"
-        app:layout_constraintTop_toBottomOf="@+id/loginbtn" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="155dp"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="33dp"
-        android:background="#A8A89E"
-        android:foregroundGravity="right"
-        app:layout_constraintStart_toEndOf="@+id/continuee"
-        app:layout_constraintTop_toBottomOf="@id/loginbtn" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/continuee">
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/facebookview"
-            style="@style/FacebookButton"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:padding="10dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginEnd="31dp"
-            android:fontFamily="@font/poppins_medium"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:letterSpacing="0.05"
-            android:text="Sign in with Facebook"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:icon="@drawable/fbb"
-            app:iconGravity="textStart"
-            app:iconTintMode="multiply"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="match_parent">
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/fbbtn"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            />
+            <TextView
+                android:id="@+id/logintitle"
+                android:layout_width="99dp"
+                android:layout_height="40dp"
+                android:layout_margin="30dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/sign_in"
+                android:textColor="#333333"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/gglbtn"
-            style="@style/GoogleButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:padding="10dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginEnd="31dp"
-            android:fontFamily="@font/poppins_medium"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:letterSpacing="0.05"
-            android:text="Sign in with Google"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/textcolor"
-            android:textSize="14sp"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:icon="@drawable/google"
-            app:iconGravity="textStart"
-            app:iconTintMode="multiply"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" />
+            <TextView
+                android:id="@+id/sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_light_italic"
+                android:text="@string/sign_in_to_your_account"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logintitle" />
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:scaleType="center"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sub"
+                app:srcCompat="@drawable/logo" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="31dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="31dp"
+                android:background="@drawable/border"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Enter email address"
+                android:inputType="textNoSuggestions"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="#8BA78E"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logo"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:hintEnabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailbox"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/accent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="31dp"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Enter your password"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#8BA78E"
+                    android:textSize="14sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/fpasslayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="31dp"
+                android:paddingRight="31dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputlayout"
+                app:layout_constraintVertical_bias="0.183">
+
+                <TextView
+                    android:id="@+id/forgotpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="right"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="Forgot password?"
+                    android:textColor="#4B684C"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toBottomOf="@id/passbox" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/loginbtn"
+                style="@style/PrimaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="31dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="31dp"
+                android:layout_marginBottom="290dp"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:hapticFeedbackEnabled="true"
+                android:letterSpacing="0.10"
+                android:scaleType="center"
+                android:text="Sign In"
+                android:textColor="#FFFFFF"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fpasslayout"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/continuee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_light_italic"
+                android:letterSpacing="0.05"
+                android:padding="3dp"
+                android:text="or continue with"
+                android:textColor="#A8A89E"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loginbtn" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="155dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="33dp"
+                android:background="#A8A89E"
+                app:layout_constraintEnd_toStartOf="@+id/continuee"
+                app:layout_constraintTop_toBottomOf="@+id/loginbtn" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="155dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="33dp"
+                android:background="#A8A89E"
+                android:foregroundGravity="right"
+                app:layout_constraintStart_toEndOf="@+id/continuee"
+                app:layout_constraintTop_toBottomOf="@id/loginbtn" />
 
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:gravity="bottom|center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/newtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="New Member?"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            app:layout_constraintVertical_bias="0.976" />
-
-        <Button
-            android:id="@+id/reglink"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            android:layout_width="124dp"
-            android:layout_height="27dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Sign Up Here"
-            android:textAlignment="viewStart"
-            android:textColor="#242B24"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.08" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.32" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.92" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.37" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.10" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+            <LinearLayout
+                android:id="@+id/loginoptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/continuee">
 
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/facebookview"
+                    style="@style/FacebookButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginEnd="31dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:letterSpacing="0.05"
+                    android:padding="10dp"
+                    android:text="Sign in with Facebook"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:icon="@drawable/fbb"
+                    app:iconGravity="textStart"
+                    app:iconTintMode="multiply"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
 
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/fbbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/gglbtn"
+                    style="@style/GoogleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginEnd="31dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:letterSpacing="0.05"
+                    android:padding="10dp"
+                    android:text="Sign in with Google"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/textcolor"
+                    android:textSize="14sp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:icon="@drawable/google"
+                    app:iconGravity="textStart"
+                    app:iconTintMode="multiply"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="5dp"
+                android:gravity="bottom|center"
+                app:layout_constraintTop_toBottomOf="@id/loginoptions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/newtxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="New Member?"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintVertical_bias="0.976" />
+
+                <Button
+                    android:id="@+id/reglink"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="124dp"
+                    android:layout_height="27dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Sign Up Here"
+                    android:textAlignment="viewStart"
+                    android:textColor="#242B24"
+                    android:textSize="14sp"
+                    android:theme="@style/Theme.MaterialComponents.Light" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

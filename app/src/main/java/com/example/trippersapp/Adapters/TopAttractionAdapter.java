@@ -89,6 +89,7 @@ public class TopAttractionAdapter extends RecyclerView.Adapter<TopAttractionAdap
         RoundedImageView imagePoster;
         TextView textName, textCountry;
         RatingBar ratingBar;
+        public static String desID;
         public  MyViewHolder (@NonNull View itemView) {
             super(itemView);
 

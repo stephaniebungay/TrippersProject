@@ -231,27 +231,24 @@ public class MainActivity extends AppCompatActivity {
         topDesViewPager.setAdapter(topDestinationAdapter);
         firebaseFirestore.collection("Packages")
                 .whereEqualTo("package_country", "Philippines")
-                .orderBy("package_name", Query.Direction.ASCENDING)
+                .orderBy("package_name", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         List listofDes = value.getDocumentChanges();
-                        if (listofDes.isEmpty()){
+                        if (listofDes.isEmpty()) {
                             Toast.makeText(MainActivity.this, "No recyclerview", Toast.LENGTH_SHORT).show();
-                        }else{
-                            for (DocumentChange documentChange : value.getDocumentChanges()){
-                                if (documentChange.getType() == DocumentChange.Type.ADDED){
+                        } else {
+                            for (DocumentChange documentChange : value.getDocumentChanges()) {
+                                if (documentChange.getType() == DocumentChange.Type.ADDED) {
                                     topDestinationList.add(documentChange.getDocument().toObject(Packages.class));
-                                    topDestinationAdapter.notifyDataSetChanged();
-
                                 }
+                                topDestinationAdapter.notifyDataSetChanged();
                             }
                         }
 
                     }
                 });
-
-
     }
 
     private void init(){

@@ -162,7 +162,6 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
         revCancel.setOnClickListener(this);
         activeTab(detailsBtn);
         userReviews();
-        addGallery();
 
         bookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +252,7 @@ public class DestinationDetail extends AppCompatActivity implements View.OnClick
 
             case R.id.reviewsbtn:
             case R.id.revcancel:
+
                 showReviews();
                 break;
 

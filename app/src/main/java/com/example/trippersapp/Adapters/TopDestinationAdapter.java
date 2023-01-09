@@ -21,6 +21,8 @@ import com.example.trippersapp.R;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class TopDestinationAdapter extends RecyclerView.Adapter<TopDestinationAdapter.MyViewHolder> {
     Context context;
@@ -83,6 +85,7 @@ public class TopDestinationAdapter extends RecyclerView.Adapter<TopDestinationAd
                 i.putExtra("videourl", topDestinationList.get(position).getPackage_video());
 
                 context.startActivity(i);
+                HashSet<Packages> set = new LinkedHashSet<>();
             }
         });
     }
