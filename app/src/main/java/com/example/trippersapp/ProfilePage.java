@@ -62,7 +62,6 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
 
         image = findViewById(R.id.pfimage);
         name = findViewById(R.id.fullname);
-        contact = findViewById(R.id.givencontact);
         backBtn = findViewById(R.id.pfbackbtn);
         changeBtn = findViewById(R.id.changebtn);
         resetBtn = findViewById(R.id.resetbtn);
@@ -195,15 +194,10 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     private void pageUI(){
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String nametxt = currentUser.getDisplayName();
-        String contacttxt = currentUser.getPhoneNumber();
         Uri pfp = currentUser.getPhotoUrl();
 
-        if(contacttxt == null) {
-            contact.setText("-");
 
-        }
         name.setText(nametxt);
-        contact.setText(contacttxt);
         Glide.with(this)
                 .load(pfp)
                 .thumbnail(0.05f)

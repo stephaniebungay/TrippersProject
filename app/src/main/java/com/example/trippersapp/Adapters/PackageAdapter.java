@@ -74,9 +74,8 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
                 i.putExtra("name", packageList.get(position).getPackage_name());
                 //photos
                 i.putExtra("price", packageList.get(position).getPackage_price());
-                i.putExtra("rating", packageList.get(position).getPackage_rating());
                 i.putExtra("region", packageList.get(position).getPackage_region());
-                i.putExtra("reviewer", packageList.get(position).getPackage_reviewer());
+
                 i.putExtra("videourl", packageList.get(position).getPackage_video());
                 context.startActivity(i);
             }

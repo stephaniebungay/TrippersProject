@@ -69,9 +69,7 @@ public class TopAttractionAdapter extends RecyclerView.Adapter<TopAttractionAdap
                 i.putExtra("name", topAttractionList.get(position).getPackage_name());
                 //photos
                 i.putExtra("price", topAttractionList.get(position).getPackage_price());
-                i.putExtra("rating", topAttractionList.get(position).getPackage_rating());
                 i.putExtra("region", topAttractionList.get(position).getPackage_region());
-                i.putExtra("reviewer", topAttractionList.get(position).getPackage_reviewer());
                 i.putExtra("videourl", topAttractionList.get(position).getPackage_video());
                 context.startActivity(i);
 

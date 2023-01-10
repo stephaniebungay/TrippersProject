@@ -75,9 +75,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                 i.putExtra("name", searchList.get(position).getPackage_name());
                 //photos
                 i.putExtra("price", searchList.get(position).getPackage_price());
-                i.putExtra("rating", searchList.get(position).getPackage_rating());
                 i.putExtra("region", searchList.get(position).getPackage_region());
-                i.putExtra("reviewer", searchList.get(position).getPackage_reviewer());
                 i.putExtra("videourl", searchList.get(position).getPackage_video());
                 context.startActivity(i);
 

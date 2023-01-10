@@ -1,6 +1,9 @@
 package com.example.trippersapp.MainPages;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -48,6 +51,7 @@ public class UserPage extends AppCompatActivity {
     private ActivityUserPageBinding binding;
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,9 @@ public class UserPage extends AppCompatActivity {
 
         binding = ActivityUserPageBinding.inflate((getLayoutInflater()));
         setContentView(binding.getRoot());
+        dialog = new Dialog(UserPage.this);
+
+
 
 
        // databaseReference = firebaseDatabase.getReference("fname");
@@ -112,6 +119,7 @@ public class UserPage extends AppCompatActivity {
         userHelpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showPopUp(view);
 
             }
         });
@@ -175,6 +183,21 @@ public class UserPage extends AppCompatActivity {
     }//end of oncreate
 
 
+    public void showPopUp(View view){
+        ImageView exit;
+
+        dialog.setContentView(R.layout.contact_us);
+        exit = (ImageView) dialog.findViewById(R.id.exitt);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+    }
 
     private void checkUser() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();

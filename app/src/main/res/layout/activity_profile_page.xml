@@ -87,28 +87,6 @@
             android:textSize="@dimen/_12ssp"
             android:paddingStart="@dimen/_10sdp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_31sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="Contact Number"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/textcolor" />
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/givencontact"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_31sdp"
-            android:layout_marginEnd="@dimen/_31sdp"
-            android:background="@drawable/regbox"
-            android:text="09354383435"
-            android:inputType="phone"
-            android:textSize="@dimen/_12ssp"
-            android:paddingStart="@dimen/_10sdp"/>
-
     </LinearLayout>
 
     <LinearLayout

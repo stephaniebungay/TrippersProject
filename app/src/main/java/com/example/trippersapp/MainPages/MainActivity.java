@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         firebaseFirestore = firebaseFirestore.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Packages");
+        databaseReference = firebaseDatabase.getReference("Destinations");
 
 
         init();
@@ -131,11 +131,11 @@ public class MainActivity extends AppCompatActivity {
         /*topDestinationAdapter = new TopDestinationAdapter(this, topDestinationList);
         topDesViewPager.setAdapter(topDestinationAdapter);*/
 
-        topAttractionAdapter = new TopAttractionAdapter(this, topAttractionList);
-        topAttractionViewPager.setAdapter(topAttractionAdapter);
+       /* topAttractionAdapter = new TopAttractionAdapter(this, topAttractionList);
+        topAttractionViewPager.setAdapter(topAttractionAdapter);*/
 
 
-        CollectionReference collectionReference = firebaseFirestore.collection("Packages");
+        CollectionReference collectionReference = firebaseFirestore.collection("Destinations");
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -143,11 +143,12 @@ public class MainActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
                         Packages packages = new Packages();
-                        packages.package_id = document.getId().toString();
-                        packages.package_attractions = document.getString("package_attractions").toString();
+                        packages.package_attractions = document.getString("package_attraction").toString();
                         packages.package_availability = document.getString("package_availability").toString();
                         packages.package_country = document.getString("package_country").toString();
                         packages.package_description = document.getString("package_description").toString();
+                        packages.package_id = document.getString("package_id");
+
                         packages.package_latitude = Double.parseDouble(document.getDouble("package_latitude").toString());
                         packages.package_longitude = Double.parseDouble(document.getDouble("package_longitude").toString());
                         packages.package_name = document.getString("package_name").toString();
@@ -159,7 +160,9 @@ public class MainActivity extends AppCompatActivity {
 
                         recommendList.add(packages);
                         /*topDestinationList.add(packages);*/
+/*
                         topAttractionList.add(packages);
+*/
 /*
                         topDesViewPager.setAdapter(topDestinationAdapter);
 */
@@ -167,14 +170,16 @@ public class MainActivity extends AppCompatActivity {
                         recommendAdapter = new RecommendAdapter(getApplicationContext(), recommendList);
                         recommendViewPager.setAdapter(recommendAdapter);
 
-                        topAttractionAdapter = new TopAttractionAdapter(getApplicationContext(), topAttractionList);
-                        topAttractionViewPager.setAdapter(topAttractionAdapter);
+                      /*  topAttractionAdapter = new TopAttractionAdapter(getApplicationContext(), topAttractionList);
+                        topAttractionViewPager.setAdapter(topAttractionAdapter);*/
 
                         recommendAdapter.notifyDataSetChanged();
 /*
                         topDestinationAdapter.notifyDataSetChanged();
 */
+/*
                         topAttractionAdapter.notifyDataSetChanged();
+*/
                     }
 
                 } else {
@@ -229,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
     private void search() {
         topDestinationAdapter = new TopDestinationAdapter(getApplicationContext(), topDestinationList);
         topDesViewPager.setAdapter(topDestinationAdapter);
-        firebaseFirestore.collection("Packages")
+        firebaseFirestore.collection("Destinations")
                 .whereEqualTo("package_country", "Philippines")
                 .orderBy("package_name", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -244,6 +249,29 @@ public class MainActivity extends AppCompatActivity {
                                     topDestinationList.add(documentChange.getDocument().toObject(Packages.class));
                                 }
                                 topDestinationAdapter.notifyDataSetChanged();
+                            }
+                        }
+
+                    }
+                });
+
+        topAttractionAdapter = new TopAttractionAdapter(getApplicationContext(), topAttractionList);
+        topAttractionViewPager.setAdapter(topAttractionAdapter);
+        firebaseFirestore.collection("Destinations")
+                .whereNotEqualTo("package_country", "Philippines")
+                .orderBy("package_country", Query.Direction.DESCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        List lists = value.getDocumentChanges();
+                        if (lists.isEmpty()) {
+                            Toast.makeText(MainActivity.this, "No recyclerview", Toast.LENGTH_SHORT).show();
+                        } else {
+                            for (DocumentChange documentChange : value.getDocumentChanges()) {
+                                if (documentChange.getType() == DocumentChange.Type.ADDED) {
+                                    topAttractionList.add(documentChange.getDocument().toObject(Packages.class));
+                                }
+                                topAttractionAdapter.notifyDataSetChanged();
                             }
                         }
 

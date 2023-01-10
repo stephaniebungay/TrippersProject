@@ -79,9 +79,7 @@ public class TopDestinationAdapter extends RecyclerView.Adapter<TopDestinationAd
                 i.putExtra("name", topDestinationList.get(position).getPackage_name());
                 //photos
                 i.putExtra("price", topDestinationList.get(position).getPackage_price());
-                i.putExtra("rating", topDestinationList.get(position).getPackage_rating());
                 i.putExtra("region", topDestinationList.get(position).getPackage_region());
-                i.putExtra("reviewer", topDestinationList.get(position).getPackage_reviewer());
                 i.putExtra("videourl", topDestinationList.get(position).getPackage_video());
 
                 context.startActivity(i);

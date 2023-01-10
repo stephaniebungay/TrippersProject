@@ -390,4 +390,10 @@
         <item>Price: High to Low</item>
     </string-array>
 
+    <string name="contact_us">We wish to hear from you!
+        Please call us at 09666804407, or
+        email us at
+        trippers.application@gmail.com.
+        if you have any inquiries related to any booking and user concerns.</string>
+
 </resources>

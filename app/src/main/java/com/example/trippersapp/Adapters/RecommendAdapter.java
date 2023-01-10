@@ -72,19 +72,17 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
             public void onClick(View view) {
                 Intent i = new Intent(context, DestinationDetail.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.putExtra("id", recommendList.get(position).getPackage_id());
                 i.putExtra("attractions", recommendList.get(position).getPackage_attractions());
                 i.putExtra("availability", recommendList.get(position).getPackage_availability());
                 i.putExtra("country", recommendList.get(position).getPackage_country());
                 i.putExtra("description", recommendList.get(position).getPackage_description());
+                i.putExtra("id", recommendList.get(position).getPackage_id());
                 i.putExtra("latitude", recommendList.get(position).getPackage_latitude());
                 i.putExtra("longitude", recommendList.get(position).getPackage_longitude());
                 i.putExtra("name", recommendList.get(position).getPackage_name());
                 //photos
                 i.putExtra("price", recommendList.get(position).getPackage_price());
-                i.putExtra("rating", recommendList.get(position).getPackage_rating());
                 i.putExtra("region", recommendList.get(position).getPackage_region());
-                i.putExtra("reviewer", recommendList.get(position).getPackage_reviewer());
                 i.putExtra("videourl", recommendList.get(position).getPackage_video());
                 context.startActivity(i);
 

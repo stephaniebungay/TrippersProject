@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -137,7 +136,6 @@ public class BookingPage extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 if(adapter.getItemCount()==0){
-                    Toast.makeText(BookingPage.this, "HENLO", Toast.LENGTH_SHORT).show();
                     bg.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.INVISIBLE);}
                 else{

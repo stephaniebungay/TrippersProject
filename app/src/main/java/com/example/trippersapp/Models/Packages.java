@@ -4,49 +4,38 @@ import java.util.HashMap;
 
 public class Packages {
 
-    public String package_id;
     public String package_attractions;
     public String package_availability;
     public String package_country;
     public String package_description;
+    public String package_id;
     public double package_latitude;
     public double package_longitude;
     public String package_name;
     public HashMap<String, Object> package_photos;
     public String package_poster;
     public String package_price;
-    public float package_rating;
     public String package_region;
-    public int package_reviewer;
     public String package_video;
 
     public Packages(){}
 
-    public Packages(String package_id, String package_attractions, String package_availability, String package_country, String package_description, double package_latitude, double package_longitude, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, float package_rating, String package_region, int package_reviewer, String package_video) {
-        this.package_id = package_id;
+    public Packages(String package_attractions, String package_availability, String package_country, String package_description, String package_id, double package_latitude, double package_longitude, String package_name, HashMap<String, Object> package_photos, String package_poster, String package_price, String package_region, String package_video) {
         this.package_attractions = package_attractions;
         this.package_availability = package_availability;
         this.package_country = package_country;
         this.package_description = package_description;
+        this.package_id = package_id;
         this.package_latitude = package_latitude;
         this.package_longitude = package_longitude;
         this.package_name = package_name;
         this.package_photos = package_photos;
         this.package_poster = package_poster;
         this.package_price = package_price;
-        this.package_rating = package_rating;
         this.package_region = package_region;
-        this.package_reviewer = package_reviewer;
         this.package_video = package_video;
     }
 
-    public String getPackage_id() {
-        return package_id;
-    }
-
-    public void setPackage_id(String package_id) {
-        this.package_id = package_id;
-    }
 
     public String getPackage_attractions() {
         return package_attractions;
@@ -79,6 +68,15 @@ public class Packages {
     public void setPackage_description(String package_description) {
         this.package_description = package_description;
     }
+
+    public String getPackage_id() {
+        return package_id;
+    }
+
+    public void setPackage_id(String package_id) {
+        this.package_id = package_id;
+    }
+
 
     public double getPackage_latitude() {
         return package_latitude;
@@ -128,13 +126,6 @@ public class Packages {
         this.package_price = package_price;
     }
 
-    public float getPackage_rating(){
-        return package_rating;
-    }
-
-    public void setPackage_rating(float package_rating){
-        this.package_rating = package_rating;
-    }
 
     public String getPackage_region() {
         return package_region;
@@ -144,13 +135,7 @@ public class Packages {
         this.package_region = package_region;
     }
 
-    public int getPackage_reviewer() {
-        return package_reviewer;
-    }
 
-    public void setPackage_reviewer(int package_reviewer) {
-        this.package_reviewer = package_reviewer;
-    }
 
 
     public String getPackage_video() {

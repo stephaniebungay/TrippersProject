@@ -63,7 +63,7 @@ public class TopDestinations extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        CollectionReference collectionReference = firebaseFirestore.collection("Packages");
+        CollectionReference collectionReference = firebaseFirestore.collection("Destinations");
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -71,11 +71,16 @@ public class TopDestinations extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
                         Packages packages = new Packages();
-                        packages.package_attractions = document.getString("package_attractions").toString();
+                        packages.package_attractions = document.getString("package_attraction").toString();
                         packages.package_availability = document.getString("package_availability").toString();
                         packages.package_country = document.getString("package_country").toString();
                         packages.package_description = document.getString("package_description").toString();
+                        packages.package_id = document.getString("package_id");
+
+                        packages.package_latitude = Double.parseDouble(document.getDouble("package_latitude").toString());
+                        packages.package_longitude = Double.parseDouble(document.getDouble("package_longitude").toString());
                         packages.package_name = document.getString("package_name").toString();
+//                        packages.package_photos = document.getDocumentReference("package_photos").
                         packages.package_poster = document.getString("package_poster").toString();
                         packages.package_price = document.getString("package_price").toString();
                         packages.package_region = document.getString("package_region").toString();
