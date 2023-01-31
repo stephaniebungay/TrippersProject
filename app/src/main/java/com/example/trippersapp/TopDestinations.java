@@ -1,8 +1,9 @@
 package com.example.trippersapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,10 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trippersapp.Adapters.PackageAdapter;
+import com.example.trippersapp.MainPages.BookingPage;
+import com.example.trippersapp.MainPages.MainActivity;
+import com.example.trippersapp.MainPages.UserPage;
 import com.example.trippersapp.Models.Packages;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -33,11 +38,14 @@ public class TopDestinations extends AppCompatActivity {
     PackageAdapter adapter;
     List<Packages> packageList;
     SearchView searchView;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_destinations);
+
+
 
         searchView = findViewById(R.id.searchView);
         searchView.clearFocus();
@@ -71,7 +79,9 @@ public class TopDestinations extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
                         Packages packages = new Packages();
-                        packages.package_attractions = document.getString("package_attraction").toString();
+                        packages.days = Integer.valueOf(Math.toIntExact(document.getLong("days")));
+                        packages.nights = Integer.valueOf(Math.toIntExact(document.getLong("nights")));
+                        packages.package_attraction = document.getString("package_attraction").toString();
                         packages.package_availability = document.getString("package_availability").toString();
                         packages.package_country = document.getString("package_country").toString();
                         packages.package_description = document.getString("package_description").toString();
@@ -82,7 +92,7 @@ public class TopDestinations extends AppCompatActivity {
                         packages.package_name = document.getString("package_name").toString();
 //                        packages.package_photos = document.getDocumentReference("package_photos").
                         packages.package_poster = document.getString("package_poster").toString();
-                        packages.package_price = document.getString("package_price").toString();
+                        packages.package_price = Integer.valueOf(Math.toIntExact(document.getLong("package_price")));
                         packages.package_region = document.getString("package_region").toString();
                         packages.package_video = document.getString("package_video").toString();
 
@@ -103,6 +113,32 @@ public class TopDestinations extends AppCompatActivity {
 
             }
         });
+
+        bottomNavigationView = findViewById(R.id.bottomnav);
+        bottomNavigationView.setSelectedItemId(R.id.homepage);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.homepage:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    case R.id.booking:
+                        startActivity(new Intent(getApplicationContext(), BookingPage.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    case R.id.user:
+                        startActivity(new Intent(getApplicationContext(), UserPage.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });//end of bottom nav
     }
 
     private void filterList(String text) {
@@ -114,7 +150,6 @@ public class TopDestinations extends AppCompatActivity {
 
         }
         if(filteredList.isEmpty()){
-            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
         }
         else{
             adapter.setFilteredList(filteredList);

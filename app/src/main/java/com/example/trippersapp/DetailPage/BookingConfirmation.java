@@ -28,7 +28,7 @@ public class BookingConfirmation extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private TextView customer, phone, email, date, pax, note, price;
-    private String scustomer, sphone, semail, sdate, spax, snote, sprice, sdestination, sprocess, scountry, sregion;
+    private String scustomer, sphone, semail, sdate, spax, snote, sprice, sdestination, sprocess, scountry, sregion, sid, end;
     private MaterialButton submit, cancel;
 
     @Override
@@ -60,17 +60,19 @@ public class BookingConfirmation extends AppCompatActivity {
         sphone = i.getStringExtra("phone");
         semail = i.getStringExtra("email");
         sdate = i.getStringExtra("date");
+        end = i.getStringExtra("enddate");
         spax = i.getStringExtra("pax");
         snote = i.getStringExtra("note");
         sprice = i.getStringExtra("total");
         sdestination = i.getStringExtra("destination");
         scountry = i.getStringExtra("country");
         sregion = i.getStringExtra("region");
+        sid = i.getStringExtra("id");
 
         customer.setText(scustomer);
         phone.setText("0"+sphone);
         email.setText(semail);
-        date.setText(sdate);
+        date.setText(sdate + " to " + end);
         pax.setText(spax);
         note.setText(snote);
         price.setText(sprice);
@@ -98,8 +100,8 @@ public class BookingConfirmation extends AppCompatActivity {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         String uid = currentUser.getUid();
         sprocess = "PENDING";
-        DatabaseReference reviewRef = firebaseDatabase.getReference("Bookings").child(uid).push();
-        Bookings bookings = new Bookings(scountry, scustomer, sdate, sdestination, semail, snote, spax, sprice, sphone, sprocess, sregion);
+        DatabaseReference reviewRef = firebaseDatabase.getReference("Bookings").child("ListOfBookings").push();
+        Bookings bookings = new Bookings(scountry, scustomer, sdate, end, sdestination, semail, sid, snote, spax, sprice, sphone, sprocess, sregion, uid);
 
         reviewRef.setValue(bookings).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

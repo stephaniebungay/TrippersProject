@@ -122,8 +122,8 @@ public class BookingPage extends AppCompatActivity {
         String uid = currentUser.getUid();
 
 
-        DatabaseReference reference = firebaseDatabase.getReference("Bookings").child(uid);
-        reference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference reference = firebaseDatabase.getReference("Bookings").child("ListOfBookings");
+        reference.orderByChild("uid").equalTo(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 bookingList = new ArrayList<>();
@@ -143,18 +143,6 @@ public class BookingPage extends AppCompatActivity {
                     bg.setVisibility(View.INVISIBLE);
 
                 }
-
-               /* adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        if(adapter.getItemCount()==0){
-                            Toast.makeText(BookingPage.this, "HENLO", Toast.LENGTH_SHORT).show();
-                            bg.setVisibility(View.VISIBLE);
-                            recyclerView.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });*/
 
                 LinearLayoutManager lin = new LinearLayoutManager(getApplicationContext());
                 lin.setStackFromEnd(true);

@@ -198,13 +198,23 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
 
 
         name.setText(nametxt);
-        Glide.with(this)
-                .load(pfp)
-                .thumbnail(0.05f)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .into(image);
 
+        if (pfp != null) {
+            Glide.with(this)
+                    .load(pfp)
+                    .thumbnail(0.05f)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .into(image);
+        }
+        else{
+            Glide.with(this)
+                    .load(R.drawable.profilepicture)
+                    .thumbnail(0.05f)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .into(image);
+        }
        /* GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct != null){
             String personGivenName = acct.getGivenName();

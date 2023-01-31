@@ -59,6 +59,7 @@ public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.MyViewHold
                 i.putExtra("country", bookingList.get(position).getCountry());
                 i.putExtra("customer", bookingList.get(position).getCustomer());
                 i.putExtra("date", bookingList.get(position).getDate());
+                i.putExtra("dateEnd", bookingList.get(position).getDateEnd());
                 i.putExtra("destination", bookingList.get(position).getDestination());
                 i.putExtra("email", bookingList.get(position).getEmail());
                 i.putExtra("note", bookingList.get(position).getNote());

@@ -58,14 +58,16 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
         holder.region.setText(packages.getPackage_region());
         holder.country.setText(packages.getPackage_country());
         holder.ratingBar.setRating(3.2f);
-        holder.price.setText(packages.getPackage_price());
+        holder.price.setText(String.valueOf(packages.getPackage_price()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DestinationDetail.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("days", packageList.get(position).getDays());
+                i.putExtra("nights", packageList.get(position).getNights());
                 i.putExtra("id", packageList.get(position).getPackage_id());
-                i.putExtra("attractions", packageList.get(position).getPackage_attractions());
+                i.putExtra("attractions", packageList.get(position).getPackage_attraction());
                 i.putExtra("availability", packageList.get(position).getPackage_availability());
                 i.putExtra("country", packageList.get(position).getPackage_country());
                 i.putExtra("description", packageList.get(position).getPackage_description());

@@ -98,18 +98,17 @@
                 android:textSize="16sp" />
 
 
-            <com.google.android.material.textfield.TextInputEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/fname"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/border"
                 android:fontFamily="@font/poppins_medium"
                 android:hint="Your first name here"
                 android:minHeight="48dp"
                 android:padding="10dp"
                 android:singleLine="true"
-
+                android:background="@drawable/border"
                 android:textColor="@color/black"
                 android:textColorHint="#8BA78E"
                 android:textSize="14sp" />
@@ -216,7 +215,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/passtxt"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/accent"
-                tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="-31dp">
 
 
@@ -261,7 +259,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/retypetxt"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/accent"
-                tools:ignore="MissingConstraints">
+                >
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -309,6 +307,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="66dp"
+            android:clickable="true"
             android:fontFamily="@font/poppins_regular"
             android:labelFor="@id/agreementbox"
             android:letterSpacing="0.04"

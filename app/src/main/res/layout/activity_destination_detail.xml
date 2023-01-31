@@ -1,16 +1,38 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".DetailPage.DestinationDetail">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayoutt"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:elevation="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/topAppBarr"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/background"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/DestinationFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="44dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -101,17 +123,50 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/days"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="end"
-                    android:text="4.2"
-                    android:textColor="@color/black"
+                    android:text="3"
+                    android:textColor="@color/accent"
                     android:textSize="@dimen/_12ssp" />
 
-                <RatingBar
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/daytxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:text="Days /"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:text="2"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nightxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:text="Nights"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/_12ssp" />
+
+                <!--<RatingBar
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -119,8 +174,8 @@
                     android:isIndicator="true"
                     android:numStars="5"
                     android:progressTint="@color/stars"
-                    android:secondaryProgressTint="@color/stars"
-                    android:rating="4.2" />
+                    android:rating="4.2"
+                    android:secondaryProgressTint="@color/stars" />-->
 
             </LinearLayout>
 
@@ -284,19 +339,22 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/DestinationLinear3" />
 
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/galleryView"
-                        android:layout_width="wrap_content"
+                    <!--<androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/albumrv"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
-                        android:orientation="horizontal"
-                        android:visibility="gone"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titlww2"
-                        tools:layout_editor_absoluteX="1dp"
-                        tools:layout_editor_absoluteY="1dp" />
+                        app:layout_constraintBottom_toTopOf="@id/description2"/>-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/albumrv"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toTopOf="@id/description2"
+                        app:layout_constraintTop_toBottomOf="@id/titlww2" />
 
-                    <TextView
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/description2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -305,7 +363,7 @@
                         android:text="@string/lorem_ipsum"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/galleryView" />
+                        app:layout_constraintTop_toBottomOf="@id/albumrv" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -315,7 +373,7 @@
                 android:id="@+id/maplayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/bottommenu"
                 app:layout_constraintTop_toBottomOf="@id/dividerr2">
 
@@ -323,15 +381,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_14sdp"
-                    android:layout_marginEnd="@dimen/_14sdp">
+                    android:layout_marginEnd="@dimen/_14sdp"
+                    android:theme="@style/Theme.MaterialComponents.Light">
 
-                    <fragment
-                        android:id="@+id/gmaps"
-                        android:name="com.google.android.gms.maps.SupportMapFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                   <fragment
+                       android:id="@+id/gmaps"
+                       android:name="com.google.android.gms.maps.SupportMapFragment"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>
@@ -488,6 +547,7 @@
 
             </ScrollView>
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottommenu"
                 android:layout_width="match_parent"
@@ -559,31 +619,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
-             android:id="@+id/DestinationSave"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="bottom|end"
-             android:layout_margin="@dimen/_10sdp"
-             android:backgroundTint="@color/white"
-             android:src="@drawable/saved_outline"
-             android:tint="@color/save"
-             app:backgroundTint="@color/white" />
-
-         <com.google.android.material.floatingactionbutton.FloatingActionButton
-             android:id="@+id/DestinationUNSave"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="bottom|end"
-             android:layout_margin="@dimen/_10sdp"
-             android:backgroundTint="@color/white"
-             android:src="@drawable/ic_baseline_favorite_24"
-             android:tint="@color/save"
-             android:visibility="gone"
-             app:backgroundTint="@color/white" />
- -->
-
     </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

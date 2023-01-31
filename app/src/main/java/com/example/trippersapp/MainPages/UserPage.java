@@ -224,8 +224,12 @@ public class UserPage extends AppCompatActivity {
 
             }
             else{
-              Toast.makeText(this, "No picture detected", Toast.LENGTH_SHORT).show();
-
+            Glide.with(this)
+                    .load(R.drawable.profilepicture)
+                    .thumbnail(0.05f)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .into(userImage);
             }
         }
         else{

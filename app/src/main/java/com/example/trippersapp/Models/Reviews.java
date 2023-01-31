@@ -5,6 +5,7 @@ import com.google.firebase.database.ServerValue;
 public class Reviews {
 
     private String content;
+    private String id;
     private float rating;
     private Object timestamp;
     private String user_email;
@@ -14,8 +15,9 @@ public class Reviews {
     public Reviews() {
     }
 
-    public Reviews(String content, float rating, String user_email, String user_pfp, String username ) {
+    public Reviews(String content, String id, float rating, String user_email, String user_pfp, String username ) {
         this.content = content;
+        this.id = id;
         this.rating = rating;
         this.timestamp = ServerValue.TIMESTAMP;
         this.user_email = user_email;
@@ -24,8 +26,9 @@ public class Reviews {
 
     }
 
-    public Reviews(String content, float rating, Object timestamp, String user_email, String user_pfp, String username) {
+    public Reviews(String content, String id, float rating, Object timestamp, String user_email, String user_pfp, String username) {
         this.content = content;
+        this.id = id;
         this.rating = rating;
         this.timestamp = timestamp;
         this.user_email = user_email;
@@ -39,6 +42,14 @@ public class Reviews {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getId(){
+        return id;
+    }
+
+    public void setId(String id){
+        this.id = id;
     }
 
     public float getRating() {

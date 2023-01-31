@@ -33,6 +33,14 @@
 
     </style>
 
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/white</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+        <item name="subtitleCentered">true</item>
+    </style>
+
     <style name="PrimaryButton">
         <item name="android:height">@dimen/_33sdp</item>
         <item name="backgroundTint">@color/PrimaryButtonColor</item>
@@ -94,27 +102,3 @@
 
 </resources>
 
-    <!--   android:id="@+id/fname"
-    android:layout_width="match_parent"
-    android:layout_height="43dp"
-    android:layout_marginStart="31dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="31dp"
-    android:background="@drawable/border"
-    android:fontFamily="@font/poppins_medium"
-    android:hint="Your first name here"
-    android:minHeight="48dp"
-    android:padding="10dp"
-    android:singleLine="true"
-    android:textColor="@color/black"
-    android:textColorHint="#8BA78E"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/fnametxt" />
-
-    <solid android:color="#FFFFFF" />
-    <corners android:radius="5dp" />
-    <stroke android:color="#4B684C" android:width="1dp" />
--->

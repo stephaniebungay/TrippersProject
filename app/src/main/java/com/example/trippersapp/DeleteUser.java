@@ -76,10 +76,14 @@ public class DeleteUser extends AppCompatActivity {
                                 startActivity(new Intent(DeleteUser.this, login.class));
                                 Toast.makeText(DeleteUser.this, "Deleted User Successfully", Toast.LENGTH_SHORT).show();
                             }
+
                         }
                     });
                 }
             });
+        }
+        else{
+            Toast.makeText(this, "Email/Password is incorrect", Toast.LENGTH_SHORT).show();
         }
 
 

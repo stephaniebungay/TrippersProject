@@ -1,18 +1,22 @@
 package com.example.trippersapp.LoginRegistration;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +26,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.trippersapp.Extra.Logger;
-import com.example.trippersapp.Extra.RegexValue;
 import com.example.trippersapp.Models.User;
 import com.example.trippersapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,64 +42,26 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.Checked;
-import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
-import com.mobsandgeeks.saripaar.annotation.Email;
-import com.mobsandgeeks.saripaar.annotation.Length;
-import com.mobsandgeeks.saripaar.annotation.NotEmpty;
-import com.mobsandgeeks.saripaar.annotation.Password;
-import com.mobsandgeeks.saripaar.annotation.Pattern;
 
-import java.util.List;
-
-public class registration extends AppCompatActivity implements Validator.ValidationListener {
+public class registration extends AppCompatActivity {
 
     private String TAG = registration.class.getSimpleName();
-    private static int PICK_PHOTOS_CODE = 1; //REQUESCODE
-    private static int REQUEST_PERMISSION_CODE = 1; //PReqCode
-    protected boolean validated;
+    private static int PICK_PHOTOS_CODE = 1;
+    private static int REQUEST_PERMISSION_CODE = 1;
     protected Validator validator;
     FirebaseFirestore firebaseFirestore;
-    private StorageReference storageReference;
     private Context context;
-
     private ImageView profilePic;
     private Uri pfpUri;
-    private Bitmap compressor;
-
-
-    @NotEmpty(message = "First name is required")
-    private EditText fName;
-
-    @NotEmpty(message = "Last name is required")
-    private EditText lName;
-
-    @NotEmpty(message = "Last name is required")
-    @Pattern(regex = RegexValue.MOBILENUMBER)
-    private EditText contactNo;
-
-    @NotEmpty
-    @Email
-    private EditText emailAdd;
-
-    @NotEmpty
-    @Length(min = 6, message = "Password should be atleast 6 character")
-    @Password
-    private EditText passWord;
-
-    @NotEmpty
-    @ConfirmPassword
-    private EditText reType;
-    @NotEmpty
-    @Checked
+    private EditText fName, lName, contactNo, emailAdd, passWord, reType;
     private CheckBox agreementBx;
-
+    private TextView agreement;
     private ImageButton backButton;
     private MaterialButton regbtn;
-
     private FirebaseAuth mAuth;
+    private Dialog dialog;
+
 
     public registration() {
     }
@@ -112,10 +77,15 @@ public class registration extends AppCompatActivity implements Validator.Validat
         StorageReference storageReference = FirebaseStorage.getInstance("gs://trippersapp-cffca.appspot.com").getReference();
 
         init();
-        validator = new Validator(this);
-        validator.setValidationListener(this);
+        pfpUri = Uri.parse(String.valueOf(R.drawable.profilepicture));
 
-
+        regbtn = (MaterialButton) findViewById(R.id.registerbtn);
+        regbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    registerUser();
+            }
+        });
     }
 
     private void registerUser() {
@@ -126,13 +96,66 @@ public class registration extends AppCompatActivity implements Validator.Validat
         String contacttxt = contactNo.getText().toString().trim();
         String emailaddtxt = emailAdd.getText().toString().trim();
         String passtxt = passWord.getText().toString().trim();
+        String retypetxt = reType.getText().toString().trim();
 
         user.setContactno(contacttxt);
         user.setEmailadd(emailaddtxt);
         user.setFname(fnametxt);
         user.setLname(lnametxt);
-        user.setPassword(passtxt);
+        user.setPassword(retypetxt);
 
+        if(fnametxt.isEmpty()){
+            fName.setError("First name is required!");
+            fName.requestFocus();
+            return;
+        }
+
+        if(lnametxt.isEmpty()){
+            lName.setError("Last name is required!");
+            lName.requestFocus();
+            return;
+        }
+
+        if(contacttxt.isEmpty()){
+            contactNo.setError("Phone number is required");
+            contactNo.requestFocus();
+            return;
+        }
+
+        if(emailaddtxt.isEmpty()){
+            emailAdd.setError("Email address is required");
+            emailAdd.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(emailaddtxt).matches()){
+            emailAdd.setError("Please provide a valid email address!");
+            emailAdd.requestFocus();
+            return;
+        }
+        if(passtxt.isEmpty()){
+            passWord.setError("Password is required!");
+            passWord.requestFocus();
+            return;
+        }
+        if(retypetxt.isEmpty()){
+            reType.setError("Confirm password!");
+            reType.requestFocus();
+            return;
+        }
+        if(passtxt.length() < 6){
+            passWord.setError("Password should be atleast 6 characters!");
+            passWord.requestFocus();
+            return;
+        }
+        if(!passtxt.equals(retypetxt)){
+            Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!agreementBx.isChecked()){
+            Toast.makeText(this, "You must accept our Terms and Services", Toast.LENGTH_LONG).show();
+            agreementBx.requestFocus();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(emailaddtxt, passtxt)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -159,7 +182,7 @@ public class registration extends AppCompatActivity implements Validator.Validat
                                         user.setLname(lnametxt);
                                         user.setContactno(contacttxt);
                                         user.setEmailadd(emailaddtxt);
-                                        user.setPassword(passtxt);
+                                        user.setPassword(retypetxt);
                                         firebaseFirestore.collection("User").document(emailaddtxt).set(user);
                                         pfpStorage(pfpUri, mAuth.getCurrentUser());
 
@@ -187,6 +210,16 @@ public class registration extends AppCompatActivity implements Validator.Validat
         passWord = (EditText) findViewById(R.id.password);
         reType = (EditText) findViewById(R.id.retype);
         agreementBx = (CheckBox) findViewById(R.id.agreementbox);
+        agreement = findViewById(R.id.agreementxt);
+        dialog = new Dialog(registration.this);
+
+
+        agreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopUp(view);
+            }
+        });
 
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,37 +241,14 @@ public class registration extends AppCompatActivity implements Validator.Validat
                 startActivity(new Intent(registration.this, login.class));
             }
         });
-        regbtn = (MaterialButton) findViewById(R.id.registerbtn);
-        regbtn.setOnClickListener((view) -> {
-            validator.validate();
-            if (agreementBx.isChecked()) {
-                registerUser();
-            }
-        });
+
 
 
     }
 
 
-    @Override
-    public void onValidationSucceeded() {
-        Toast.makeText(this, "YES", Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public void onValidationFailed(List<ValidationError> errors) {
-        validated = false;
-        for (ValidationError error : errors) {
-            View view = error.getView();
-            String message = error.getCollatedErrorMessage(this);
-            if (view instanceof EditText) {
-                ((EditText) view).setError(message);
 
-                return;
-            }
-            return;
-        }
-    }
 
 
     private void checkAndRequestForPermission() {
@@ -282,12 +292,31 @@ public class registration extends AppCompatActivity implements Validator.Validat
 
     }
 
+    public void showPopUp(View view){
+        ImageView exit;
+
+        dialog.setContentView(R.layout.terms_condition);
+        exit = (ImageView) dialog.findViewById(R.id.exitTerms);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_PHOTOS_CODE && data != null) {
             pfpUri = data.getData();
-            profilePic.setImageURI(pfpUri);
+            if (pfpUri != null) {
+                profilePic.setImageURI(pfpUri);
+            }
+
         }
     }
 }

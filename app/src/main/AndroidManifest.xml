@@ -27,6 +27,24 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name="com.example.trippersapp.PanoSample"
+            android:exported="false"
+
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.example.trippersapp.Extra.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.example.trippersapp.DeleteUser"
             android:exported="false">
             <meta-data
@@ -99,15 +117,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.example.trippersapp.LoginRegistration.UploadDisplayPhoto"
-            android:exported="false"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <!--
-<activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
             android:exported="false"
             tools:replace="android:exported" />
@@ -115,15 +124,7 @@
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
             android:exported="false"
             tools:replace="android:exported" />
-        -->
-        <activity
-            android:name="com.example.trippersapp.Admin.AdminAttractions"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.trippersapp.Admin.AdminAddData"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.example.trippersapp.LoginRegistration.ForgotPass2"
             android:exported="false"
@@ -134,10 +135,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.trippersapp.LoginRegistration.verifypage"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.trippersapp.MainPages.NotifPage"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -162,14 +159,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.trippersapp.LoginRegistration.login"
-            android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.trippersapp.MainPages.MainActivity"
             android:exported="false"

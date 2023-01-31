@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -80,8 +81,9 @@ dependencies {
 
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    implementation 'co.gofynd.library:gravity-view:1.0'
 
-    implementation 'com.google.android.flexbox:flexbox:3.0.0'
-
+    implementation "androidx.multidex:multidex:2.0.1"
 }
 

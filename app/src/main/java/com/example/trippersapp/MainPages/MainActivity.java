@@ -7,30 +7,23 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.trippersapp.Adapters.RecommendAdapter;
-import com.example.trippersapp.Adapters.SearchAdapter;
-import com.example.trippersapp.Adapters.TopAttractionAdapter;
-import com.example.trippersapp.Adapters.TopDestinationAdapter;
+import com.example.trippersapp.Adapters.AllDesAdapter;
+import com.example.trippersapp.Adapters.BudgetAdapter;
+import com.example.trippersapp.Adapters.VirtualAdapter;
 import com.example.trippersapp.Models.Packages;
 import com.example.trippersapp.R;
 import com.example.trippersapp.TopDestinations;
 import com.example.trippersapp.databinding.ActivityMainBinding;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -53,31 +46,22 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    String TAG = MainActivity.class.getSimpleName();
     private Toolbar topBar;
     private AppBarLayout appBarLayout;
-    String TAG = MainActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
     private ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
     private ActionBar actionBar;
     private TextView seeALL;
-
-    //private DatabaseReference database;
     private FirebaseFirestore firebaseFirestore;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    private ArrayList<Packages> recommendList, topDestinationList, topAttractionList, searchList;
-    private RecommendAdapter recommendAdapter;
-    private TopDestinationAdapter topDestinationAdapter;
-    private TopAttractionAdapter topAttractionAdapter;
-    private SearchAdapter searchAdapter;
-    private RecyclerView recommendViewPager, topAttractionViewPager, topDesViewPager, results;
-    private SearchView SearchBar;
-    private FirebaseRecyclerOptions<Packages> options;
-    /*private FirebaseRecyclerAdapter<Packages, com.example.trippersapp.Adapters.ViewHolder> firebaseRecyclerAdapter;
-    private LinearLayoutManager mLinearLayoutManager;*/
-
+    private ArrayList<Packages> virtualList, allDesList, budgetList;
+    private RecyclerView virtualRv, allRv, budgetRv;
+    private VirtualAdapter virtualAdapter;
+    private AllDesAdapter allDesAdapter;
+    private BudgetAdapter budgetAdapter;
     Packages packages;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -91,109 +75,9 @@ public class MainActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Destinations");
 
-
         init();
-        /*dataFetch();*/
-
-        /** APPBAR */
-
-
-
-
-
-        seeALL = findViewById(R.id.recommendSeeAll);
-
-        recommendViewPager = findViewById(R.id.recommendViewPager);
-        topDesViewPager = findViewById(R.id.topDesViewPager);
-        topAttractionViewPager = findViewById(R.id.topAttractionViewPager);
-
-        recommendViewPager.setHasFixedSize(true);
-        topDesViewPager.setHasFixedSize(true);
-        topAttractionViewPager.setHasFixedSize(true);
-
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        recommendViewPager.setLayoutManager(layoutManager1);
-
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        topDesViewPager.setLayoutManager(layoutManager2);
-
-        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        topAttractionViewPager.setLayoutManager(layoutManager3);
-
-
-        recommendList = new ArrayList<>();
-        topDestinationList = new ArrayList<>();
-        topAttractionList = new ArrayList<>();
-
-        recommendAdapter = new RecommendAdapter(this, recommendList);
-        recommendViewPager.setAdapter(recommendAdapter);
-
-        /*topDestinationAdapter = new TopDestinationAdapter(this, topDestinationList);
-        topDesViewPager.setAdapter(topDestinationAdapter);*/
-
-       /* topAttractionAdapter = new TopAttractionAdapter(this, topAttractionList);
-        topAttractionViewPager.setAdapter(topAttractionAdapter);*/
-
-
-        CollectionReference collectionReference = firebaseFirestore.collection("Destinations");
-        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d(TAG, document.getId() + " => " + document.getData());
-                        Packages packages = new Packages();
-                        packages.package_attractions = document.getString("package_attraction").toString();
-                        packages.package_availability = document.getString("package_availability").toString();
-                        packages.package_country = document.getString("package_country").toString();
-                        packages.package_description = document.getString("package_description").toString();
-                        packages.package_id = document.getString("package_id");
-
-                        packages.package_latitude = Double.parseDouble(document.getDouble("package_latitude").toString());
-                        packages.package_longitude = Double.parseDouble(document.getDouble("package_longitude").toString());
-                        packages.package_name = document.getString("package_name").toString();
-//                        packages.package_photos = document.getDocumentReference("package_photos").
-                        packages.package_poster = document.getString("package_poster").toString();
-                        packages.package_price = document.getString("package_price").toString();
-                        packages.package_region = document.getString("package_region").toString();
-                        packages.package_video = document.getString("package_video").toString();
-
-                        recommendList.add(packages);
-                        /*topDestinationList.add(packages);*/
-/*
-                        topAttractionList.add(packages);
-*/
-/*
-                        topDesViewPager.setAdapter(topDestinationAdapter);
-*/
-
-                        recommendAdapter = new RecommendAdapter(getApplicationContext(), recommendList);
-                        recommendViewPager.setAdapter(recommendAdapter);
-
-                      /*  topAttractionAdapter = new TopAttractionAdapter(getApplicationContext(), topAttractionList);
-                        topAttractionViewPager.setAdapter(topAttractionAdapter);*/
-
-                        recommendAdapter.notifyDataSetChanged();
-/*
-                        topDestinationAdapter.notifyDataSetChanged();
-*/
-/*
-                        topAttractionAdapter.notifyDataSetChanged();
-*/
-                    }
-
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
-
+        dataFetch();
+        sortedView();
 
         bottomNavigationView = findViewById(R.id.bottomnav);
         bottomNavigationView.setSelectedItemId(R.id.homepage);
@@ -218,159 +102,145 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });//end of bottom nav
-
-        seeALL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, TopDestinations.class));
-
-            }
-        });
-
-        search();
-
     }//end of oncreate
-
-    private void search() {
-        topDestinationAdapter = new TopDestinationAdapter(getApplicationContext(), topDestinationList);
-        topDesViewPager.setAdapter(topDestinationAdapter);
-        firebaseFirestore.collection("Destinations")
-                .whereEqualTo("package_country", "Philippines")
-                .orderBy("package_name", Query.Direction.DESCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        List listofDes = value.getDocumentChanges();
-                        if (listofDes.isEmpty()) {
-                            Toast.makeText(MainActivity.this, "No recyclerview", Toast.LENGTH_SHORT).show();
-                        } else {
-                            for (DocumentChange documentChange : value.getDocumentChanges()) {
-                                if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                    topDestinationList.add(documentChange.getDocument().toObject(Packages.class));
-                                }
-                                topDestinationAdapter.notifyDataSetChanged();
-                            }
-                        }
-
-                    }
-                });
-
-        topAttractionAdapter = new TopAttractionAdapter(getApplicationContext(), topAttractionList);
-        topAttractionViewPager.setAdapter(topAttractionAdapter);
-        firebaseFirestore.collection("Destinations")
-                .whereNotEqualTo("package_country", "Philippines")
-                .orderBy("package_country", Query.Direction.DESCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        List lists = value.getDocumentChanges();
-                        if (lists.isEmpty()) {
-                            Toast.makeText(MainActivity.this, "No recyclerview", Toast.LENGTH_SHORT).show();
-                        } else {
-                            for (DocumentChange documentChange : value.getDocumentChanges()) {
-                                if (documentChange.getType() == DocumentChange.Type.ADDED) {
-                                    topAttractionList.add(documentChange.getDocument().toObject(Packages.class));
-                                }
-                                topAttractionAdapter.notifyDataSetChanged();
-                            }
-                        }
-
-                    }
-                });
-    }
 
     private void init(){
         topBar = findViewById(R.id.appBar);
         appBarLayout = findViewById(R.id.appBarLayout);
         setSupportActionBar(topBar);
         getSupportActionBar().setTitle("Trippers: Homepage");
-        /** END OF APPBAR */
 
+        virtualRv = findViewById(R.id.virtualTourRv);
+        allRv = findViewById(R.id.allDesRv);
+        budgetRv = findViewById(R.id.budgetRv);
+
+        seeALL = findViewById(R.id.viewAllDes);
+        seeALL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TopDestinations.class));
+            }
+        });
 
     }
 
-   /* private void dataFetch() {
-        options = new FirebaseRecyclerOptions.Builder<Packages>().setQuery(databaseReference, Packages.class).build();
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Packages, ViewHolder>(options) {
+    private void dataFetch() {
+        CollectionReference collectionReference = firebaseFirestore.collection("Destinations");
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Packages model) {
-                holder.setDetails(getApplicationContext(),
-                        model.getPackage_poster(),
-                        model.getPackage_name(),
-                        model.getPackage_region(),
-                        model.getPackage_country(),
-                        model.getPackage_price());
-            }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                        Packages packages = new Packages();
+                        packages.days = Integer.valueOf(Math.toIntExact(document.getLong("days")));
+                        packages.nights = Integer.valueOf(Math.toIntExact(document.getLong("nights")));
+                        packages.package_attraction = document.getString("package_attraction").toString();
+                        packages.package_availability = document.getString("package_availability").toString();
+                        packages.package_country = document.getString("package_country").toString();
+                        packages.package_description = document.getString("package_description").toString();
+                        packages.package_id = document.getString("package_id").toString();
+//                        packages.package_latitude = Double.parseDouble(document.getDouble("package_latitude").toString());
+                        packages.package_longitude = Double.parseDouble(document.getDouble("package_longitude").toString());
+                        packages.package_name = document.getString("package_name").toString();
+                        packages.package_poster = document.getString("package_poster").toString();
+                        packages.package_price = Integer.valueOf(Math.toIntExact(document.getLong("package_price")));
+                        packages.package_region = document.getString("package_region").toString();
+                        packages.package_video = document.getString("package_video").toString();
+                        packages.tourStatus = document.getString("tourStatus").toString();
 
-            @NonNull
-            @Override
-            public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.destination_landscape_container, parent, false);
-
-                ViewHolder viewHolder = new ViewHolder(itemView);
-                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_LONG).show();
                     }
 
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    private void sortedView() {
+        virtualList = new ArrayList<>();
+        virtualAdapter = new VirtualAdapter(getApplicationContext(), virtualList);
+        virtualRv.setAdapter(virtualAdapter);
+        virtualRv.setHasFixedSize(true);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        virtualRv.setLayoutManager(layoutManager1);
+
+        firebaseFirestore.collection("Destinations")
+                .whereEqualTo("tourStatus", "Yes")
+                .whereEqualTo("package_availability","Yes")
+                .orderBy("package_name", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void ontItemLongClick(View view, int position) {
-                        Toast.makeText(MainActivity.this, "helloooooo", Toast.LENGTH_LONG).show();
-
-
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        List listofVirtual = value.getDocumentChanges();
+                        for (DocumentChange documentChange : value.getDocumentChanges()){
+                            if (documentChange.getType() == DocumentChange.Type.ADDED){
+                                Log.d(TAG, documentChange.getDocument() + " => " );
+                                virtualList.add(documentChange.getDocument().toObject(Packages.class));
+                            }
+                            virtualAdapter.notifyDataSetChanged();
+                        }
                     }
                 });
-                return viewHolder;
-            }
-        };
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setReverseLayout(true);
-        mLinearLayoutManager.setStackFromEnd(true);
-
-        results.setLayoutManager(mLinearLayoutManager);
-        firebaseRecyclerAdapter.startListening();
-        results.setAdapter(firebaseRecyclerAdapter);
-        firebaseRecyclerAdapter.notifyDataSetChanged();
 
 
+        allDesList = new ArrayList<>();
+        allDesAdapter = new AllDesAdapter(getApplicationContext(), allDesList);
+        allRv.setAdapter(allDesAdapter);
+        allRv.setHasFixedSize(true);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        allRv.setLayoutManager(layoutManager2);
+
+        firebaseFirestore.collection("Destinations")
+                .whereEqualTo("package_availability", "Yes")
+                .orderBy("package_name", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        List listofAll = value.getDocumentChanges();
+                        for (DocumentChange documentChange : value.getDocumentChanges()){
+                            if (documentChange.getType() == DocumentChange.Type.ADDED){
+                                Log.d(TAG, documentChange.getDocument() + " => " );
+                                allDesList.add(documentChange.getDocument().toObject(Packages.class));
+                            }
+                            allDesAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+        budgetList = new ArrayList<>();
+        budgetAdapter = new BudgetAdapter(getApplicationContext(), budgetList);
+        budgetRv.setAdapter(budgetAdapter);
+        budgetRv.setHasFixedSize(true);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getApplicationContext());
+        budgetRv.setLayoutManager(layoutManager3);
+
+        firebaseFirestore.collection("Destinations")
+                .whereEqualTo("package_availability", "Yes")
+                .orderBy("package_price", Query.Direction.ASCENDING)
+                .limit(5)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        List listofBudget = value.getDocumentChanges();
+                        for (DocumentChange documentChange : value.getDocumentChanges()){
+                            if (documentChange.getType() == DocumentChange.Type.ADDED){
+                                Log.d(TAG, documentChange.getDocument() + " => " );
+                                budgetList.add(documentChange.getDocument().toObject(Packages.class));
+                            }
+                            budgetAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
     }
-*/
 
 
-    private void setupViewPager(ViewPager2 viewPager2) {
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
-        viewPager2.setFocusable(true);
-        viewPager2.getDescendantFocusability();
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(1));
-        viewPager2.setPageTransformer(compositePageTransformer);
-    }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.top_menu, menu);
-
-
-        return true;
-    }*/
-/*protected void onStart(){
-        super.onStart();
-
-        if (firebaseRecyclerAdapter != null){
-            firebaseRecyclerAdapter.startListening();
-        }
-}*/
-   /* private Runnable sliderRunnable = new Runnable() {
-        @Override
-        public void run() {
-            recommendViewPager.setCurrentItem(recommendViewPager.getCurrentItem() + 1);
-
-        }
-    };*/
 }

@@ -12,7 +12,7 @@ import com.example.trippersapp.R;
 
 public class BookingPopUp extends AppCompatActivity {
     TextView destination, place, name, email, phone, pax, date, total, process;
-    String sdestination, sregion, scountry, sname, semail, sphone, spax, sdate, stotal, sprocess;
+    String sdestination, sregion, scountry, sname, semail, sphone, spax, sdate, end,  stotal, sprocess;
     ImageView close;
 
     @Override
@@ -29,6 +29,7 @@ public class BookingPopUp extends AppCompatActivity {
         sphone = i.getStringExtra("phone");
         spax = i.getStringExtra("pax");
         sdate = i.getStringExtra("date");
+        end = i.getStringExtra("dateEnd");
         stotal = i.getStringExtra("payment");
         sprocess = i.getStringExtra("process");
 
@@ -51,7 +52,7 @@ public class BookingPopUp extends AppCompatActivity {
         pax.setText("For " + spax+ " People");
         total.setText("PHP " + stotal);
         process.setText(sprocess);
-        date.setText("Date of Trip: " + sdate);
+        date.setText("Date of Trip: " + sdate + " Up to " + end);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override

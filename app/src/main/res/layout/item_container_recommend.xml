@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/_5sdp"
+    android:layout_height="@dimen/_160sdp"
+    android:layout_margin="@dimen/_20sdp"
     android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="@dimen/_8sdp"
     >
 
@@ -18,7 +18,7 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imagePoster"
             android:layout_width="match_parent"
-            android:layout_height="114dp"
+            android:layout_height="@dimen/_100sdp"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="H, 2:1.6"
             app:layout_constraintTop_toTopOf="parent"
